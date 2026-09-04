@@ -1,0 +1,11 @@
+import { site } from '../../data/content.mjs';
+import { finalCta } from '../components.mjs';
+import { breadcrumb, link, pageHeroArt, sectionHeading } from '../templates.mjs';
+
+export function assessmentPage() {
+  return `
+    <section class="page-hero page-hero--assessment">${pageHeroArt('assessment')}<div class="shell">${breadcrumb([{ name: 'Home', path: '/' }, { name: 'Future-Proof Assessment', path: '/future-proof-assessment/' }])}<div class="page-hero__grid"><div><p class="kicker">For your organisation</p><h1>How future-proof is your organisation?</h1></div><div><p class="page-hero__lede">Understand how ready your organisation is today and where the greatest opportunities exist to strengthen what comes next.</p>${link(site.assessment, 'Take the assessment', 'button button--cyan', true)}</div></div></div></section>
+    <section class="section assessment-explain" aria-labelledby="assessment-explain-title"><div class="shell assessment-explain__grid"><div>${sectionHeading('A different question', '<span id="assessment-explain-title">The individual quiz and organisation assessment are related—not interchangeable.</span>')}</div><div class="comparison"><article><p>For you</p><h3>Role Quiz</h3><p>How do you naturally contribute to discovery, building or leading change?</p><a href="/role-quiz/">Find your role →</a></article><article><p>For the organisation</p><h3>Future-Proof Assessment</h3><p>How ready are your people, culture and systems to succeed in whatever future emerges?</p><a href="${site.assessment}" target="_blank" rel="noreferrer">Start assessment ↗</a></article></div></div></section>
+    <section class="section assessment-steps"><div class="shell"><div class="section-heading"><p class="kicker">What it helps reveal</p><h2>See the strongest foundations and the most urgent gaps.</h2></div><ol><li><span>01</span><h3>Capability</h3><p>Can people use emerging technology to solve meaningful problems?</p></li><li><span>02</span><h3>Culture</h3><p>Does the organisation recognise, reward and ritualise useful innovation?</p></li><li><span>03</span><h3>Execution</h3><p>Can ideas move from strategy to tested and deployed solutions?</p></li><li><span>04</span><h3>Impact</h3><p>Can leaders see what changed and what value the work created?</p></li></ol></div></section>
+    ${finalCta()}`;
+}
