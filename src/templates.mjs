@@ -198,7 +198,7 @@ function footer() {
       </div>
       <div class="footer-grid shell">
         <div class="footer-brand">
-          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><img src="/images/logo-horizontal.png" alt="" width="394" height="68"></a>
+          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><span class="brand__white-logo" aria-hidden="true"></span></a>
           <p>Future-proofing people, culture and organisations through real AI innovation.</p>
           <div class="social-links" aria-label="Social media">
             <a href="${site.social.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a>
@@ -288,6 +288,8 @@ export function layout({
   path,
   title,
   description,
+  image = '/images/quiz-banner.jpeg',
+  ogType = 'website',
   body,
   pageClass = '',
   scripts = [],
@@ -295,6 +297,7 @@ export function layout({
   noindex = false,
 }) {
   const canonical = `${site.url}${path === '/' ? '/' : `${path.replace(/\/$/, '')}/`}`;
+  const socialImage = image.startsWith('http') ? image : `${site.url}${image}`;
   const jsonLd = structuredData
     .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`)
     .join('\n');
@@ -311,17 +314,17 @@ export function layout({
   <meta name="robots" content="${noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'}">
   <link rel="canonical" href="${canonical}">
   <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="${ogType}">
   <meta property="og:site_name" content="Leadapreneur">
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${site.url}/images/quiz-banner.jpeg">
+  <meta property="og:image" content="${socialImage}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
-  <meta name="twitter:image" content="${site.url}/images/quiz-banner.jpeg">
-  <link rel="stylesheet" href="/assets/styles.css?v=20260904-8">
+  <meta name="twitter:image" content="${socialImage}">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260904-13">
   ${jsonLd}
 </head>
 <body class="${pageClass}">
@@ -330,7 +333,7 @@ export function layout({
   <main id="main">${body}</main>
   ${footer()}
   ${solutionModal()}
-  <script type="module" src="/assets/site.js?v=20260904-8"></script>
+  <script type="module" src="/assets/site.js?v=20260904-13"></script>
   ${scriptTags}
   <script>
     if (/(^|\\.)leadapreneur\\.com$/.test(location.hostname)) {

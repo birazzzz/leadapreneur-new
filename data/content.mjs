@@ -325,32 +325,7 @@ export const events = [
   },
 ];
 
-export const insights = [
-  {
-    slug: 'the-great-acceleration-a-strategic-briefing-for-ceos-in-the-age-of-ai',
-    title: 'The Great Acceleration: A Strategic Briefing for CEOs in the Age of AI',
-    category: 'AI strategy',
-    date: '2026-03-25',
-    excerpt:
-      'Why the next five years may compress the change of the last twenty-five—and what leaders should build now.',
-  },
-  {
-    slug: 'from-resistance-to-renewal-wendys-leadership-journey-through-the-toshiba-teka-greatness-games',
-    title: "From Resistance to Renewal: Wendy's Leadership Journey Through the TOSHIBA TEKA Greatness Games",
-    category: 'Client story',
-    date: '2026-01-19',
-    excerpt:
-      'A story about the decision to stop protecting business-as-usual and begin leading forward.',
-  },
-  {
-    slug: 'what-we-witnessed-at-leadapreneur-open-day-2025-a-real-look-at-future-proofing-your-talent-in-the-age-of-ai',
-    title: 'What We Witnessed at Leadapreneur Open Day 2025',
-    category: 'Events',
-    date: '2025-07-01',
-    excerpt:
-      'What one unscripted story revealed about innovative leadership, confidence and the courage to change a system.',
-  },
-];
+export { educationalVideos, insights, inspiringPodcasts } from './insights.mjs';
 
 export const team = [
   ['Hanaa Maysoon', 'COO', '/images/team-hanaa.png'],

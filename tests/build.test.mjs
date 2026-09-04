@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { insights } from '../data/content.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -16,9 +17,10 @@ function walk(directory) {
 
 const htmlFiles = walk(dist).filter((file) => extname(file) === '.html');
 const indexableFiles = htmlFiles.filter((file) => !readFileSync(file, 'utf8').includes('noindex,follow'));
+const expectedIndexablePages = 11 + insights.length;
 
 test('every indexable page has one h1, a canonical, description and parseable JSON-LD', () => {
-  assert.equal(indexableFiles.length, 14);
+  assert.equal(indexableFiles.length, expectedIndexablePages);
   for (const file of indexableFiles) {
     const html = readFileSync(file, 'utf8');
     assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, file);
@@ -78,7 +80,7 @@ test('internal page links and local assets resolve in the production output', ()
         assert.ok(existsSync(join(dist, 'index.html')), `${file}: ${url}`);
         continue;
       }
-      const path = normalize(join(dist, url.replace(/^\//, '')));
+      const path = normalize(join(dist, decodeURIComponent(url.replace(/^\//, ''))));
       const resolved = extname(path) ? path : join(path, 'index.html');
       assert.ok(resolved.startsWith(dist) && existsSync(resolved), `${file}: ${url}`);
     }
@@ -87,7 +89,7 @@ test('internal page links and local assets resolve in the production output', ()
 
 test('sitemap lists indexable routes and excludes redirects', () => {
   const sitemap = readFileSync(join(dist, 'sitemap.xml'), 'utf8');
-  assert.equal((sitemap.match(/<url>/g) || []).length, 14);
+  assert.equal((sitemap.match(/<url>/g) || []).length, expectedIndexablePages);
   assert.match(sitemap, /\/role-quiz\//);
   assert.match(sitemap, /\/events\/greatness-games-kl-season-1\//);
   assert.doesNotMatch(sitemap, /<loc>[^<]+\/blog\/<\/loc>/);

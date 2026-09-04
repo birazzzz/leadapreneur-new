@@ -4,7 +4,8 @@
   "trailingSlash": true,
   "redirects": [
     { "source": "/blog", "destination": "/insights/", "permanent": true },
-    { "source": "/greatness-games-kl-season-1", "destination": "/events/greatness-games-kl-season-1/", "permanent": true }
+    { "source": "/greatness-games-kl-season-1", "destination": "/events/greatness-games-kl-season-1/", "permanent": true },
+    { "source": "/blog/from-resistance-to-renewal-wendys-leadership-journey-through-the-toshiba-teka-greatness-games", "destination": "/blog/from-resistance-to-renewal-wendy’s-leadership-journey-through-the-toshiba-teka-greatness-games/", "permanent": true }
   ],
   "headers": [
     {

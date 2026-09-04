@@ -136,6 +136,9 @@ const pages = [
     path: `/blog/${insight.slug}/`,
     title: `${insight.title} | Leadapreneur`,
     description: insight.excerpt,
+    image: insight.thumbnail,
+    ogType: 'article',
+    lastmod: insight.date,
     body: articlePage(insight),
     pageClass: 'article-page-body',
     structuredData: [
@@ -177,6 +180,10 @@ for (const page of pages) write(outputPath(page.path), layout(page));
 const redirects = [
   ['/blog/', '/insights/'],
   ['/greatness-games-kl-season-1/', `/events/${events[0].slug}/`],
+  [
+    '/blog/from-resistance-to-renewal-wendys-leadership-journey-through-the-toshiba-teka-greatness-games/',
+    '/blog/from-resistance-to-renewal-wendy’s-leadership-journey-through-the-toshiba-teka-greatness-games/',
+  ],
 ];
 for (const [from, to] of redirects) write(outputPath(from), redirectHtml(from, to));
 
@@ -194,18 +201,18 @@ for (const [file, to] of Object.entries(legacyFiles)) {
   write(join(dist, file), redirectHtml(`/${file}`, to));
 }
 
-const indexed = pages.filter((page) => !page.noindex).map((page) => page.path);
+const indexed = pages.filter((page) => !page.noindex);
 const lastmod = buildDate.toISOString().slice(0, 10);
 write(
   join(dist, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexed
-    .map((path) => `  <url><loc>${site.url}${path === '/' ? '/' : path}</loc><lastmod>${lastmod}</lastmod></url>`)
+    .map((page) => `  <url><loc>${encodeURI(site.url + (page.path === '/' ? '/' : page.path))}</loc><lastmod>${page.lastmod ?? lastmod}</lastmod></url>`)
     .join('\n')}\n</urlset>\n`,
 );
 write(join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`);
 write(
   join(dist, '_redirects'),
-  `/blog /insights/ 301\n/greatness-games-kl-season-1 /events/${events[0].slug}/ 301\n`,
+  `${redirects.map(([from, to]) => `${from} ${to} 301`).join('\n')}\n`,
 );
 
 console.log(`Built ${pages.length} indexable pages and ${redirects.length + Object.keys(legacyFiles).length - 1} redirects.`);
