@@ -3,6 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { events, insights, site } from '../data/content.mjs';
+import { assetVersion } from '../lib/asset-version.mjs';
 import { aboutPage } from '../src/pages/about.mjs';
 import { acceleratorPage } from '../src/pages/accelerator.mjs';
 import { assessmentPage } from '../src/pages/assessment.mjs';
@@ -50,7 +51,7 @@ const pages = [
     description: 'Discover whether you are an AI Explorer, AI Innovator or AI Vanguard in three private questions.',
     body: roleQuizPage(),
     pageClass: 'role-quiz-page',
-    scripts: ['/assets/quiz.js?v=20260904-8'],
+    scripts: [`/assets/quiz.js?v=${assetVersion.quiz}`],
     structuredData: [crumbs('Role Quiz', '/role-quiz/')],
   },
   {

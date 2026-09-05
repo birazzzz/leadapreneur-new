@@ -97,6 +97,20 @@ if (reducedMotion || !('IntersectionObserver' in window)) {
   reveals.forEach((element) => observer.observe(element));
 }
 
+/* The closing CTA runs a continuously animated illustration. Keep it parked
+   until it is actually on screen, and let it stop again once it scrolls away,
+   so the page is not burning frames on a section nobody is looking at. */
+const finalCta = document.querySelector('.final-cta');
+if (finalCta && !reducedMotion && 'IntersectionObserver' in window) {
+  const ctaObserver = new IntersectionObserver(
+    (entries) => entries.forEach((entry) => finalCta.classList.toggle('is-live', entry.isIntersecting)),
+    { rootMargin: '120px 0px' },
+  );
+  ctaObserver.observe(finalCta);
+} else if (finalCta && !reducedMotion) {
+  finalCta.classList.add('is-live');
+}
+
 $$('[data-role-reveal]').forEach((button) => {
   button.addEventListener('click', () => {
     const region = document.getElementById(button.getAttribute('aria-controls'));

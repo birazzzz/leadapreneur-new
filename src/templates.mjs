@@ -1,4 +1,5 @@
 import { site } from '../data/content.mjs';
+import { assetVersion } from '../lib/asset-version.mjs';
 
 export const arrow = `<svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>`;
 export const navChevron = `<svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>`;
@@ -324,7 +325,7 @@ export function layout({
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${socialImage}">
-  <link rel="stylesheet" href="/assets/styles.css?v=20260904-13">
+  <link rel="stylesheet" href="/assets/styles.css?v=${assetVersion.styles}">
   ${jsonLd}
 </head>
 <body class="${pageClass}">
@@ -333,7 +334,7 @@ export function layout({
   <main id="main">${body}</main>
   ${footer()}
   ${solutionModal()}
-  <script type="module" src="/assets/site.js?v=20260904-13"></script>
+  <script type="module" src="/assets/site.js?v=${assetVersion.site}"></script>
   ${scriptTags}
   <script>
     if (/(^|\\.)leadapreneur\\.com$/.test(location.hostname)) {

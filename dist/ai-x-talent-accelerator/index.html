@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="AI × Talent Accelerator | Build Real AI Projects">
   <meta name="twitter:description" content="Upgrade managers into leadapreneurs who propose, build and deploy real AI innovations with measurable value.">
   <meta name="twitter:image" content="https://www.leadapreneur.com/images/quiz-banner.jpeg">
-  <link rel="stylesheet" href="/assets/styles.css?v=20260904-13">
+  <link rel="stylesheet" href="/assets/styles.css?v=d423a59247">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.leadapreneur.com/"},{"@type":"ListItem","position":2,"name":"AI × Talent Accelerator","item":"https://www.leadapreneur.com/ai-x-talent-accelerator/"}]}</script>
 </head>
 <body class="accelerator-page">
@@ -154,16 +154,43 @@
       </div>
     </section>
     <section class="final-cta">
+    <div class="final-cta__scene" aria-hidden="true">
     <svg class="final-cta__journey" viewBox="0 0 920 580" fill="none" aria-hidden="true" focusable="false">
       <defs>
+        <radialGradient id="journey-dawn" cx=".5" cy=".5" r=".5">
+          <stop stop-color="#81EDFF" stop-opacity=".30"/><stop offset=".55" stop-color="#009FB8" stop-opacity=".10"/><stop offset="1" stop-color="#009FB8" stop-opacity="0"/>
+        </radialGradient>
         <linearGradient id="journey-terrain" x1="364" y1="580" x2="840" y2="94" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#009FB8" stop-opacity=".03"/><stop offset="1" stop-color="#81EDFF" stop-opacity=".16"/>
+          <stop stop-color="#009FB8" stop-opacity=".04"/><stop offset="1" stop-color="#81EDFF" stop-opacity=".20"/>
+        </linearGradient>
+        <linearGradient id="journey-ridge" x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="#81EDFF" stop-opacity=".10"/><stop offset="1" stop-color="#81EDFF" stop-opacity="0"/>
         </linearGradient>
         <linearGradient id="journey-beacon" x1="0" y1=".5" x2="1" y2=".5">
-          <stop stop-color="#81EDFF" stop-opacity="0"/><stop offset=".72" stop-color="#81EDFF" stop-opacity=".14"/><stop offset="1" stop-color="#81EDFF" stop-opacity=".34"/>
+          <stop stop-color="#81EDFF" stop-opacity="0"/><stop offset=".68" stop-color="#81EDFF" stop-opacity=".16"/><stop offset="1" stop-color="#81EDFF" stop-opacity=".40"/>
         </linearGradient>
-        <filter id="journey-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <linearGradient id="journey-aurora" x1="0" y1="0" x2="1" y2="0">
+          <stop stop-color="#81EDFF" stop-opacity="0"/><stop offset=".5" stop-color="#81EDFF" stop-opacity=".22"/><stop offset="1" stop-color="#009FB8" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="journey-halo" cx=".5" cy=".5" r=".5">
+          <stop stop-color="#81EDFF" stop-opacity=".85"/><stop offset=".4" stop-color="#81EDFF" stop-opacity=".28"/><stop offset="1" stop-color="#81EDFF" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="journey-trail" x1="0" y1="0" x2="1" y2="0">
+          <stop stop-color="#81EDFF" stop-opacity="0"/><stop offset="1" stop-color="#81EDFF" stop-opacity=".55"/>
+        </linearGradient>
       </defs>
+
+      <circle class="journey-dawn" cx="812" cy="40" r="300" fill="url(#journey-dawn)"/>
+      <path class="journey-aurora" d="M120 96C300 34 520 150 900 44" stroke="url(#journey-aurora)" stroke-width="46" stroke-linecap="round"/>
+
+      <g class="journey-stars">
+        <circle cx="188" cy="94" r="1.7"/><circle cx="286" cy="52" r="1.2"/><circle cx="352" cy="132" r="1.9"/>
+        <circle cx="447" cy="70" r="1.3"/><circle cx="530" cy="150" r="1.6"/><circle cx="612" cy="66" r="1.2"/>
+        <circle cx="676" cy="126" r="1.8"/><circle cx="742" cy="42" r="1.4"/><circle cx="820" cy="118" r="1.5"/>
+        <circle cx="884" cy="70" r="1.2"/><circle cx="238" cy="168" r="1.4"/><circle cx="404" cy="196" r="1.2"/>
+      </g>
+
+      <path class="journey-ridge" d="M-20 486C90 442 168 452 250 414C334 375 388 396 470 352C560 304 604 318 690 262C772 209 826 214 920 148V580H-20Z" fill="url(#journey-ridge)"/>
 
       <g class="journey-terrain">
         <path class="journey-terrain__mass" d="M311 580C360 516 412 489 465 474C536 454 551 390 616 363C689 332 715 250 764 209C816 165 850 101 920 54V580Z"/>
@@ -189,8 +216,9 @@
         <g class="journey-gateway__door journey-gateway__door--right">
           <path class="journey-panel" d="m60 56 49-18v73l-49 10Z"/><path class="journey-panel__line" d="m69 65 31-11M69 87l31-9"/>
         </g>
+        <circle class="journey-glow" cx="56" cy="138" r="30" fill="url(#journey-halo)"/>
         <circle class="journey-marker" cx="56" cy="138" r="7"/><circle class="journey-marker__ring" cx="56" cy="138" r="17"/>
-        <text class="journey-label" x="-4" y="174">01 · ENTER</text>
+        <text class="journey-label" x="-4" y="174">01 &#183; ENTER</text>
       </g>
 
       <g class="journey-lighthouse" transform="translate(426 230)">
@@ -200,9 +228,11 @@
         <path class="journey-architecture" d="m35 139 13-83h40l15 83M28 139h83M43 87h52M39 113h60"/>
         <path class="journey-detail" d="m50 57-7-12h51l-7 12M48 44V29h40v15M42 29h52M50 29l7-13h23l8 13M69 16V5"/>
         <path class="journey-railing" d="M35 45V32M45 45V32M55 45V32M65 45V32M75 45V32M85 45V32M95 45V32"/>
-        <circle class="journey-lamp" cx="69" cy="35" r="8" filter="url(#journey-glow)"/>
+        <circle class="journey-glow journey-glow--lamp" cx="69" cy="35" r="34" fill="url(#journey-halo)"/>
+        <circle class="journey-lamp" cx="69" cy="35" r="8"/>
+        <circle class="journey-glow" cx="69" cy="159" r="30" fill="url(#journey-halo)"/>
         <circle class="journey-marker" cx="69" cy="159" r="7"/><circle class="journey-marker__ring" cx="69" cy="159" r="17"/>
-        <text class="journey-label" x="18" y="196">02 · ORIENT</text>
+        <text class="journey-label" x="18" y="196">02 &#183; ORIENT</text>
       </g>
 
       <g class="journey-summit" transform="translate(682 54)">
@@ -213,19 +243,25 @@
         <path class="journey-contour" d="m-39 169 52-47 53 32 69-83 63 91M-8 182l24-31 44 25M100 152l37-51 42 57"/>
         <path class="journey-flagpole" d="M142 49V-25"/>
         <g class="journey-flag"><path d="M143-23c25 13 45-5 70 7v39c-24-12-46 6-70-7Z"/><path d="M151-11c18 6 34-5 51 2"/></g>
+        <circle class="journey-glow journey-glow--sun" cx="142" cy="-25" r="86" fill="url(#journey-halo)"/>
         <g class="journey-sun"><circle cx="142" cy="-25" r="34"/><circle cx="142" cy="-25" r="47"/></g>
+        <circle class="journey-glow" cx="142" cy="49" r="30" fill="url(#journey-halo)"/>
         <circle class="journey-marker" cx="142" cy="49" r="7"/><circle class="journey-marker__ring" cx="142" cy="49" r="17"/>
-        <text class="journey-label" x="104" y="213">03 · RISE</text>
+        <text class="journey-label" x="104" y="213">03 &#183; RISE</text>
       </g>
 
-      <circle class="journey-traveller" r="8" filter="url(#journey-glow)">
-        <animateMotion dur="10s" repeatCount="indefinite" path="M54 528C131 530 151 491 231 478C324 463 344 407 431 389C520 370 539 324 611 302C694 276 721 215 787 172C824 148 848 116 875 79"/>
-      </circle>
+      <g class="journey-traveller">
+        <path class="journey-traveller__trail" d="M-46 0H0" stroke="url(#journey-trail)" stroke-width="5" stroke-linecap="round"/>
+        <circle class="journey-traveller__halo" r="17" fill="url(#journey-halo)"/>
+        <circle class="journey-traveller__core" r="5.5"/>
+      </g>
     </svg>
+    </div>
+
     <div class="shell final-cta__inner">
-      <div><p class="kicker kicker--light">Your move</p><h2>Dare<br>to be<br><em>great.</em></h2></div>
+      <div class="final-cta__lead"><p class="kicker kicker--light">Your move</p><h2>Dare<br>to be<br><em>great.</em></h2></div>
       <div class="final-cta__copy">
-        <p>The future will not wait for your people to catch up. Give them a real challenge—and the system to turn it into measurable value.</p>
+        <p>The future will not wait for your people to catch up. Give them a real challenge&#8212;and the system to turn it into measurable value.</p>
         <a class="button button--cyan solution-trigger" href="/contact/">Future-proof your people<svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
@@ -333,7 +369,7 @@
       <p class="solution-dialog__note">Each option opens a pre-filled WhatsApp conversation with our team.</p>
     </div>
   </dialog>
-  <script type="module" src="/assets/site.js?v=20260904-13"></script>
+  <script type="module" src="/assets/site.js?v=65d36b574d"></script>
   
   <script>
     if (/(^|\.)leadapreneur\.com$/.test(location.hostname)) {
