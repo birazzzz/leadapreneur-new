@@ -1956,13 +1956,21 @@ em {
 .journey-glow--sun { opacity: 0.4; animation-duration: 9s; }
 
 .journey-road,
-.journey-architecture,
-.journey-detail,
 .journey-contour,
-.journey-panel__line,
 .journey-beam__edge,
-.journey-railing,
-.journey-flagpole {
+.gate-band,
+.lh-rock__edge,
+.lh-band,
+.lh-rail,
+.lh-rail__top,
+.lh-glass,
+.lh-finial,
+.lh-sheen,
+.peak-edge,
+.peak-trail,
+.peak-trail__glow,
+.flag-pole,
+.flag-fold {
   vector-effect: non-scaling-stroke;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -1999,43 +2007,46 @@ em {
   animation: journey-flow 8s linear infinite;
 }
 
-.journey-platform,
-.journey-cliff {
-  fill: rgba(0, 159, 184, 0.13);
-  stroke: rgba(129, 237, 255, 0.38);
-  stroke-width: 1.4;
-}
+/* ---- 01 · the gate ---- */
+.gate-plinth--outer { fill: rgba(14, 63, 73, 0.55); stroke: rgba(129, 237, 255, 0.22); stroke-width: 1; }
+.gate-plinth--inner { fill: rgba(129, 237, 255, 0.10); stroke: rgba(129, 237, 255, 0.3); stroke-width: 1; }
 
-.journey-architecture {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.9);
-  stroke-width: 2.2;
-}
+/* The opening is lit from within, so the way through reads as already open. */
+.gate-portal { fill: url(#portal-light); opacity: 0.62; animation: journey-breathe 6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+.gate-portal__core { fill: url(#portal-light); opacity: 0.85; }
 
-.journey-detail {
-  fill: none;
-  stroke: rgba(129, 237, 255, 0.62);
-  stroke-width: 1.5;
-}
+.gate-frame { fill: url(#stone-mid); stroke: rgba(129, 237, 255, 0.42); stroke-width: 1.2; }
+.gate-facet--lit { fill: url(#stone-lit); opacity: 0.85; }
+.gate-facet--dark { fill: url(#stone-dark); }
+.gate-facet--mid { fill: url(#stone-lit); opacity: 0.55; }
+.gate-key { fill: var(--cyan); opacity: 0.9; }
+.gate-band { stroke: rgba(129, 237, 255, 0.45); stroke-width: 1.1; }
 
-.journey-panel {
-  fill: rgba(129, 237, 255, 0.12);
-  stroke: rgba(255, 255, 255, 0.74);
-  stroke-width: 1.5;
-}
+.gate-shard { fill: var(--cyan); opacity: 0.5; transform-box: fill-box; transform-origin: center; animation: journey-float 7s ease-in-out infinite; }
+.gate-shard--b { animation-duration: 9s; animation-delay: -2s; opacity: 0.4; }
+.gate-shard--c { animation-duration: 6s; animation-delay: -4s; opacity: 0.32; }
 
-.journey-panel__line,
-.journey-railing {
-  stroke: rgba(129, 237, 255, 0.55);
-  stroke-width: 1.1;
-}
+/* ---- 02 · the lighthouse ---- */
+.lh-sea { fill: none; stroke: rgba(129, 237, 255, 0.16); stroke-width: 1; }
+.lh-sea--near { stroke: rgba(129, 237, 255, 0.26); }
+.lh-sheen { opacity: 0.7; }
 
-.journey-gateway__door {
-  transform-box: fill-box;
-}
+.lh-rock--dark { fill: url(#stone-dark); }
+.lh-rock--mid { fill: url(#stone-mid); }
+.lh-rock--lit { fill: url(#stone-lit); opacity: 0.72; }
+.lh-rock__edge { fill: none; stroke: rgba(129, 237, 255, 0.34); stroke-width: 1.1; }
 
-.journey-gateway__door--left { transform-origin: right center; animation: journey-gate-left 10s var(--ease) infinite; }
-.journey-gateway__door--right { transform-origin: left center; animation: journey-gate-right 10s var(--ease) infinite; }
+.lh-tower { fill: url(#stone-mid); }
+.lh-tower__lit { fill: url(#stone-lit); opacity: 0.8; }
+.lh-base { fill: url(#stone-dark); }
+.lh-band { stroke: rgba(129, 237, 255, 0.5); stroke-width: 2.4; }
+.lh-gallery { fill: url(#stone-lit); opacity: 0.9; }
+.lh-rail,
+.lh-rail__top { stroke: rgba(223, 246, 251, 0.7); stroke-width: 1.1; }
+.lh-lantern { fill: rgba(129, 237, 255, 0.18); stroke: rgba(223, 246, 251, 0.75); stroke-width: 1.3; }
+.lh-glass { stroke: rgba(129, 237, 255, 0.6); stroke-width: 1.1; }
+.lh-roof { fill: url(#stone-lit); }
+.lh-finial { stroke: rgba(223, 246, 251, 0.8); stroke-width: 1.6; }
 
 .journey-beam {
   transform-box: fill-box;
@@ -2046,11 +2057,6 @@ em {
 .journey-beam__edge {
   stroke: rgba(129, 237, 255, 0.26);
   stroke-width: 1;
-}
-
-.journey-tower {
-  fill: rgba(0, 159, 184, 0.12);
-  stroke: none;
 }
 
 .journey-lamp,
@@ -2079,32 +2085,51 @@ em {
 .journey-summit .journey-marker,
 .journey-summit .journey-marker__ring { animation-delay: -2s; }
 
-.journey-summit__back { fill: rgba(0, 159, 184, 0.08); }
-.journey-summit__face { stroke: rgba(129, 237, 255, 0.14); stroke-width: 1.2; }
-.journey-summit__face--left { fill: rgba(0, 159, 184, 0.13); }
-.journey-summit__face--right { fill: rgba(129, 237, 255, 0.08); }
+/* ---- 03 · the summit ---- */
+/* Broken into facets rather than three flat planes, so the mass reads as rock
+   turning away from the light instead of a paper triangle. */
+.peak-back { fill: url(#stone-dark); opacity: 0.75; }
+.peak-face--left { fill: url(#stone-dark); }
+.peak-face--spur { fill: url(#stone-mid); opacity: 0.45; }
+.peak-face--front { fill: url(#stone-mid); }
+.peak-face--gully { fill: url(#stone-dark); opacity: 0.55; }
+.peak-face--right { fill: url(#stone-lit); opacity: 0.42; }
+.peak-face--buttress { fill: url(#stone-mid); opacity: 0.7; }
+.peak-snow { fill: url(#snow-cap); }
+.peak-snow--spur { opacity: 0.7; }
+.peak-edge { fill: none; stroke: rgba(129, 237, 255, 0.4); stroke-width: 1.2; }
 
-.journey-flagpole { stroke: rgba(255,255,255,.9); stroke-width: 2.2; }
+/* The climb itself: a switchback line drawn up the face, lit as it goes. */
+.peak-trail__glow { fill: none; stroke: rgba(129, 237, 255, 0.22); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.peak-trail {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 2.4;
+  stroke-dasharray: 0.14 0.86;
+  animation: journey-climb 5s linear infinite;
+}
 
+.peak-trail__nodes circle { fill: var(--cyan); opacity: 0.55; animation: journey-twinkle 3.2s ease-in-out infinite; }
+.peak-trail__nodes circle:nth-child(2) { animation-delay: -0.8s; }
+.peak-trail__nodes circle:nth-child(3) { animation-delay: -1.6s; }
+.peak-trail__nodes circle:nth-child(4) { animation-delay: -2.4s; }
+
+.flag-pole { stroke: rgba(223, 246, 251, 0.92); stroke-width: 2.2; }
 .journey-flag {
   transform-box: fill-box;
   transform-origin: left center;
   animation: journey-flag 2.6s ease-in-out infinite;
 }
 
-.journey-flag path:first-child { fill: var(--cyan); stroke: var(--cyan); stroke-width: 1.2; }
-.journey-flag path:last-child { fill: none; stroke: rgba(16,37,33,.65); stroke-width: 1; }
-
-.journey-sun circle {
-  fill: none;
-  stroke: rgba(129, 237, 255, 0.22);
-  stroke-width: 1.2;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: journey-sun 12s linear infinite;
+.flag-cloth { fill: var(--cyan); }
+.flag-fold { fill: none; stroke: rgba(16, 37, 33, 0.45); stroke-width: 1; }
+.flag-mark {
+  fill: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
-
-.journey-sun circle:last-child { stroke-dasharray: 5 9; animation-direction: reverse; animation-duration: 18s; }
 
 .journey-label {
   fill: rgba(255, 255, 255, 0.48);
@@ -2131,14 +2156,10 @@ em {
   to { stroke-dashoffset: -1; }
 }
 
-@keyframes journey-gate-left {
-  0%, 14%, 92%, 100% { transform: perspective(110px) rotateY(0deg); }
-  28%, 78% { transform: perspective(110px) rotateY(-68deg); }
+28%, 78% { transform: perspective(110px) rotateY(-68deg); }
 }
 
-@keyframes journey-gate-right {
-  0%, 14%, 92%, 100% { transform: perspective(110px) rotateY(0deg); }
-  28%, 78% { transform: perspective(110px) rotateY(68deg); }
+28%, 78% { transform: perspective(110px) rotateY(68deg); }
 }
 
 @keyframes journey-beam {
@@ -2165,13 +2186,21 @@ em {
   to { stroke-dashoffset: -220; }
 }
 
-@keyframes journey-sun {
-  to { transform: rotate(360deg); }
 }
 
 @keyframes journey-flag {
   0%, 100% { transform: skewY(-2deg) scaleX(0.96); }
   50% { transform: skewY(4deg) scaleX(1.04); }
+}
+
+/* Light running up the switchbacks, from the foot of the climb to the flag. */
+@keyframes journey-climb {
+  to { stroke-dashoffset: -1; }
+}
+
+@keyframes journey-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+  50% { transform: translateY(-7px) rotate(45deg); opacity: 0.85; }
 }
 
 @keyframes journey-travel {
