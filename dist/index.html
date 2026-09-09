@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Future-Proof Your People | AI Talent Development | Leadapreneur">
   <meta name="twitter:description" content="Transform managers into AI-powered innovators who build real solutions with verified business value.">
   <meta name="twitter:image" content="https://www.leadapreneur.com/images/quiz-banner.jpeg">
-  <link rel="stylesheet" href="/assets/styles.css?v=d5472147ec">
+  <link rel="stylesheet" href="/assets/styles.css?v=c01ab83f03">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://www.leadapreneur.com/#organization","name":"Leadapreneur","legalName":"LEADAPRENEUR SDN. BHD.","url":"https://www.leadapreneur.com","logo":"https://www.leadapreneur.com/images/logo-horizontal.png","slogan":"Dare to be great","description":"Leadapreneur transforms managers into AI-powered innovators who build real solutions with verified business value.","foundingDate":"2006","founder":{"@type":"Person","name":"Jan Henrik Bartscht","jobTitle":"Founder & CEO"},"address":{"@type":"PostalAddress","streetAddress":"Level 7, Tower 7, Avenue 7, Menara Pernas, The Horizon","addressLocality":"Kuala Lumpur","postalCode":"59200","addressCountry":"MY"},"areaServed":["MY","SG","KH","PH","ID","HK"],"sameAs":["https://www.linkedin.com/company/leadapreneur/","https://www.facebook.com/Leadapreneurs/","https://www.instagram.com/leadapreneur/","https://www.youtube.com/@Leadapreneur"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://www.leadapreneur.com/#website","name":"Leadapreneur","url":"https://www.leadapreneur.com","publisher":{"@id":"https://www.leadapreneur.com/#organization"},"description":"Leadapreneur transforms managers into AI-powered innovators who build real solutions with verified business value."}</script>
 </head>
@@ -60,7 +60,13 @@
       </div>
     </header>
   <main id="main">
-    <section class="hero home-hero" aria-labelledby="home-title">
+    <section class="hero home-hero" aria-labelledby="home-title" data-hero-depth>
+      <div class="hero-backdrop" aria-hidden="true">
+        <picture>
+          <source srcset="/images/hero-banner.webp" type="image/webp">
+          <img src="/images/hero-banner.jpg" alt="" width="2000" height="1126" fetchpriority="high">
+        </picture>
+      </div>
       <div class="hero-grid shell">
         <div class="hero-copy">
           <p class="kicker reveal">Lead in the age of AI</p>
@@ -72,26 +78,12 @@
             <a class="button button--ghost" href="/role-quiz/">Find your AI role<svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
           </div>
         </div>
-        <div class="hero-composition reveal" data-hero-depth>
-          <figure class="hero-image">
-            <img src="/images/quiz-banner.jpeg" alt="Three AI role archetypes exploring, building and leading" width="1600" height="900" fetchpriority="high">
-          </figure>
-          <div class="hero-chip hero-chip--one"><span>01</span><b>Discover</b><small>See the opening.</small></div>
-          <div class="hero-chip hero-chip--two"><span>02</span><b>Build</b><small>Make it real.</small></div>
-          <div class="hero-chip hero-chip--three"><span>03</span><b>Lead</b><small>Move the system.</small></div>
-          <div class="hero-sketch" aria-hidden="true">
-            <svg viewBox="0 0 320 250" role="presentation">
-              <path class="hero-sketch__echo" d="M20 218c48-5 37-61 88-56 47 5 38-57 90-54 45 3 46-47 94-76"/>
-              <path class="hero-sketch__route" d="M17 207c48-5 37-61 88-56 47 5 38-57 90-54 45 3 46-47 94-76"/>
-              <path class="hero-sketch__route hero-sketch__arrow" d="m257 18 38-4-7 38"/>
-              <path class="hero-sketch__spark" d="m62 116 8-17 8 17 17 8-17 8-8 17-8-17-17-8Z"/>
-              <circle class="hero-sketch__dot hero-sketch__dot--one" cx="105" cy="151" r="8"/>
-              <circle class="hero-sketch__dot hero-sketch__dot--two" cx="196" cy="97" r="12"/>
-              <circle class="hero-sketch__dot hero-sketch__dot--three" cx="248" cy="54" r="6"/>
-            </svg>
-          </div>
-        </div>
       </div>
+      <ol class="hero-chips shell reveal" aria-label="How the journey works">
+        <li class="hero-chip"><span>01</span><b>Discover</b><small>See the opening.</small></li>
+        <li class="hero-chip"><span>02</span><b>Build</b><small>Make it real.</small></li>
+        <li class="hero-chip"><span>03</span><b>Lead</b><small>Move the system.</small></li>
+      </ol>
     </section>
 
     <section class="trust-section" aria-labelledby="trust-title">

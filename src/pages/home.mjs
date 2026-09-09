@@ -19,7 +19,13 @@ import { arrow, link, sectionHeading } from '../templates.mjs';
 
 export function homePage() {
   return `
-    <section class="hero home-hero" aria-labelledby="home-title">
+    <section class="hero home-hero" aria-labelledby="home-title" data-hero-depth>
+      <div class="hero-backdrop" aria-hidden="true">
+        <picture>
+          <source srcset="/images/hero-banner.webp" type="image/webp">
+          <img src="/images/hero-banner.jpg" alt="" width="2000" height="1126" fetchpriority="high">
+        </picture>
+      </div>
       <div class="hero-grid shell">
         <div class="hero-copy">
           <p class="kicker reveal">Lead in the age of AI</p>
@@ -31,26 +37,12 @@ export function homePage() {
             ${link('/role-quiz/', 'Find your AI role', 'button button--ghost')}
           </div>
         </div>
-        <div class="hero-composition reveal" data-hero-depth>
-          <figure class="hero-image">
-            <img src="/images/quiz-banner.jpeg" alt="Three AI role archetypes exploring, building and leading" width="1600" height="900" fetchpriority="high">
-          </figure>
-          <div class="hero-chip hero-chip--one"><span>01</span><b>Discover</b><small>See the opening.</small></div>
-          <div class="hero-chip hero-chip--two"><span>02</span><b>Build</b><small>Make it real.</small></div>
-          <div class="hero-chip hero-chip--three"><span>03</span><b>Lead</b><small>Move the system.</small></div>
-          <div class="hero-sketch" aria-hidden="true">
-            <svg viewBox="0 0 320 250" role="presentation">
-              <path class="hero-sketch__echo" d="M20 218c48-5 37-61 88-56 47 5 38-57 90-54 45 3 46-47 94-76"/>
-              <path class="hero-sketch__route" d="M17 207c48-5 37-61 88-56 47 5 38-57 90-54 45 3 46-47 94-76"/>
-              <path class="hero-sketch__route hero-sketch__arrow" d="m257 18 38-4-7 38"/>
-              <path class="hero-sketch__spark" d="m62 116 8-17 8 17 17 8-17 8-8 17-8-17-17-8Z"/>
-              <circle class="hero-sketch__dot hero-sketch__dot--one" cx="105" cy="151" r="8"/>
-              <circle class="hero-sketch__dot hero-sketch__dot--two" cx="196" cy="97" r="12"/>
-              <circle class="hero-sketch__dot hero-sketch__dot--three" cx="248" cy="54" r="6"/>
-            </svg>
-          </div>
-        </div>
       </div>
+      <ol class="hero-chips shell reveal" aria-label="How the journey works">
+        <li class="hero-chip"><span>01</span><b>Discover</b><small>See the opening.</small></li>
+        <li class="hero-chip"><span>02</span><b>Build</b><small>Make it real.</small></li>
+        <li class="hero-chip"><span>03</span><b>Lead</b><small>Move the system.</small></li>
+      </ol>
     </section>
 
     <section class="trust-section" aria-labelledby="trust-title">
