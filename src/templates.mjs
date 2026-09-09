@@ -315,6 +315,7 @@ export function layout({
   <meta name="robots" content="${noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'}">
   <link rel="canonical" href="${canonical}">
   <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <meta property="og:type" content="${ogType}">
   <meta property="og:site_name" content="Leadapreneur">
   <meta property="og:title" content="${escapeHtml(title)}">
