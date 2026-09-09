@@ -3455,6 +3455,8 @@ body.modal-open {
 
   .hero { min-height: auto; padding-block: 130px 90px; }
   .home-hero { min-height: 92svh; padding-block: 124px clamp(1.6rem, 4vh, 2.6rem); }
+  /* Nudge the peak clear of the menu button once the nav collapses. */
+  .hero-backdrop img { object-position: 56% 82%; }
   /* Narrow crops put the scene right behind the copy, so the veil carries more. */
   .hero-backdrop::after {
     background:
@@ -3536,8 +3538,8 @@ body.modal-open {
   .hero { padding-top: 112px; }
   .home-hero { padding-top: 108px; }
   .display { letter-spacing: -0.065em; }
-  /* Hold the two figures in frame once the crop goes tall and narrow. */
-  .hero-backdrop img { object-position: 44% 100%; }
+  /* Tall crops lose the right of the frame first; hold the summit in shot. */
+  .hero-backdrop img { object-position: 62% 82%; }
   .hero-chip { min-width: 148px; padding: 0.65rem 0.8rem; }
 
   .role-intro { gap: 2rem; }
@@ -3690,46 +3692,17 @@ body.modal-open {
   .contact-grid aside { padding: 1.4rem; }
 }
 
-/* Phone widths crop a full-bleed cover so hard that the summit falls outside
-   the frame. Art-direct instead: the whole scene in a band across the top,
-   copy on paper below it, so the peak and the flag survive the narrow
-   viewport and lead the page. */
+/* A portrait crop of a landscape scene throws away most of its width, and the
+   summit sits well right of centre, so phones re-aim the crop at the peak
+   rather than the middle of the frame. Copy still rides over the art. */
 @media (max-width: 560px) {
   .home-hero {
-    min-height: auto;
-    grid-template-rows: auto auto;
-    gap: 1.2rem;
-    padding-block: calc(46vh + 76px + 1.7rem) 2.4rem;
-    background: linear-gradient(to bottom, var(--beige), var(--paper));
-  }
-
-  /* Start below the fixed header so the flag never sits under the menu button. */
-  .hero-backdrop {
-    inset: 76px 0 auto 0;
-    height: 46vh;
+    padding-block: clamp(150px, 21vh, 210px) clamp(1.6rem, 4vh, 2.4rem);
   }
 
   .hero-backdrop img {
-    object-position: 50% 45%;
+    object-position: 69% 50%;
     transform: none;
-  }
-
-  /* Settle the base of the band into the paper the copy sits on. */
-  .hero-backdrop::after {
-    background: linear-gradient(to bottom, rgba(255, 253, 248, 0) 62%, var(--paper) 100%);
-  }
-
-  /* On a clean ground the halo and the heavier lede are no longer needed. */
-  .home-hero .kicker,
-  .home-hero .display,
-  .home-hero .hero-subhead,
-  .home-hero .hero-lede {
-    text-shadow: none;
-  }
-
-  .home-hero .hero-lede {
-    color: var(--muted);
-    font-weight: 400;
   }
 }
 
