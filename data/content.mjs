@@ -262,6 +262,7 @@ export const projects = [
 export const caseStudies = [
   {
     id: 'dbs',
+    logo: '/images/client-dbs.png',
     name: 'DBS',
     eyebrow: '5 seasons · 2019–2024',
     title: 'SGD 79 million in innovation value',
@@ -271,6 +272,7 @@ export const caseStudies = [
   },
   {
     id: 'uob',
+    logo: '/images/client-uob.png',
     name: 'UOB',
     eyebrow: 'Second cycle · 12 weeks',
     title: 'RM 8.28 million in innovation value',
@@ -280,6 +282,7 @@ export const caseStudies = [
   },
   {
     id: 'ocbc',
+    logo: '/images/client-ocbc.png',
     name: 'OCBC',
     eyebrow: 'Rebel Accelerator · 16 weeks',
     title: 'RM 5.17 million in innovation value',

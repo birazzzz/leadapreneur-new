@@ -30,10 +30,6 @@ export function homePage() {
             ${link('/contact/', 'Future-proof your people', 'button button--teal solution-trigger')}
             ${link('/role-quiz/', 'Find your AI role', 'button button--ghost')}
           </div>
-          <div class="hero-proof reveal" aria-label="Leadapreneur impact at a glance">
-            <span><b>20 years</b> building innovators</span>
-            <span><b>USD 120M+</b> business impact</span>
-          </div>
         </div>
         <div class="hero-composition reveal" data-hero-depth>
           <figure class="hero-image">
@@ -57,6 +53,13 @@ export function homePage() {
       </div>
     </section>
 
+    <section class="trust-section" aria-labelledby="trust-title">
+      <div class="shell">
+        <p class="trust-title" id="trust-title">Trusted by forward-thinking organisations across Asia</p>
+        ${logoStrip()}
+      </div>
+    </section>
+
     <section class="section role-section" id="roles" aria-labelledby="roles-title">
       <div class="shell">
         <div class="role-intro">
@@ -74,13 +77,6 @@ export function homePage() {
           <p aria-live="polite"><span data-carousel-position>1</span> / 3</p>
           <button type="button" data-carousel-next aria-label="Next role">→</button>
         </div>
-      </div>
-    </section>
-
-    <section class="trust-section" aria-labelledby="trust-title">
-      <div class="shell">
-        <p class="trust-title" id="trust-title">Trusted by forward-thinking organisations across Asia</p>
-        ${logoStrip()}
       </div>
     </section>
 
@@ -175,7 +171,7 @@ export function homePage() {
       <div class="shell stories-layout">
         <div class="stories-proof">
           <p class="kicker">Client story</p>
-          <p class="stories-logo">${caseStudies[0].name}</p>
+          <figure class="stories-logo"><img src="${caseStudies[0].logo}" alt="${caseStudies[0].name}" loading="lazy"></figure>
           <h2 id="stories-title">${caseStudies[0].title}</h2>
           <p>${caseStudies[0].story}</p>
           <ul>${caseStudies[0].metrics.map((metric) => `<li>${metric}</li>`).join('')}</ul>

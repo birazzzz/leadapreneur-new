@@ -45,8 +45,8 @@ test('homepage keeps the required story order', () => {
   const html = readFileSync(join(dist, 'index.html'), 'utf8');
   const markers = [
     'home-hero',
-    'role-section',
     'trust-section',
+    'role-section',
     'future-section',
     'journey-section',
     'projects-section',
