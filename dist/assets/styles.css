@@ -557,7 +557,7 @@ em {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 100%;
+  object-position: 50% 82%;
   transform: scale(1.06) translate3d(calc(var(--pointer-x, 0) * -16px), calc(var(--pointer-y, 0) * -12px), 0);
   transition: transform 320ms ease-out;
 }
@@ -3691,20 +3691,22 @@ body.modal-open {
 }
 
 /* Phone widths crop a full-bleed cover so hard that the summit falls outside
-   the frame. Art-direct instead: copy on paper, the whole scene in a band
-   beneath it, so the peak and the flag survive the narrow viewport. */
+   the frame. Art-direct instead: the whole scene in a band across the top,
+   copy on paper below it, so the peak and the flag survive the narrow
+   viewport and lead the page. */
 @media (max-width: 560px) {
   .home-hero {
     min-height: auto;
     grid-template-rows: auto auto;
     gap: 1.2rem;
-    padding-block: 96px calc(40vh + 1.3rem);
+    padding-block: calc(46vh + 76px + 1.7rem) 2.4rem;
     background: linear-gradient(to bottom, var(--beige), var(--paper));
   }
 
+  /* Start below the fixed header so the flag never sits under the menu button. */
   .hero-backdrop {
-    inset: auto 0 0 0;
-    height: 40vh;
+    inset: 76px 0 auto 0;
+    height: 46vh;
   }
 
   .hero-backdrop img {
@@ -3712,8 +3714,9 @@ body.modal-open {
     transform: none;
   }
 
+  /* Settle the base of the band into the paper the copy sits on. */
   .hero-backdrop::after {
-    background: linear-gradient(to bottom, var(--paper) 0%, rgba(255, 253, 248, 0) 22%);
+    background: linear-gradient(to bottom, rgba(255, 253, 248, 0) 62%, var(--paper) 100%);
   }
 
   /* On a clean ground the halo and the heavier lede are no longer needed. */
