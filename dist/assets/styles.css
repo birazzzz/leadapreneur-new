@@ -758,17 +758,6 @@ em {
   margin-top: clamp(-160px, -13vw, -90px);
 }
 
-/* Small text over busy artwork needs a tighter, denser glow than the
-   headline does -- short radius, so it lifts the words without hazing the
-   picture around them. */
-.projects-section .section-heading > p:last-child {
-  color: rgba(16, 37, 33, 0.86);
-  text-shadow:
-    0 0 5px rgba(255, 253, 248, 1),
-    0 0 12px rgba(255, 253, 248, 0.98),
-    0 0 24px rgba(255, 253, 248, 0.85);
-}
-
 .role-intro__action {
   display: grid;
   justify-items: start;
@@ -1208,37 +1197,40 @@ em {
   background: var(--beige);
 }
 
-/* The card rail is tall and opaque, so a full-height backdrop would have
-   nowhere to show. Keep the artwork to the band the heading sits in and let
-   it settle into the ground before the cards begin. */
+/* A band that starts below the heading and runs under the card rail, soft at
+   both ends so it never cuts on a hard edge. The crop is set so the faces
+   land in the open gap -- clear of the copy above and the cards below. */
 .projects-section .section-backdrop {
-  inset: 0 0 auto 0;
-  height: clamp(430px, 47vw, 780px);
+  inset: clamp(272px, 21vw, 320px) 0 auto 0;
+  height: clamp(400px, 40vw, 640px);
 }
 
 .projects-section .section-backdrop img {
-  object-position: 50% 38%;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 96%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 96%);
+  object-position: 50% 92%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 64%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 64%, transparent 100%);
 }
 
 .projects-section .section-backdrop::after {
-  background:
-    linear-gradient(to bottom, rgba(243, 238, 229, 0.74) 0%, rgba(243, 238, 229, 0.56) 24%, rgba(243, 238, 229, 0.2) 44%, rgba(243, 238, 229, 0) 66%),
-    linear-gradient(to right, rgba(243, 238, 229, 0.45) 0%, rgba(243, 238, 229, 0) 58%);
+  background: linear-gradient(to right, rgba(243, 238, 229, 0.34) 0%, rgba(243, 238, 229, 0) 52%);
+}
+
+/* Blur the band's top and bottom strips as well as fading them, so the
+   artwork dissolves into the ground instead of thinning out on a sharp edge.
+   The middle -- where the faces are -- stays sharp. */
+.projects-section .section-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  backdrop-filter: blur(16px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 24%, transparent 70%, #000 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 24%, transparent 70%, #000 100%);
 }
 
 /* Leave a band of the illustration between the heading and the rail. */
 .projects-section .projects-head {
-  margin-bottom: clamp(4rem, 9vw, 8rem);
-}
-
-.projects-section .section-heading .kicker,
-.projects-section .section-heading h2,
-.projects-section .section-heading p {
-  text-shadow:
-    0 0 12px rgba(243, 238, 229, 0.94),
-    0 0 28px rgba(243, 238, 229, 0.8);
+  margin-bottom: clamp(6rem, 14vw, 12rem);
 }
 
 
