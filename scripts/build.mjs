@@ -175,6 +175,7 @@ cpSync(join(root, 'src', 'quiz.js'), join(dist, 'assets', 'quiz.js'));
 cpSync(join(root, 'lib', 'quiz-engine.mjs'), join(dist, 'assets', 'quiz-engine.mjs'));
 mkdirSync(join(dist, 'data'), { recursive: true });
 cpSync(join(root, 'data', 'content.mjs'), join(dist, 'data', 'content.mjs'));
+cpSync(join(root, 'data', 'insights.mjs'), join(dist, 'data', 'insights.mjs'));
 
 for (const page of pages) write(outputPath(page.path), layout(page));
 

@@ -50,6 +50,12 @@ export function homePage() {
     </section>
 
     <section class="section role-section" id="roles" aria-labelledby="roles-title">
+      <div class="role-backdrop" aria-hidden="true">
+        <picture>
+          <source srcset="/images/roles-banner.webp" type="image/webp">
+          <img src="/images/roles-banner.jpg" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+        </picture>
+      </div>
       <div class="shell">
         <div class="role-intro">
           ${sectionHeading('Who can I become?', '<span id="roles-title">Which role will you play in the age of AI?</span>', 'We all lead differently. Find the role that matches how you think and build.')}
@@ -59,7 +65,7 @@ export function homePage() {
           </div>
         </div>
         <div class="role-deck" data-role-carousel>
-          ${roleCards()}
+          ${roleCards({ withArt: false })}
         </div>
         <div class="carousel-controls" data-carousel-controls>
           <button type="button" data-carousel-prev aria-label="Previous role">←</button>

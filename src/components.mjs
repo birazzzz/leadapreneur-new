@@ -1,18 +1,20 @@
 import { companies, educationalVideos, insights, inspiringPodcasts, roles, site } from '../data/content.mjs';
 import { arrow, escapeHtml, link } from './templates.mjs';
 
-export function roleCards({ limit = roles.length, interactive = true } = {}) {
+// `withArt: false` drops the per-card artwork, for surfaces that carry one
+// shared illustration behind the deck instead.
+export function roleCards({ limit = roles.length, interactive = true, withArt = true } = {}) {
   return roles
     .slice(0, limit)
     .map(
       (role, index) => `
-      <article class="role-card reveal" style="--role:${role.accent};--card-index:${index}" data-role-card>
-        <div class="role-card__visual">
+      <article class="role-card reveal${withArt ? '' : ' role-card--plain'}" style="--role:${role.accent};--card-index:${index}" data-role-card>
+        ${withArt ? `<div class="role-card__visual">
           <img src="${role.image}" alt="${role.name} archetype artwork" width="1024" height="1365" loading="${index === 0 ? 'eager' : 'lazy'}">
           <span class="role-card__number">${role.number}</span>
-        </div>
+        </div>` : ''}
         <div class="role-card__body">
-          <p class="role-card__label">${role.bestAt}</p>
+          <p class="role-card__label">${withArt ? '' : `<span class="role-card__number">${role.number}</span>`}${role.bestAt}</p>
           <h3>${role.name}</h3>
           <p>${role.tagline}</p>
           <div class="trait-list" aria-label="Signature traits">${role.traits.map((trait) => `<span>${trait}</span>`).join('')}</div>

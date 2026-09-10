@@ -683,7 +683,34 @@ em {
 /* Role cards */
 .role-section {
   position: relative;
+  isolation: isolate;
   background: var(--paper);
+}
+
+/* One shared illustration behind the deck, in place of three card crops. */
+.role-backdrop {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+}
+
+.role-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+
+/* Heavy at the top so the heading reads, light across the middle so the three
+   archetypes stay visible, solid again under the cards. */
+.role-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, var(--paper) 0%, rgba(255, 253, 248, 0.93) 14%, rgba(255, 253, 248, 0.82) 32%, rgba(255, 253, 248, 0.24) 45%, rgba(255, 253, 248, 0.14) 58%, rgba(255, 253, 248, 0.42) 76%, rgba(255, 253, 248, 0.9) 93%, var(--paper) 100%),
+    linear-gradient(to right, rgba(255, 253, 248, 0.55) 0%, rgba(255, 253, 248, 0) 52%);
 }
 
 .role-intro {
@@ -692,6 +719,26 @@ em {
   align-items: end;
   gap: 3rem;
   margin-bottom: clamp(3rem, 6vw, 5.5rem);
+}
+
+/* Leave a band of the illustration visible between the heading and the deck. */
+.role-section .role-intro {
+  margin-bottom: clamp(5rem, 11vw, 10rem);
+}
+
+/* Same trick as the hero: a paper halo on the type buys contrast over the
+   artwork without washing the artwork out. */
+.role-section .role-intro .kicker,
+.role-section .role-intro h2,
+.role-section .role-intro p {
+  text-shadow:
+    0 0 12px rgba(255, 253, 248, 0.94),
+    0 0 28px rgba(255, 253, 248, 0.8);
+}
+
+.role-section .role-intro .section-heading > p:last-child,
+.role-section .role-intro__action p {
+  color: rgba(16, 37, 33, 0.82);
 }
 
 .role-intro__action {
@@ -776,6 +823,35 @@ em {
   display: grid;
   gap: 0.85rem;
   padding: 1.25rem;
+}
+
+/* No crop on top, so the card carries its own number and a little more air. */
+.role-card--plain {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+}
+
+.role-card--plain .role-card__body {
+  padding: 1.5rem 1.4rem 1.4rem;
+}
+
+.role-card--plain .role-card__label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.role-card--plain .role-card__number {
+  position: static;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--role);
+  font-size: 0.68rem;
+  letter-spacing: 0;
 }
 
 .role-card__label {
