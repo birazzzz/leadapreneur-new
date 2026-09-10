@@ -30,7 +30,7 @@ export function homePage() {
           <p class="hero-lede reveal">Leadapreneur turns managers into AI-powered innovators who build real solutions and create measurable business impact.</p>
           <div class="button-row reveal">
             ${link('/contact/', 'Future-proof your people', 'button button--teal solution-trigger')}
-            ${link('/role-quiz/', 'Find your AI role', 'button button--ghost')}
+            ${link('/role-quiz/', 'Discover more about me', 'button button--ghost')}
           </div>
         </div>
       </div>
@@ -51,10 +51,10 @@ export function homePage() {
     <section class="section role-section" id="roles" aria-labelledby="roles-title">
       <div class="shell">
         <div class="role-intro">
-          ${sectionHeading('Who can I become?', '<span id="roles-title">Which role will you play in the age of AI?</span>', 'We all lead differently. Find the role that matches how you think and build.')}
+          ${sectionHeading('Who could you become?', '<span id="roles-title">There’s more to you than your job title.</span>', 'What could those strengths mean for your future?')}
           <div class="role-intro__action">
-            ${link('/role-quiz/', 'Take the 2-minute role quiz', 'button button--outline')}
-            <p><span aria-hidden="true">✓</span> No sign-up. No email. Just your result.</p>
+            ${link('/role-quiz/', 'Show me', 'button button--outline')}
+            <p><span aria-hidden="true">✓</span> A few questions. No right or wrong answers.</p>
           </div>
         </div>
         <figure class="role-stage" aria-hidden="true">
