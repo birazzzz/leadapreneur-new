@@ -114,7 +114,7 @@ export function homePage() {
       <div class="shell">
         <div class="journey-head">
           ${sectionHeading('AI × Talent Accelerator', '<span id="journey-title">From manager to leadapreneur.</span>', 'Capability, execution, value, then the next level of leadership.')}
-          ${link('/ai-x-talent-accelerator/', 'Explore the complete accelerator', 'button button--outline')}
+          ${link('/ai-x-talent-accelerator/', 'Explore', 'button button--outline')}
         </div>
         <ol class="journey-track">
           ${acceleratorSteps
