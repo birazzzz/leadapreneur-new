@@ -60,7 +60,7 @@ export function homePage() {
         <div class="role-intro">
           ${sectionHeading('Who can I become?', '<span id="roles-title">Which role will you play in the age of AI?</span>', 'We all lead differently. Find the role that matches how you think and build.')}
           <div class="role-intro__action">
-            ${link('/role-quiz/', 'Take the 2-minute role quiz', 'button button--cyan')}
+            ${link('/role-quiz/', 'Take the 2-minute role quiz', 'button button--ghost')}
             <p><span aria-hidden="true">✓</span> No sign-up. No email. Just your result.</p>
           </div>
         </div>
@@ -114,7 +114,7 @@ export function homePage() {
       <div class="shell">
         <div class="journey-head">
           ${sectionHeading('AI × Talent Accelerator', '<span id="journey-title">From manager to leadapreneur.</span>', 'Capability, execution, value, then the next level of leadership.')}
-          ${link('/ai-x-talent-accelerator/', 'Explore the complete accelerator', 'text-link')}
+          ${link('/ai-x-talent-accelerator/', 'Explore the complete accelerator', 'button button--outline')}
         </div>
         <ol class="journey-track">
           ${acceleratorSteps
@@ -209,7 +209,7 @@ export function homePage() {
       <div class="shell">
         <div class="insights-head">
           ${sectionHeading('Ideas for the intelligence age', '<span id="insights-title">Read what changes the work.</span>', 'Field notes on AI, leadership, innovation and building people who can move.')}
-          ${link('/insights/', 'Explore all insights', 'text-link')}
+          ${link('/insights/', 'Explore all insights', 'button button--outline')}
         </div>
         ${featuredInsights()}
       </div>

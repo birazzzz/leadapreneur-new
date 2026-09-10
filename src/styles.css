@@ -284,16 +284,21 @@ em {
   background: #a0f3ff;
 }
 
+/* Four call-to-action variants, and only four:
+     .button--teal    primary
+     .button--ghost   secondary, glass -- over an image backdrop
+     .button--outline secondary, teal stroke -- over a plain ground
+     .text-link       inline link, for article and body copy */
 .button--ghost {
-  border-color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.32);
-  backdrop-filter: blur(12px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 10px 30px -22px rgba(0, 72, 82, 0.5);
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.46);
+  backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 12px 34px -22px rgba(0, 72, 82, 0.55);
 }
 
 .button--ghost:hover {
-  border-color: rgba(255, 255, 255, 0.85);
-  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.68);
 }
 
 .button--outline {
@@ -708,6 +713,10 @@ em {
   height: 100%;
   object-fit: cover;
   object-position: 50% 45%;
+  /* Feathered rather than washed: the visible band keeps full saturation
+     instead of sitting under a flat milky overlay. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 64%, transparent 94%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 64%, transparent 94%);
 }
 
 .section-backdrop::after {
@@ -716,12 +725,11 @@ em {
   inset: 0;
 }
 
-/* Heavy at the top so the heading reads, light across the middle so the three
-   archetypes stay visible, solid again under the cards. */
+/* Only as much wash as the heading needs; the mask does the rest. */
 .role-section .section-backdrop::after {
   background:
-    linear-gradient(to bottom, var(--paper) 0%, rgba(255, 253, 248, 0.93) 14%, rgba(255, 253, 248, 0.82) 32%, rgba(255, 253, 248, 0.24) 45%, rgba(255, 253, 248, 0.14) 58%, rgba(255, 253, 248, 0.42) 76%, rgba(255, 253, 248, 0.9) 93%, var(--paper) 100%),
-    linear-gradient(to right, rgba(255, 253, 248, 0.55) 0%, rgba(255, 253, 248, 0) 52%);
+    linear-gradient(to bottom, rgba(255, 253, 248, 0.8) 0%, rgba(255, 253, 248, 0.66) 28%, rgba(255, 253, 248, 0.34) 42%, rgba(255, 253, 248, 0.05) 56%, rgba(255, 253, 248, 0) 70%),
+    linear-gradient(to right, rgba(255, 253, 248, 0.4) 0%, rgba(255, 253, 248, 0) 58%);
 }
 
 .role-intro {
@@ -747,9 +755,17 @@ em {
     0 0 28px rgba(255, 253, 248, 0.8);
 }
 
+/* Small text over busy artwork needs a tighter, denser glow than the
+   headline does -- short radius, so it lifts the words without hazing the
+   picture around them. */
 .role-section .role-intro .section-heading > p:last-child,
-.role-section .role-intro__action p {
-  color: rgba(16, 37, 33, 0.82);
+.role-section .role-intro__action p,
+.projects-section .section-heading > p:last-child {
+  color: rgba(16, 37, 33, 0.86);
+  text-shadow:
+    0 0 5px rgba(255, 253, 248, 1),
+    0 0 12px rgba(255, 253, 248, 0.98),
+    0 0 24px rgba(255, 253, 248, 0.85);
 }
 
 .role-intro__action {
@@ -1202,12 +1218,14 @@ em {
 
 .projects-section .section-backdrop img {
   object-position: 50% 38%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 96%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 96%);
 }
 
 .projects-section .section-backdrop::after {
   background:
-    linear-gradient(to bottom, var(--beige) 0%, rgba(243, 238, 229, 0.72) 9%, rgba(243, 238, 229, 0.42) 22%, rgba(243, 238, 229, 0.34) 45%, rgba(243, 238, 229, 0.72) 72%, rgba(243, 238, 229, 0.94) 88%, var(--beige) 100%),
-    linear-gradient(to right, rgba(243, 238, 229, 0.5) 0%, rgba(243, 238, 229, 0) 58%);
+    linear-gradient(to bottom, rgba(243, 238, 229, 0.74) 0%, rgba(243, 238, 229, 0.56) 24%, rgba(243, 238, 229, 0.2) 44%, rgba(243, 238, 229, 0) 66%),
+    linear-gradient(to right, rgba(243, 238, 229, 0.45) 0%, rgba(243, 238, 229, 0) 58%);
 }
 
 /* Leave a band of the illustration between the heading and the rail. */
@@ -1223,9 +1241,7 @@ em {
     0 0 28px rgba(243, 238, 229, 0.8);
 }
 
-.projects-section .section-heading > p:last-child {
-  color: rgba(16, 37, 33, 0.82);
-}
+
 
 .projects-section .project-card {
   background: rgba(255, 253, 248, 0.94);
@@ -2027,6 +2043,41 @@ em {
   max-width: 1800px;
   height: auto;
   margin-inline: auto;
+}
+
+.final-cta__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: end;
+  gap: clamp(3rem, 8vw, 8rem);
+}
+
+.final-cta h2 {
+  margin-top: 1rem;
+  font-size: clamp(4.4rem, 11vw, 11rem);
+  letter-spacing: -0.08em;
+  line-height: 0.75;
+  text-transform: uppercase;
+}
+
+.final-cta h2 em {
+  color: var(--cyan);
+}
+
+.final-cta__copy {
+  align-self: start;
+  display: grid;
+  justify-items: start;
+  gap: 1.5rem;
+  padding-top: clamp(1.5rem, 3vw, 3rem);
+}
+
+.final-cta__copy p {
+  max-width: 42ch;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 1.15rem;
 }
 
 /* Footer */
