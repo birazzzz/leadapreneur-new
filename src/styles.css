@@ -2020,7 +2020,7 @@ em {
   position: relative;
   overflow: hidden;
   /* The lower band belongs to the artwork, so the headline never fights it. */
-  padding-block: clamp(4.5rem, 9vw, 8rem) calc(min(100vw, 1800px) * 0.371 + clamp(1rem, 2vw, 2.5rem));
+  padding-block: clamp(4.5rem, 9vw, 8rem) calc(min(100vw, 1800px) * 0.49 + clamp(1rem, 2vw, 2.5rem));
   color: var(--white);
   background: var(--ink);
 }
@@ -3571,7 +3571,7 @@ body.modal-open {
   .insight-card:last-child { grid-column: auto; }
   .media-grid { grid-template-columns: 1fr; }
   .article-cover { aspect-ratio: 4 / 3; }
-  .final-cta { padding-block: clamp(4rem, 12vw, 6rem) calc(100vw * 0.371 + 1.5rem); }
+  .final-cta { padding-block: clamp(4rem, 12vw, 6rem) calc(100vw * 0.5 + 1.5rem); }
   .final-cta__inner { gap: 2.5rem; }
   .final-cta__copy { padding-top: 0; gap: 1.75rem; }
   .final-cta__copy p { font-size: 1.05rem; }

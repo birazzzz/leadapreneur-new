@@ -145,10 +145,7 @@ export function eventTicket(event, state = 'past') {
 export function finalCta() {
   return `<section class="final-cta">
     <div class="final-cta__scene" aria-hidden="true">
-      <picture>
-        <source srcset="/images/cta-journey.webp" type="image/webp">
-        <img src="/images/cta-journey.png" alt="" width="1800" height="668" loading="lazy" decoding="async">
-      </picture>
+      <img src="/images/cta-journey.svg" alt="" width="1672" height="952" loading="lazy" decoding="async">
     </div>
 
     <div class="shell final-cta__inner">
