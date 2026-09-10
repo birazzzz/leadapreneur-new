@@ -760,7 +760,7 @@ em {
 
 .role-intro__action {
   display: grid;
-  justify-items: start;
+  justify-items: end;
   gap: 0.75rem;
 }
 
