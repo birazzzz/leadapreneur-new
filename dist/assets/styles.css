@@ -540,7 +540,7 @@ em {
   grid-template-rows: 1fr auto;
   justify-items: center;
   gap: 2rem;
-  padding-block: clamp(160px, 20vh, 250px) clamp(2rem, 5vh, 3.4rem);
+  padding-block: clamp(126px, 14vh, 190px) clamp(2rem, 5vh, 3.4rem);
   text-align: center;
   isolation: isolate;
 }
