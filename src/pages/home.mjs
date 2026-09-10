@@ -50,20 +50,20 @@ export function homePage() {
     </section>
 
     <section class="section role-section" id="roles" aria-labelledby="roles-title">
-      <div class="section-backdrop" aria-hidden="true">
-        <picture>
-          <source srcset="/images/roles-banner.webp" type="image/webp">
-          <img src="/images/roles-banner.jpg" alt="" width="1536" height="1024" loading="lazy" decoding="async">
-        </picture>
-      </div>
       <div class="shell">
         <div class="role-intro">
           ${sectionHeading('Who can I become?', '<span id="roles-title">Which role will you play in the age of AI?</span>', 'We all lead differently. Find the role that matches how you think and build.')}
           <div class="role-intro__action">
-            ${link('/role-quiz/', 'Take the 2-minute role quiz', 'button button--ghost')}
+            ${link('/role-quiz/', 'Take the 2-minute role quiz', 'button button--outline')}
             <p><span aria-hidden="true">✓</span> No sign-up. No email. Just your result.</p>
           </div>
         </div>
+        <figure class="role-stage" aria-hidden="true">
+          <picture>
+            <source srcset="/images/roles-banner.webp" type="image/webp">
+            <img src="/images/roles-banner.jpg" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+          </picture>
+        </figure>
         <div class="role-deck" data-role-carousel>
           ${roleCards({ withArt: false })}
         </div>
