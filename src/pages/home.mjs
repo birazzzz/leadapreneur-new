@@ -6,7 +6,6 @@ import {
   stats,
 } from '../../data/content.mjs';
 import {
-  featuredInsights,
   finalCta,
   logoStrip,
   projectCard,
@@ -202,16 +201,6 @@ export function homePage() {
               .join('')}
           </ol>
         </div>
-      </div>
-    </section>
-
-    <section class="section insights-section" aria-labelledby="insights-title">
-      <div class="shell">
-        <div class="insights-head">
-          ${sectionHeading('Ideas for the intelligence age', '<span id="insights-title">Read what changes the work.</span>', 'Field notes on AI, leadership, innovation and building people who can move.')}
-          ${link('/insights/', 'Explore all insights', 'button button--outline')}
-        </div>
-        ${featuredInsights()}
       </div>
     </section>
 

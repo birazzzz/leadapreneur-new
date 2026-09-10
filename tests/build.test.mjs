@@ -53,7 +53,6 @@ test('homepage keeps the required story order', () => {
     'impact-section',
     'stories-section',
     'games-section',
-    'insights-section',
     'final-cta',
     'site-footer',
   ];
