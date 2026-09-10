@@ -1,21 +1,18 @@
 import {
   acceleratorSteps,
   caseStudies,
-  events,
   futureProofingPillars,
   projects,
-  site,
   stats,
 } from '../../data/content.mjs';
 import {
-  emptyEvents,
   featuredInsights,
   finalCta,
   logoStrip,
   projectCard,
   roleCards,
 } from '../components.mjs';
-import { arrow, link, sectionHeading } from '../templates.mjs';
+import { link, sectionHeading } from '../templates.mjs';
 
 export function homePage() {
   return `
@@ -55,7 +52,7 @@ export function homePage() {
     <section class="section role-section" id="roles" aria-labelledby="roles-title">
       <div class="shell">
         <div class="role-intro">
-          ${sectionHeading('Who can I become?', '<span id="roles-title">Which role will you play in the age of AI?</span>', 'We all lead differently. Discover the role that matches how you think, build and create change.')}
+          ${sectionHeading('Who can I become?', '<span id="roles-title">Which role will you play in the age of AI?</span>', 'We all lead differently. Find the role that matches how you think and build.')}
           <div class="role-intro__action">
             ${link('/role-quiz/', 'Take the 2-minute role quiz', 'button button--cyan')}
             <p><span aria-hidden="true">✓</span> No sign-up. No email. Just your result.</p>
@@ -89,10 +86,22 @@ export function homePage() {
       </div>
     </section>
 
+    <section class="section projects-section" aria-labelledby="projects-title">
+      <div class="shell">
+        <div class="projects-head">
+          ${sectionHeading('Built in the real world', '<span id="projects-title">Real projects. Real impact.</span>', 'Every figure below comes from a live project record.')}
+          ${link('/projects/', 'Explore all projects', 'button button--outline')}
+        </div>
+        <div class="project-rail">
+          ${projects.slice(0, 3).map(projectCard).join('')}
+        </div>
+      </div>
+    </section>
+
     <section class="section journey-section" aria-labelledby="journey-title">
       <div class="shell">
         <div class="journey-head">
-          ${sectionHeading('AI × Talent Accelerator', '<span id="journey-title">From manager to leadapreneur.</span>', 'A working journey from capability to execution, value and the next level of leadership.')}
+          ${sectionHeading('AI × Talent Accelerator', '<span id="journey-title">From manager to leadapreneur.</span>', 'Capability, execution, value, then the next level of leadership.')}
           ${link('/ai-x-talent-accelerator/', 'Explore the complete accelerator', 'text-link')}
         </div>
         <ol class="journey-track">
@@ -105,57 +114,13 @@ export function homePage() {
       </div>
     </section>
 
-    <section class="section projects-section" aria-labelledby="projects-title">
-      <div class="shell">
-        <div class="projects-head">
-          ${sectionHeading('Built in the real world', '<span id="projects-title">Real projects. Real impact.</span>', 'Leadapreneurs work on live business problems. Every figure below comes from a current Leadapreneur project record.')}
-          ${link('/projects/', 'Explore all projects', 'button button--outline')}
-        </div>
-        <div class="project-rail">
-          ${projects.slice(0, 3).map(projectCard).join('')}
-        </div>
-      </div>
-    </section>
-
-    <section class="games-section" id="greatness-games" aria-labelledby="games-title">
-      <div class="shell games-layout">
-        <div class="games-copy">
-          <p class="kicker kicker--light">Enter game mode</p>
-          <h2 id="games-title">AI adoption shouldn’t feel like another training programme.</h2>
-          <p class="games-punch">Make it a game worth winning.</p>
-          <p>The Greatness Games bring the performance energy of professional sport to AI adoption. People step forward, experiment, build real projects and return stronger next season.</p>
-          ${link('/ai-x-talent-accelerator/#greatness-games', 'How the Games work', 'button button--cyan')}
-        </div>
-        <div class="scoreboard reveal" aria-label="Four outcomes of the Greatness Games">
-          <div class="scoreboard__top"><span>GREATNESS GAMES</span><span>LIVE SYSTEM</span></div>
-          ${[
-            ['01', 'Adoption', 'People choose to step forward.'],
-            ['02', 'Engagement', 'Participants actively build and test.'],
-            ['03', 'Outcomes', 'Projects deliver tangible business results.'],
-            ['04', 'Sustainability', 'Innovators return to coach and lead.'],
-          ]
-            .map(([number, title, copy]) => `<div class="scoreboard__row"><span>${number}</span><b>${title}</b><p>${copy}</p><i aria-hidden="true"></i></div>`)
-            .join('')}
-        </div>
-      </div>
-    </section>
-
     <section class="impact-section" aria-labelledby="impact-title">
       <div class="shell">
-        <div class="impact-intro"><p class="kicker">The record</p><h2 id="impact-title">Impact at the scale of a system.</h2></div>
+        <p class="kicker">The record</p>
+        <h2 id="impact-title">Impact at the scale of a system.</h2>
         <dl class="impact-grid">
           ${stats.map(([value, label]) => `<div class="reveal"><dt>${label}</dt><dd>${value}</dd></div>`).join('')}
         </dl>
-      </div>
-    </section>
-
-    <section class="section events-home" aria-labelledby="events-title">
-      <div class="shell">
-        <div class="events-head">
-          ${sectionHeading('What’s next', '<span id="events-title">For people who refuse to stand still.</span>', 'Public events appear here as soon as dates are confirmed. No expired event is presented as upcoming.')}
-          ${link('/events/', 'View all events', 'text-link')}
-        </div>
-        ${emptyEvents()}
       </div>
     </section>
 
@@ -166,29 +131,64 @@ export function homePage() {
           <figure class="stories-logo"><img src="${caseStudies[0].logo}" alt="${caseStudies[0].name}" loading="lazy"></figure>
           <h2 id="stories-title">${caseStudies[0].title}</h2>
           <p>${caseStudies[0].story}</p>
-          <ul>${caseStudies[0].metrics.map((metric) => `<li>${metric}</li>`).join('')}</ul>
+          <dl class="stories-metrics">
+            ${caseStudies[0].metrics
+              .map((metric) => {
+                const [value, ...rest] = metric.split(' ');
+                return `<div><dt>${value}</dt><dd>${rest.join(' ')}</dd></div>`;
+              })
+              .join('')}
+          </dl>
           ${link('/case-studies/', 'Read the evidence', 'text-link')}
         </div>
         <figure class="testimonial-stage reveal">
-          <blockquote>“With the world changing so fast, the imperative is to future-proof the business. But before you do that, you must future-proof your people. This programme does exactly that.”</blockquote>
+          <blockquote>With the world changing so fast, the imperative is to future-proof the business. But before you do that, you must future-proof your people.</blockquote>
           <figcaption><b>Nisha Padbidri</b><span>APAC Head, Human Resources · Citi</span></figcaption>
-          <span class="quote-mark" aria-hidden="true">“</span>
         </figure>
       </div>
     </section>
 
-    <section class="section path-section" aria-labelledby="path-title">
+    <section class="games-section" id="greatness-games" aria-labelledby="games-title">
       <div class="shell">
-        ${sectionHeading('Two paths. One future.', '<span id="path-title">Start with the question that matters now.</span>', 'The role quiz shows how you contribute. The organisation assessment shows how ready your system is.')}
-        <div class="path-grid">
-          <article class="path-card path-card--personal reveal">
-            <p>For you</p><span aria-hidden="true">✦</span><h3>Find your role.</h3><p>Three honest questions. One clear archetype. No personal details.</p>
-            ${link('/role-quiz/', 'Take the role quiz', 'button button--cyan')}
-          </article>
-          <article class="path-card path-card--organisation reveal">
-            <p>For your organisation</p><span aria-hidden="true">◎</span><h3>Measure future readiness.</h3><p>See where capability is strong and where the organisation needs to move next.</p>
-            ${link('/future-proof-assessment/', 'Explore the assessment', 'button button--outline button--light')}
-          </article>
+        <div class="games-layout">
+          <div class="games-copy">
+            <p class="kicker kicker--light">Enter game mode</p>
+            <h2 id="games-title">AI adoption shouldn’t feel like another training programme.</h2>
+            <p class="games-punch">Make it a game worth winning.</p>
+            <p>The Greatness Games bring the performance energy of professional sport to AI adoption.</p>
+            ${link('/ai-x-talent-accelerator/#greatness-games', 'How the Games work', 'button button--cyan')}
+          </div>
+          <div class="scoreboard reveal" aria-label="Four outcomes of the Greatness Games">
+            <div class="scoreboard__top"><span>GREATNESS GAMES</span><span>LIVE SYSTEM</span></div>
+            ${[
+              ['01', 'Adoption', 'People choose to step forward.'],
+              ['02', 'Engagement', 'Participants actively build and test.'],
+              ['03', 'Outcomes', 'Projects deliver tangible business results.'],
+              ['04', 'Sustainability', 'Innovators return to coach and lead.'],
+            ]
+              .map(([number, title, copy]) => `<div class="scoreboard__row"><span>${number}</span><b>${title}</b><p>${copy}</p><i aria-hidden="true"></i></div>`)
+              .join('')}
+          </div>
+        </div>
+
+        <div class="next-steps" aria-labelledby="next-steps-title">
+          <h3 id="next-steps-title" class="next-steps__title">Three ways in.</h3>
+          <ol class="next-steps__grid">
+            ${[
+              ['For you', 'Find your role.', 'Three honest questions. One clear archetype. No personal details.', '/role-quiz/', 'Take the role quiz'],
+              ['For your organisation', 'Measure future readiness.', 'See where capability is strong and where the organisation needs to move next.', '/future-proof-assessment/', 'Explore the assessment'],
+              ['Next season', 'Join us in the room.', 'The next public event is being prepared. Explore the latest season while it takes shape.', '/events/', 'See events and past seasons'],
+            ]
+              .map(
+                ([label, title, copy, href, cta], index) => `<li class="next-step reveal" style="--delay:${index * 70}ms">
+              <p class="next-step__label"><span aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>${label}</p>
+              <h4>${title}</h4>
+              <p>${copy}</p>
+              ${link(href, cta, 'text-link text-link--light')}
+            </li>`,
+              )
+              .join('')}
+          </ol>
         </div>
       </div>
     </section>

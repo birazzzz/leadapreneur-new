@@ -113,7 +113,7 @@ function header() {
           <a href="/events/">Events</a>
           <a href="/insights/">Insights</a>
           <a href="/about/">About</a>
-          <a class="header-cta solution-trigger" href="/contact/">Future-proof your people ${arrow}</a>
+          <a class="header-cta solution-trigger" href="/contact/">Future-proof ${arrow}</a>
         </nav>
       </div>
     </header>`;

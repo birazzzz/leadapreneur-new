@@ -540,7 +540,7 @@ em {
   grid-template-rows: 1fr auto;
   justify-items: center;
   gap: 2rem;
-  padding-block: clamp(200px, 26vh, 320px) clamp(2rem, 5vh, 3.4rem);
+  padding-block: clamp(160px, 20vh, 250px) clamp(2rem, 5vh, 3.4rem);
   text-align: center;
   isolation: isolate;
 }
@@ -761,25 +761,15 @@ em {
   transform: scale(1.025);
 }
 
-.role-card__number,
-.role-card__symbol {
+.role-card__number {
   position: absolute;
   z-index: 1;
-  color: var(--white);
-  font-weight: 800;
-}
-
-.role-card__number {
   left: 1rem;
   top: 0.9rem;
+  color: var(--white);
   font-size: 0.75rem;
+  font-weight: 800;
   letter-spacing: 0.12em;
-}
-
-.role-card__symbol {
-  right: 1rem;
-  bottom: 0.65rem;
-  font-size: 2.2rem;
 }
 
 .role-card__body {
@@ -1034,7 +1024,6 @@ em {
 
 .journey-head,
 .projects-head,
-.events-head,
 .insights-head {
   display: flex;
   align-items: end;
@@ -1145,12 +1134,41 @@ em {
 
 .project-card__meta {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
   color: var(--muted);
   font-size: 0.72rem;
   font-weight: 750;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.project-card__icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--teal);
+  background: var(--cyan-soft);
+}
+
+.project-card__icon svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.project-card__industry {
+  color: var(--teal);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
@@ -1339,60 +1357,131 @@ em {
   box-shadow: 0 0 0 5px rgba(129, 237, 255, 0.08);
 }
 
+/* The three ways in, folded into the foot of the games panel. */
+.next-steps {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+  padding-top: clamp(2.5rem, 4vw, 3.5rem);
+  border-top: 1px solid var(--line-light);
+}
+
+.next-steps__title {
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  color: var(--cyan);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.next-steps__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  list-style: none;
+  background: var(--line-light);
+}
+
+.next-step {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+  padding: 0 clamp(1.25rem, 2.6vw, 2.25rem);
+  background: var(--teal-dark);
+}
+
+.next-step:first-child { padding-left: 0; }
+.next-step:last-child { padding-right: 0; }
+
+.next-step__label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.next-step__label span {
+  color: var(--cyan);
+}
+
+.next-step h4 {
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.next-step > p:not(.next-step__label) {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.9rem;
+}
+
+.next-step .text-link {
+  margin-top: 0.35rem;
+  justify-self: start;
+}
+
+.text-link--light {
+  color: var(--cyan);
+}
+
 /* Impact */
 .impact-section {
-  padding-block: clamp(4rem, 8vw, 7rem);
-  background: var(--cyan);
+  padding-block: clamp(4.5rem, 8vw, 7rem);
+  background: var(--paper);
 }
 
-.impact-intro {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: baseline;
-  gap: 2rem;
-  margin-bottom: 2.5rem;
+.impact-section .kicker {
+  margin-bottom: 0.6rem;
 }
 
-.impact-intro .kicker {
-  color: var(--teal-dark);
-}
-
-.impact-intro h2 {
-  font-size: clamp(2rem, 4vw, 4rem);
+.impact-section h2 {
+  max-width: 16ch;
+  font-size: clamp(1.9rem, 3.4vw, 3.2rem);
 }
 
 .impact-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid rgba(0, 72, 82, 0.24);
-  border-bottom: 1px solid rgba(0, 72, 82, 0.24);
+  gap: 1px;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  background: var(--line);
 }
 
 .impact-grid div {
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: space-between;
-  gap: 1.7rem;
-  min-height: 210px;
-  padding: 1.5rem;
-  border-right: 1px solid rgba(0, 72, 82, 0.24);
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+  padding: 0 clamp(1rem, 2.4vw, 2rem);
+  background: var(--paper);
+}
+
+.impact-grid div:first-child {
+  padding-left: 0;
 }
 
 .impact-grid div:last-child {
-  border-right: 0;
-}
-
-.impact-grid dt {
-  max-width: 22ch;
-  font-size: 0.78rem;
-  font-weight: 700;
+  padding-right: 0;
 }
 
 .impact-grid dd {
-  font-size: clamp(2.15rem, 4vw, 4.25rem);
+  order: -1;
+  color: var(--teal);
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
   font-weight: 800;
-  letter-spacing: -0.065em;
-  line-height: 0.95;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.impact-grid dt {
+  max-width: 20ch;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
 }
 
 /* Events */
@@ -1544,8 +1633,8 @@ em {
 
 .stories-layout {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: clamp(3rem, 8vw, 8rem);
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
   align-items: center;
 }
 
@@ -1556,150 +1645,98 @@ em {
 }
 
 .stories-logo {
-  width: 148px;
-  min-height: 76px;
+  width: 132px;
+  min-height: 64px;
   display: grid;
   place-items: center;
-  padding: 0.9rem 1.2rem;
+  padding: 0.75rem 1.1rem;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 14px;
   background: var(--white);
-  box-shadow: var(--shadow-sm);
 }
 
 .stories-logo img {
   width: 100%;
-  max-height: 46px;
+  max-height: 38px;
   object-fit: contain;
 }
 
 .stories-proof h2 {
+  max-width: 15ch;
   color: var(--teal);
+  font-size: clamp(1.9rem, 3.4vw, 3.2rem);
 }
 
-.stories-proof > p:not(.kicker, .stories-logo) {
+.stories-proof > p:not(.kicker) {
+  max-width: 46ch;
   color: var(--muted);
 }
 
-.stories-proof ul {
+/* Three figures reading as one line rather than a bulleted list. */
+.stories-metrics {
   display: grid;
-  gap: 0.45rem;
-  list-style: none;
+  grid-template-columns: repeat(3, auto);
+  gap: clamp(1.25rem, 3vw, 2.75rem);
+  margin-top: 0.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
 }
 
-.stories-proof li::before {
-  content: "↳";
-  margin-right: 0.55rem;
-  color: var(--teal);
-}
-
-.testimonial-stage {
-  position: relative;
-  min-height: 520px;
-  display: grid;
-  align-content: end;
-  gap: 2rem;
-  padding: clamp(2rem, 5vw, 4.5rem);
-  overflow: hidden;
-  color: var(--white);
-  background: var(--teal-deep);
-}
-
-.testimonial-stage::before {
-  content: "";
-  position: absolute;
-  width: 290px;
-  height: 290px;
-  right: -70px;
-  top: -90px;
-  border: 1px solid rgba(129, 237, 255, 0.25);
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 40px rgba(129, 237, 255, 0.03), inset 0 0 0 80px rgba(129, 237, 255, 0.03);
-}
-
-.testimonial-stage blockquote {
-  position: relative;
-  z-index: 1;
-  font-size: clamp(1.7rem, 3.4vw, 3.25rem);
-  font-weight: 650;
-  line-height: 1.16;
+.stories-metrics dt {
+  color: var(--ink);
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  font-weight: 800;
   letter-spacing: -0.04em;
 }
 
+.stories-metrics dd {
+  max-width: 14ch;
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+/* The quote is a quiet aside now, not a slab of teal. */
+.testimonial-stage {
+  display: grid;
+  gap: 1.5rem;
+  padding-left: clamp(1.4rem, 3vw, 2.4rem);
+  border-left: 2px solid var(--teal);
+}
+
+.testimonial-stage blockquote {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.1vw, 1.85rem);
+  font-weight: 620;
+  line-height: 1.34;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.testimonial-stage blockquote::before {
+  content: open-quote;
+}
+
+.testimonial-stage blockquote::after {
+  content: close-quote;
+}
+
 .testimonial-stage figcaption {
-  position: relative;
-  z-index: 1;
   display: grid;
   gap: 0.15rem;
 }
 
+.testimonial-stage figcaption b {
+  font-size: 0.95rem;
+}
+
 .testimonial-stage figcaption span {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--muted);
   font-size: 0.82rem;
 }
 
-.quote-mark {
-  position: absolute;
-  left: 2rem;
-  top: 1rem;
-  color: var(--cyan);
-  font-size: 8rem;
-  line-height: 1;
-  opacity: 0.24;
-}
-
 /* Paths */
-.path-section {
-  background: var(--paper);
-}
-
-.path-section .section-heading {
-  margin-bottom: 3rem;
-}
-
-.path-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.path-card {
-  min-height: 440px;
-  display: grid;
-  align-content: end;
-  justify-items: start;
-  gap: 1rem;
-  padding: clamp(2rem, 5vw, 4rem);
-}
-
-.path-card > span {
-  font-size: 3.2rem;
-}
-
-.path-card > p:first-child {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.path-card h3 {
-  font-size: clamp(2.2rem, 4vw, 4rem);
-}
-
-.path-card--personal {
-  border: 1px solid var(--line);
-  background: var(--beige);
-}
-
-.path-card--organisation {
-  color: var(--white);
-  background: var(--teal-deep);
-}
-
-.path-card--organisation > p:not(:first-child) {
-  color: rgba(255, 255, 255, 0.65);
-}
-
 /* Insights */
 .insights-section,
 .insights-index {
@@ -1839,263 +1876,28 @@ em {
 .final-cta {
   position: relative;
   overflow: hidden;
-  /* Deep bottom padding leaves the lower band of the section to the artwork,
-     so the scene is not fighting the headline for the same space. */
-  padding-block: clamp(4.5rem, 9vw, 8rem) clamp(17rem, 30vw, 30rem);
+  /* The lower band belongs to the artwork, so the headline never fights it. */
+  padding-block: clamp(4.5rem, 9vw, 8rem) calc(min(100vw, 1800px) * 0.371 + clamp(1rem, 2vw, 2.5rem));
   color: var(--white);
   background: var(--ink);
 }
 
-/* The scene is its own layer so the whole illustration can be promoted once,
-   and so every animation inside it can be paused while it is off screen. */
 .final-cta__scene {
   position: absolute;
   z-index: 0;
   inset: 0;
-  overflow: hidden;
   pointer-events: none;
-  contain: paint;
 }
 
-.final-cta__journey {
+/* Pinned to the base and always shown whole -- width leads, height follows,
+   so the full panorama survives every viewport instead of being cropped. */
+.final-cta__scene img {
   position: absolute;
   inset: auto 0 0 0;
   width: 100%;
-  height: clamp(340px, 46vw, 700px);
-  opacity: 0.96;
-  /* Feather every edge so the artwork dissolves into the section rather than
-     ending on a visible rectangle. */
-  -webkit-mask-image: radial-gradient(128% 108% at 56% 92%, #000 34%, rgba(0, 0, 0, 0.75) 60%, rgba(0, 0, 0, 0.25) 82%, transparent 96%);
-  mask-image: radial-gradient(128% 108% at 56% 92%, #000 34%, rgba(0, 0, 0, 0.75) 60%, rgba(0, 0, 0, 0.25) 82%, transparent 96%);
-}
-
-/* Nothing animates until the section is actually in view. */
-.final-cta:not(.is-live) .final-cta__scene * {
-  animation-play-state: paused !important;
-}
-
-/* ============================================================
-   Closing CTA scene
-   A single route runs gate -> lighthouse -> summit. Everything is drawn from
-   flat facets sharing one light source, and every edge of the frame is
-   feathered so the artwork dissolves into the section instead of ending on a
-   rectangle.
-   ============================================================ */
-
-.sc-sky { opacity: 0.92; }
-.sc-dawn { opacity: 0.85; transform-box: fill-box; transform-origin: center; animation: sc-breathe 13s ease-in-out infinite; }
-
-.sc-aurora { opacity: 0.5; }
-.sc-aurora--a { animation: sc-drift 26s ease-in-out infinite; }
-.sc-aurora--b { opacity: 0.36; animation: sc-drift 34s ease-in-out infinite reverse; }
-
-.sc-stars circle { fill: #cdf5ff; opacity: 0.5; animation: sc-twinkle 5s ease-in-out infinite; }
-.sc-stars circle:nth-child(3n) { animation-duration: 6.5s; animation-delay: -1.7s; }
-.sc-stars circle:nth-child(3n + 1) { animation-duration: 7.5s; animation-delay: -3.4s; }
-.sc-stars circle:nth-child(4n) { animation-delay: -4.6s; }
-
-.sc-ridge--far { opacity: 0.55; }
-.sc-ridge--mid { opacity: 0.9; }
-.sc-water { opacity: 0.55; }
-.sc-sheen path { opacity: 0.5; animation: sc-shimmer 7s ease-in-out infinite; }
-.sc-sheen path:nth-child(even) { animation-duration: 9s; animation-delay: -3s; }
-.sc-fore { opacity: 0.95; }
-
-/* ---- summit ---- */
-.sc-peak__lit { opacity: 0.58; }
-.sc-peak__face { opacity: 0.92; }
-.sc-peak__crest { opacity: 0.28; }
-.sc-peak__spur { opacity: 0.7; }
-.sc-peak__edge {
-  fill: none;
-  stroke: rgba(129, 237, 255, 0.30);
-  stroke-width: 2;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-
-/* ---- lighthouse ---- */
-.sc-lh__beam {
-  transform-box: fill-box;
-  transform-origin: 100% 50%;
-  animation: sc-beam 9s ease-in-out infinite;
-}
-
-.sc-lh__isle-edge {
-  fill: none;
-  stroke: rgba(129, 237, 255, 0.24);
-  stroke-width: 2;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-
-.sc-lh__band { stroke: rgba(46, 127, 142, 0.5); stroke-width: 5; stroke-linecap: round; }
-.sc-lh__door { fill: rgba(11, 50, 56, 0.65); }
-.sc-lh__rail,
-.sc-lh__rail-top { stroke: rgba(232, 250, 254, 0.7); stroke-width: 2; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.sc-lh__lantern { fill: rgba(129, 237, 255, 0.22); stroke: rgba(232, 250, 254, 0.8); stroke-width: 2; }
-.sc-lh__finial { stroke: rgba(232, 250, 254, 0.85); stroke-width: 3; stroke-linecap: round; }
-.sc-lh__glow { opacity: 0.9; transform-box: fill-box; transform-origin: center; animation: sc-breathe 3.2s ease-in-out infinite; }
-.sc-lh__lamp { fill: #ffffff; animation: sc-lamp 3.2s ease-in-out infinite; }
-
-/* ---- gate ---- */
-.sc-gate__portal { opacity: 0.7; transform-box: fill-box; transform-origin: 50% 100%; animation: sc-breathe 6s ease-in-out infinite; }
-.sc-gate__band { stroke: rgba(129, 237, 255, 0.4); stroke-width: 2; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.sc-gate__key { fill: #b6f2ff; }
-
-.sc-gate__shards rect { fill: #81edff; opacity: 0.55; transform-box: fill-box; transform-origin: center; animation: sc-float 8s ease-in-out infinite; }
-.sc-gate__shards rect:nth-child(2) { animation-duration: 10s; animation-delay: -2.5s; opacity: 0.4; }
-.sc-gate__shards rect:nth-child(3) { animation-duration: 9s; animation-delay: -5s; opacity: 0.48; }
-.sc-gate__shards rect:nth-child(4) { animation-duration: 11s; animation-delay: -7s; opacity: 0.35; }
-
-/* ---- the route ---- */
-.sc-path__glow {
-  fill: none;
-  stroke: rgba(129, 237, 255, 0.20);
-  stroke-width: 16;
-  stroke-linecap: round;
-}
-
-.sc-path {
-  fill: none;
-  stroke: #81edff;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-dasharray: 0.06 0.94;
-  animation: sc-flow 6s linear infinite;
-}
-
-.sc-nodes circle {
-  fill: #0b3238;
-  stroke: #81edff;
-  stroke-width: 4;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: sc-node 4s ease-in-out infinite;
-}
-
-.sc-nodes circle:nth-child(2) { animation-delay: -0.8s; }
-.sc-nodes circle:nth-child(3) { animation-delay: -1.6s; }
-.sc-nodes circle:nth-child(4) { animation-delay: -2.4s; }
-.sc-nodes circle:nth-child(5) { animation-delay: -3.2s; }
-
-/* Rides the route itself. offset-path keeps it on the compositor and, unlike
-   SMIL, it can be paused when the section is off screen.
-   This path must stay identical to .sc-path's `d`. */
-.sc-spark {
-  offset-path: path("M240 690C350 730 480 720 600 665C690 624 780 620 880 600C1060 564 1200 510 1300 440C1370 392 1430 330 1470 245");
-  offset-rotate: auto;
-  animation: sc-travel 9s linear infinite;
-}
-
-.sc-spark__core { fill: #ffffff; }
-.sc-spark__glow { opacity: 0.9; }
-
-/* ---- flag ---- */
-.sc-flag__pole { stroke: #e8fafe; stroke-width: 4; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.sc-flag__wave { transform-box: fill-box; transform-origin: left center; animation: sc-flag 3.4s ease-in-out infinite; }
-.sc-flag__cloth { fill: #81edff; }
-.sc-flag__mark {
-  fill: #0b3238;
-  font-family: var(--font-body);
-  font-size: 40px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-anchor: middle;
-}
-
-/* ============================================================
-   Scene motion
-   ============================================================ */
-@keyframes sc-flow {
-  to { stroke-dashoffset: -1; }
-}
-
-@keyframes sc-travel {
-  0% { offset-distance: 0%; opacity: 0; }
-  8%, 92% { opacity: 1; }
-  100% { offset-distance: 100%; opacity: 0; }
-}
-
-@keyframes sc-node {
-  0%, 100% { opacity: 0.75; transform: scale(0.92); }
-  50% { opacity: 1; transform: scale(1.12); }
-}
-
-@keyframes sc-breathe {
-  0%, 100% { opacity: 0.5; transform: scale(0.94); }
-  50% { opacity: 0.95; transform: scale(1.06); }
-}
-
-@keyframes sc-twinkle {
-  0%, 100% { opacity: 0.16; }
-  50% { opacity: 0.8; }
-}
-
-@keyframes sc-drift {
-  0%, 100% { opacity: 0.32; transform: translate3d(0, 0, 0); }
-  50% { opacity: 0.62; transform: translate3d(-34px, 12px, 0); }
-}
-
-@keyframes sc-shimmer {
-  0%, 100% { opacity: 0.24; }
-  50% { opacity: 0.6; }
-}
-
-@keyframes sc-beam {
-  0%, 100% { opacity: 0.55; transform: rotate(-7deg); }
-  50% { opacity: 1; transform: rotate(9deg); }
-}
-
-@keyframes sc-lamp {
-  0%, 100% { opacity: 0.72; }
-  50% { opacity: 1; }
-}
-
-@keyframes sc-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-14px) rotate(38deg); }
-}
-
-@keyframes sc-flag {
-  0%, 100% { transform: skewY(-2.5deg) scaleX(0.97); }
-  50% { transform: skewY(3.5deg) scaleX(1.03); }
-}
-
-
-.final-cta__inner {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: end;
-  gap: clamp(3rem, 8vw, 8rem);
-}
-
-.final-cta h2 {
-  margin-top: 1rem;
-  font-size: clamp(4.4rem, 11vw, 11rem);
-  letter-spacing: -0.08em;
-  line-height: 0.75;
-  text-transform: uppercase;
-}
-
-.final-cta h2 em {
-  color: var(--cyan);
-}
-
-.final-cta__copy {
-  align-self: start;
-  display: grid;
-  justify-items: start;
-  gap: 1.5rem;
-  padding-top: clamp(1.5rem, 3vw, 3rem);
-}
-
-.final-cta__copy p {
-  max-width: 42ch;
-  color: rgba(255, 255, 255, 0.66);
-  font-size: 1.15rem;
+  max-width: 1800px;
+  height: auto;
+  margin-inline: auto;
 }
 
 /* Footer */
@@ -3480,11 +3282,6 @@ body.modal-open {
   .assessment-explain__grid,
   .contact-grid { grid-template-columns: 1fr; }
 
-  .final-cta__journey {
-    height: clamp(300px, 52vw, 470px);
-    opacity: 0.88;
-  }
-
   .role-intro { align-items: start; }
   .role-intro__action { justify-items: start; }
   .future-sticky { position: static; }
@@ -3496,12 +3293,16 @@ body.modal-open {
   .project-rail { grid-template-columns: 1fr; }
   .project-card { min-height: auto; }
   .games-layout { gap: 4rem; }
-  .impact-grid { grid-template-columns: 1fr 1fr; }
-  .impact-grid div:nth-child(2) { border-right: 0; }
-  .impact-grid div:nth-child(-n+2) { border-bottom: 1px solid rgba(6,46,44,.24); }
+  .impact-grid { grid-template-columns: 1fr 1fr; gap: 1px; }
+  .impact-grid div { padding: clamp(1rem, 3vw, 1.6rem); }
+  .impact-grid div:first-child,
+  .impact-grid div:last-child { padding: clamp(1rem, 3vw, 1.6rem); }
   .event-empty { grid-template-columns: 90px 1fr; }
   .event-empty > .button { grid-column: 2; justify-self: start; }
-  .path-card { min-height: 390px; }
+  .next-steps__grid { grid-template-columns: 1fr; }
+  .next-step { padding: clamp(1.5rem, 4vw, 2rem) 0; }
+  .next-step:first-child { padding-top: 0; }
+  .next-step:last-child { padding-bottom: 0; }
   .insight-grid { grid-template-columns: 1fr 1fr; }
   .insight-card:last-child { grid-column: 1 / -1; }
   .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
@@ -3565,16 +3366,13 @@ body.modal-open {
   .future-list li { min-height: 0; }
   .journey-head,
   .projects-head,
-  .events-head,
   .insights-head { display: grid; align-items: start; }
   .project-rail { width: calc(100% + 16px); grid-template-columns: repeat(3, minmax(85vw, 1fr)); margin-right: -16px; padding-right: 16px; overflow-x: auto; scroll-snap-type: x mandatory; }
   .project-rail .project-card { scroll-snap-align: start; }
   .scoreboard__row { grid-template-columns: 36px 1fr 20px; }
   .scoreboard__row p { grid-column: 2 / -1; }
   .impact-intro { grid-template-columns: 1fr; gap: 0.7rem; }
-  .impact-grid { grid-template-columns: 1fr; }
-  .impact-grid div { min-height: 165px; border-right: 0; border-bottom: 1px solid rgba(6,46,44,.24); }
-  .impact-grid div:last-child { border-bottom: 0; }
+  .impact-grid { grid-template-columns: 1fr 1fr; }
   .event-empty { grid-template-columns: 1fr; }
   .event-empty > .button { grid-column: auto; }
   .event-empty__signal { width: 74px; }
@@ -3582,10 +3380,12 @@ body.modal-open {
   .event-ticket__date span { font-size: 3rem; }
   .event-ticket__body { padding: 1.4rem; }
   .event-ticket__stub { display: none; }
-  .stories-layout { gap: 3rem; }
-  .testimonial-stage { min-height: 440px; }
-  .path-grid { grid-template-columns: 1fr; }
-  .path-card { min-height: 340px; }
+  .stories-layout { gap: 2.5rem; }
+  .testimonial-stage { padding-left: 1.2rem; }
+  .next-steps__grid { grid-template-columns: 1fr; gap: 1px; }
+  .next-step { padding: clamp(1.5rem, 5vw, 2rem) 0; }
+  .next-step:first-child { padding-top: 0; }
+  .next-step:last-child { padding-bottom: 0; }
   .insight-directory { grid-template-columns: 1fr; margin-top: -24px; }
   .insight-directory a { min-height: 66px; border-right: 0; border-bottom: 1px solid var(--line); }
   .insight-directory a:last-child { border-bottom: 0; }
@@ -3593,17 +3393,13 @@ body.modal-open {
   .insight-card:last-child { grid-column: auto; }
   .media-grid { grid-template-columns: 1fr; }
   .article-cover { aspect-ratio: 4 / 3; }
-  .final-cta { padding-block: clamp(4rem, 12vw, 6rem) clamp(15rem, 60vw, 22rem); }
+  .final-cta { padding-block: clamp(4rem, 12vw, 6rem) calc(100vw * 0.371 + 1.5rem); }
   .final-cta__inner { gap: 2.5rem; }
   .final-cta__copy { padding-top: 0; gap: 1.75rem; }
   .final-cta__copy p { font-size: 1.05rem; }
   /* 23vw with a 0.75 line-height is punishing on a phone: it fills the screen
      and the lines collide. Smaller, with room between them. */
   .final-cta h2 { font-size: clamp(3.1rem, 17vw, 5.2rem); line-height: 0.86; }
-  .final-cta__journey {
-    height: clamp(250px, 60vw, 390px);
-    opacity: 0.82;
-  }
   .logo-strip::before,
   .logo-strip::after { width: 56px; }
   .logo-strip__track { animation-duration: 26s; }
@@ -3735,9 +3531,6 @@ body.modal-open {
   .assessment-steps ol { grid-template-columns: 1fr; }
   .event-detail-hero dl { grid-template-columns: 1fr; }
   .assessment-steps li { min-height: 220px; border-right: 0; }
-  .final-cta__journey {
-    height: clamp(220px, 64vw, 330px);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
