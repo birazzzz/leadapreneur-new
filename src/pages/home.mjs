@@ -50,7 +50,7 @@ export function homePage() {
     </section>
 
     <section class="section role-section" id="roles" aria-labelledby="roles-title">
-      <div class="role-backdrop" aria-hidden="true">
+      <div class="section-backdrop" aria-hidden="true">
         <picture>
           <source srcset="/images/roles-banner.webp" type="image/webp">
           <img src="/images/roles-banner.jpg" alt="" width="1536" height="1024" loading="lazy" decoding="async">
@@ -93,10 +93,16 @@ export function homePage() {
     </section>
 
     <section class="section projects-section" aria-labelledby="projects-title">
+      <div class="section-backdrop" aria-hidden="true">
+        <picture>
+          <source srcset="/images/projects-banner.webp" type="image/webp">
+          <img src="/images/projects-banner.jpg" alt="" width="1672" height="941" loading="lazy" decoding="async">
+        </picture>
+      </div>
       <div class="shell">
         <div class="projects-head">
           ${sectionHeading('Built in the real world', '<span id="projects-title">Real projects. Real impact.</span>', 'Every figure below comes from a live project record.')}
-          ${link('/projects/', 'Explore all projects', 'button button--outline')}
+          ${link('/projects/', 'Explore all projects', 'button button--ghost')}
         </div>
         <div class="project-rail">
           ${projects.slice(0, 3).map(projectCard).join('')}

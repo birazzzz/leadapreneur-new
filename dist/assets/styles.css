@@ -285,8 +285,15 @@ em {
 }
 
 .button--ghost {
-  border-color: var(--line);
-  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 10px 30px -22px rgba(0, 72, 82, 0.5);
+}
+
+.button--ghost:hover {
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .button--outline {
@@ -687,27 +694,31 @@ em {
   background: var(--paper);
 }
 
-/* One shared illustration behind the deck, in place of three card crops. */
-.role-backdrop {
+/* A full-bleed illustration behind a section, veiled enough for the copy on
+   top to read but not so much that the artwork disappears. */
+.section-backdrop {
   position: absolute;
   z-index: -1;
   inset: 0;
   overflow: hidden;
 }
 
-.role-backdrop img {
+.section-backdrop img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 45%;
 }
 
-/* Heavy at the top so the heading reads, light across the middle so the three
-   archetypes stay visible, solid again under the cards. */
-.role-backdrop::after {
+.section-backdrop::after {
   content: "";
   position: absolute;
   inset: 0;
+}
+
+/* Heavy at the top so the heading reads, light across the middle so the three
+   archetypes stay visible, solid again under the cards. */
+.role-section .section-backdrop::after {
   background:
     linear-gradient(to bottom, var(--paper) 0%, rgba(255, 253, 248, 0.93) 14%, rgba(255, 253, 248, 0.82) 32%, rgba(255, 253, 248, 0.24) 45%, rgba(255, 253, 248, 0.14) 58%, rgba(255, 253, 248, 0.42) 76%, rgba(255, 253, 248, 0.9) 93%, var(--paper) 100%),
     linear-gradient(to right, rgba(255, 253, 248, 0.55) 0%, rgba(255, 253, 248, 0) 52%);
@@ -1176,7 +1187,49 @@ em {
 
 /* Projects */
 .projects-section {
+  position: relative;
+  isolation: isolate;
   background: var(--beige);
+}
+
+/* The card rail is tall and opaque, so a full-height backdrop would have
+   nowhere to show. Keep the artwork to the band the heading sits in and let
+   it settle into the ground before the cards begin. */
+.projects-section .section-backdrop {
+  inset: 0 0 auto 0;
+  height: clamp(430px, 47vw, 780px);
+}
+
+.projects-section .section-backdrop img {
+  object-position: 50% 38%;
+}
+
+.projects-section .section-backdrop::after {
+  background:
+    linear-gradient(to bottom, var(--beige) 0%, rgba(243, 238, 229, 0.72) 9%, rgba(243, 238, 229, 0.42) 22%, rgba(243, 238, 229, 0.34) 45%, rgba(243, 238, 229, 0.72) 72%, rgba(243, 238, 229, 0.94) 88%, var(--beige) 100%),
+    linear-gradient(to right, rgba(243, 238, 229, 0.5) 0%, rgba(243, 238, 229, 0) 58%);
+}
+
+/* Leave a band of the illustration between the heading and the rail. */
+.projects-section .projects-head {
+  margin-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+.projects-section .section-heading .kicker,
+.projects-section .section-heading h2,
+.projects-section .section-heading p {
+  text-shadow:
+    0 0 12px rgba(243, 238, 229, 0.94),
+    0 0 28px rgba(243, 238, 229, 0.8);
+}
+
+.projects-section .section-heading > p:last-child {
+  color: rgba(16, 37, 33, 0.82);
+}
+
+.projects-section .project-card {
+  background: rgba(255, 253, 248, 0.94);
+  backdrop-filter: blur(10px);
 }
 
 .project-rail,
