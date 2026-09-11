@@ -18,8 +18,8 @@ export function roleQuizPage() {
         <div class="quiz-card-stack" aria-label="Three possible role cards">
           ${[
             ['/images/role-explorer.jpeg', 'AI Explorer'],
-            ['/images/role-innovator.jpeg', 'AI Innovator'],
-            ['/images/role-vanguard.jpeg', 'AI Vanguard'],
+            ['/images/role-innovator.jpeg', 'AI Builder'],
+            ['/images/role-vanguard.jpeg', 'AI Leader'],
           ]
             .map(([image, alt], index) => `<figure style="--stack:${index}"><img src="${image}" alt="${alt} role artwork" width="1024" height="1365"><span aria-hidden="true">?</span></figure>`)
             .join('')}

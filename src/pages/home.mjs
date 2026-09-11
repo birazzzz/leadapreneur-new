@@ -4,6 +4,7 @@ import {
   futureProofingPillars,
   projects,
   stats,
+  videos,
 } from '../../data/content.mjs';
 import {
   finalCta,
@@ -11,7 +12,7 @@ import {
   projectCard,
   roleCards,
 } from '../components.mjs';
-import { link, sectionHeading } from '../templates.mjs';
+import { escapeHtml, link, sectionHeading } from '../templates.mjs';
 
 export function homePage() {
   return `
@@ -122,6 +123,25 @@ export function homePage() {
             )
             .join('')}
         </ol>
+      </div>
+    </section>
+
+    <section class="section videos-section" aria-labelledby="videos-title">
+      <div class="shell">
+        <div class="videos-head">
+          ${sectionHeading('In the room', '<span id="videos-title">See the work come alive.</span>', 'Programme moments, celebrations and the people who lived them.')}
+        </div>
+        <div class="video-collage">
+          ${videos
+            .map(
+              ({ id, category, title }, index) => `<a class="video-tile${index === 0 ? ' video-tile--feature' : ''}" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener" data-video-id="${id}" data-video-title="${escapeHtml(title)}" aria-label="Play: ${escapeHtml(title)}">
+            <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+            <span class="video-tile__play" aria-hidden="true"></span>
+            <span class="video-tile__meta"><small>${escapeHtml(category)}</small><b>${escapeHtml(title)}</b></span>
+          </a>`,
+            )
+            .join('')}
+        </div>
       </div>
     </section>
 

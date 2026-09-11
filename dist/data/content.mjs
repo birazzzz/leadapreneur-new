@@ -42,7 +42,7 @@ export const roles = [
   {
     id: 'innovator',
     number: '02',
-    name: 'AI Innovator',
+    name: 'AI Builder',
     image: '/images/role-innovator.jpeg',
     accent: '#14886f',
     symbol: '△',
@@ -59,7 +59,7 @@ export const roles = [
   {
     id: 'vanguard',
     number: '03',
-    name: 'AI Vanguard',
+    name: 'AI Leader',
     image: '/images/role-vanguard.jpeg',
     accent: '#d9574f',
     symbol: '●',
@@ -290,6 +290,16 @@ export const caseStudies = [
     story:
       'Employees from Treasury, Compliance, Operations and Marketing built and validated MVPs around live business problems.',
   },
+];
+
+// Placeholder footage until the programme videos are supplied: replace each
+// `id` with the real YouTube video id. The first entry is the featured tile.
+export const videos = [
+  { id: 'aqz-KE-bpKQ', category: 'Programme', title: 'Programme highlights' },
+  { id: 'eRsGyueVLvQ', category: 'Testimonial', title: 'Participant testimonial' },
+  { id: 'R6MlUcmOul8', category: 'Celebration', title: 'Season finale celebration' },
+  { id: 'WhWc3b3KhnY', category: 'Programme', title: 'Inside the build sprint' },
+  { id: 'Y-rmzh0PI3c', category: 'Testimonial', title: 'Leader testimonial' },
 ];
 
 export const stats = [

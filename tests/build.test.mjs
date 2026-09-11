@@ -50,6 +50,7 @@ test('homepage keeps the required story order', () => {
     'future-section',
     'projects-section',
     'journey-section',
+    'videos-section',
     'impact-section',
     'stories-section',
     'games-section',

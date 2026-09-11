@@ -50,10 +50,18 @@ export function acceleratorPage() {
     <section class="section value-section" aria-labelledby="value-title">
       <div class="shell value-grid">
         <div>${sectionHeading('Innovation accounting', '<span id="value-title">Make value visible.</span>', 'Projects are organised around five kinds of business value and a seven-pillar delivery framework.')}</div>
-        <div class="value-types" aria-label="Five types of value"><span>Grow revenue</span><span>Cut costs</span><span>Improve efficiency</span><span>Reduce risk</span><span>Increase satisfaction</span></div>
-        <ol class="pillars-seven">
-          ${['Problem', 'Proposition', 'Positioning', 'Politics', 'Planning', 'Performance', 'Potential'].map((item, index) => `<li><span>${index + 1}</span>${item}</li>`).join('')}
-        </ol>
+        <div class="value-block">
+          <p class="value-block__label" id="value-kinds">Five kinds of value</p>
+          <ol class="value-tiles value-tiles--five" aria-labelledby="value-kinds">
+            ${['Grow revenue', 'Cut costs', 'Improve efficiency', 'Reduce risk', 'Increase satisfaction'].map((item, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span>${item}</li>`).join('')}
+          </ol>
+        </div>
+        <div class="value-block">
+          <p class="value-block__label" id="value-pillars">Seven-pillar delivery</p>
+          <ol class="value-tiles value-tiles--seven" aria-labelledby="value-pillars">
+            ${['Problem', 'Proposition', 'Positioning', 'Politics', 'Planning', 'Performance', 'Potential'].map((item, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span>${item}</li>`).join('')}
+          </ol>
+        </div>
       </div>
     </section>
 

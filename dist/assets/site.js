@@ -170,6 +170,23 @@ if (!reducedMotion && matchMedia('(hover: hover) and (pointer: fine)').matches) 
   }
 }
 
+/* Video tiles are plain links to YouTube until someone asks to play one, so the
+   page never loads five players up front and still works without script. */
+$$('[data-video-id]').forEach((tile) => {
+  tile.addEventListener('click', (event) => {
+    event.preventDefault();
+    const frame = document.createElement('iframe');
+    frame.src = `https://www.youtube-nocookie.com/embed/${tile.dataset.videoId}?autoplay=1&rel=0`;
+    frame.title = tile.dataset.videoTitle;
+    frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    frame.allowFullscreen = true;
+    const player = document.createElement('div');
+    player.className = `${tile.className} is-playing`;
+    player.append(frame);
+    tile.replaceWith(player);
+  });
+});
+
 $$('[data-filter-group]').forEach((group) => {
   const target = $(group.dataset.filterTarget);
   if (!target) return;

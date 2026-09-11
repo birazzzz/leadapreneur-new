@@ -48,7 +48,7 @@ const pages = [
   {
     path: '/role-quiz/',
     title: 'AI Role Quiz | Find Your Leadapreneur Role',
-    description: 'Discover whether you are an AI Explorer, AI Innovator or AI Vanguard in three private questions.',
+    description: 'Discover whether you are an AI Explorer, AI Builder or AI Leader in three private questions.',
     body: roleQuizPage(),
     pageClass: 'role-quiz-page',
     scripts: [`/assets/quiz.js?v=${assetVersion.quiz}`],
