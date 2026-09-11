@@ -134,10 +134,10 @@ export function homePage() {
         <div class="video-collage">
           ${videos
             .map(
-              ({ id, category, title }, index) => `<a class="video-tile${index === 0 ? ' video-tile--feature' : ''}" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener" data-video-id="${id}" data-video-title="${escapeHtml(title)}" aria-label="Play: ${escapeHtml(title)}">
+              ({ id, title, start = 0, list = '' }, index) => `<a class="video-tile${index === 0 ? ' video-tile--feature' : ''}" href="https://www.youtube.com/watch?v=${id}${start ? `&t=${start}s` : ''}${list ? `&list=${list}` : ''}" target="_blank" rel="noopener" data-video-id="${id}" data-video-start="${start}" data-video-list="${list}" data-video-title="${escapeHtml(title)}" aria-label="Play: ${escapeHtml(title)}">
             <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
             <span class="video-tile__play" aria-hidden="true"></span>
-            <span class="video-tile__meta"><small>${escapeHtml(category)}</small><b>${escapeHtml(title)}</b></span>
+            <span class="video-tile__meta"><b>${escapeHtml(title)}</b></span>
           </a>`,
             )
             .join('')}

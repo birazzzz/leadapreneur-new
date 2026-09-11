@@ -176,7 +176,10 @@ $$('[data-video-id]').forEach((tile) => {
   tile.addEventListener('click', (event) => {
     event.preventDefault();
     const frame = document.createElement('iframe');
-    frame.src = `https://www.youtube-nocookie.com/embed/${tile.dataset.videoId}?autoplay=1&rel=0`;
+    const params = new URLSearchParams({ autoplay: '1', rel: '0' });
+    if (Number(tile.dataset.videoStart)) params.set('start', tile.dataset.videoStart);
+    if (tile.dataset.videoList) params.set('list', tile.dataset.videoList);
+    frame.src = `https://www.youtube-nocookie.com/embed/${tile.dataset.videoId}?${params}`;
     frame.title = tile.dataset.videoTitle;
     frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     frame.allowFullscreen = true;

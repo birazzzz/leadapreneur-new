@@ -58,8 +58,8 @@ export function acceleratorPage() {
         </div>
         <div class="value-block">
           <p class="value-block__label" id="value-pillars">Seven-pillar delivery</p>
-          <ol class="value-tiles value-tiles--seven" aria-labelledby="value-pillars">
-            ${['Problem', 'Proposition', 'Positioning', 'Politics', 'Planning', 'Performance', 'Potential'].map((item, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span>${item}</li>`).join('')}
+          <ol class="pillar-track" aria-labelledby="value-pillars">
+            ${['Problem', 'Proposition', 'Positioning', 'Politics', 'Planning', 'Performance', 'Potential'].map((item, index) => `<li><span class="pillar-track__dot">${String(index + 1).padStart(2, '0')}</span><b>${item}</b></li>`).join('')}
           </ol>
         </div>
       </div>

@@ -292,14 +292,14 @@ export const caseStudies = [
   },
 ];
 
-// Placeholder footage until the programme videos are supplied: replace each
-// `id` with the real YouTube video id. The first entry is the featured tile.
+// Programme footage for the home collage; the first entry is the featured
+// tile. `start` (seconds) and `list` (playlist id) are optional.
 export const videos = [
-  { id: 'aqz-KE-bpKQ', category: 'Programme', title: 'Programme highlights' },
-  { id: 'eRsGyueVLvQ', category: 'Testimonial', title: 'Participant testimonial' },
-  { id: 'R6MlUcmOul8', category: 'Celebration', title: 'Season finale celebration' },
-  { id: 'WhWc3b3KhnY', category: 'Programme', title: 'Inside the build sprint' },
-  { id: 'Y-rmzh0PI3c', category: 'Testimonial', title: 'Leader testimonial' },
+  { id: '1p5F5BR3wUQ', start: 3, title: 'Leadapreneur x Citibank' },
+  { id: '_XDAhVOZfTA', title: 'Toshiba Greatness Games Season 2: Sales Warriors' },
+  { id: 'HORvj7F_9q4', title: 'Leadapreneur Innovation Accelerator | UOB Tournament Highlights' },
+  { id: '1q4UnUgHV6Q', title: 'Warriors of WOW: Unleashing the Power of Innovation Across 5 Seasons' },
+  { id: 'HORvj7F_9q4', list: 'PL8OSlp4m4ku05ZfNXxTf_RQI-OlPJuoeW', title: 'Leadapreneur Innovation Accelerator | UOB Tournament Highlights' },
 ];
 
 export const stats = [
