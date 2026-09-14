@@ -22,6 +22,7 @@ function digest(...relativePaths) {
 export const assetVersion = {
   styles: digest('src/styles.css'),
   site: digest('src/site.js'),
+  footerLogo: digest('public/images/footer-logo.svg'),
   // quiz.js pulls in the engine, so a change to either has to bust the same URL.
   quiz: digest('src/quiz.js', 'lib/quiz-engine.mjs'),
 };

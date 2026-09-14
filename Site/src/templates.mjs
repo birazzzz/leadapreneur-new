@@ -199,7 +199,7 @@ function footer() {
       </div>
       <div class="footer-grid shell">
         <div class="footer-brand">
-          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><span class="brand__white-logo" aria-hidden="true"></span></a>
+          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><img class="brand__white-logo" src="/images/footer-logo.svg?v=${assetVersion.footerLogo}" alt="" width="232" height="47"></a>
           <p>Future-proofing people, culture and organisations through real AI innovation.</p>
           <div class="social-links" aria-label="Social media">
             <a href="${site.social.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a>
