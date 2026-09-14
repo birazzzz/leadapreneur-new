@@ -1,6 +1,7 @@
 export const site = {
   name: 'Leadapreneur',
   legalName: 'LEADAPRENEUR SDN. BHD.',
+  registrationNumber: '1086234K / 201401010155',
   url: 'https://www.leadapreneur.com',
   description:
     'Leadapreneur transforms managers into AI-powered innovators who build real solutions with verified business value.',
@@ -42,7 +43,7 @@ export const roles = [
   {
     id: 'innovator',
     number: '02',
-    name: 'AI Innovator',
+    name: 'AI Builder',
     image: '/images/role-innovator.jpeg',
     accent: '#14886f',
     symbol: '△',
@@ -59,7 +60,7 @@ export const roles = [
   {
     id: 'vanguard',
     number: '03',
-    name: 'AI Vanguard',
+    name: 'AI Leader',
     image: '/images/role-vanguard.jpeg',
     accent: '#d9574f',
     symbol: '●',
@@ -262,6 +263,7 @@ export const projects = [
 export const caseStudies = [
   {
     id: 'dbs',
+    logo: '/images/client-dbs.png',
     name: 'DBS',
     eyebrow: '5 seasons · 2019–2024',
     title: 'SGD 79 million in innovation value',
@@ -271,6 +273,7 @@ export const caseStudies = [
   },
   {
     id: 'uob',
+    logo: '/images/client-uob.png',
     name: 'UOB',
     eyebrow: 'Second cycle · 12 weeks',
     title: 'RM 8.28 million in innovation value',
@@ -280,6 +283,7 @@ export const caseStudies = [
   },
   {
     id: 'ocbc',
+    logo: '/images/client-ocbc.png',
     name: 'OCBC',
     eyebrow: 'Rebel Accelerator · 16 weeks',
     title: 'RM 5.17 million in innovation value',
@@ -287,6 +291,16 @@ export const caseStudies = [
     story:
       'Employees from Treasury, Compliance, Operations and Marketing built and validated MVPs around live business problems.',
   },
+];
+
+// Programme footage for the home collage; the first entry is the featured
+// tile. `start` (seconds) and `list` (playlist id) are optional.
+export const videos = [
+  { id: '1p5F5BR3wUQ', start: 3, title: 'Leadapreneur x Citibank' },
+  { id: '_XDAhVOZfTA', title: 'Toshiba Greatness Games Season 2: Sales Warriors' },
+  { id: 'HORvj7F_9q4', title: 'Leadapreneur Innovation Accelerator | UOB Tournament Highlights' },
+  { id: '1q4UnUgHV6Q', title: 'Warriors of WOW: Unleashing the Power of Innovation Across 5 Seasons' },
+  { id: 'HORvj7F_9q4', list: 'PL8OSlp4m4ku05ZfNXxTf_RQI-OlPJuoeW', title: 'Leadapreneur Innovation Accelerator | UOB Tournament Highlights' },
 ];
 
 export const stats = [
@@ -325,32 +339,7 @@ export const events = [
   },
 ];
 
-export const insights = [
-  {
-    slug: 'the-great-acceleration-a-strategic-briefing-for-ceos-in-the-age-of-ai',
-    title: 'The Great Acceleration: A Strategic Briefing for CEOs in the Age of AI',
-    category: 'AI strategy',
-    date: '2026-03-25',
-    excerpt:
-      'Why the next five years may compress the change of the last twenty-five—and what leaders should build now.',
-  },
-  {
-    slug: 'from-resistance-to-renewal-wendys-leadership-journey-through-the-toshiba-teka-greatness-games',
-    title: "From Resistance to Renewal: Wendy's Leadership Journey Through the TOSHIBA TEKA Greatness Games",
-    category: 'Client story',
-    date: '2026-01-19',
-    excerpt:
-      'A story about the decision to stop protecting business-as-usual and begin leading forward.',
-  },
-  {
-    slug: 'what-we-witnessed-at-leadapreneur-open-day-2025-a-real-look-at-future-proofing-your-talent-in-the-age-of-ai',
-    title: 'What We Witnessed at Leadapreneur Open Day 2025',
-    category: 'Events',
-    date: '2025-07-01',
-    excerpt:
-      'What one unscripted story revealed about innovative leadership, confidence and the courage to change a system.',
-  },
-];
+export { educationalVideos, insights, inspiringPodcasts } from './insights.mjs';
 
 export const team = [
   ['Hanaa Maysoon', 'COO', '/images/team-hanaa.png'],

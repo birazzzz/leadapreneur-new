@@ -5,7 +5,7 @@ import { quizQuestions, roles } from '../data/content.mjs';
 import { scoreQuiz, validateAnswers } from '../lib/quiz-engine.mjs';
 
 test('quiz uses the three roles and three questions from the live source', () => {
-  assert.deepEqual(roles.map((role) => role.name), ['AI Explorer', 'AI Innovator', 'AI Vanguard']);
+  assert.deepEqual(roles.map((role) => role.name), ['AI Explorer', 'AI Builder', 'AI Leader']);
   assert.equal(quizQuestions.length, 3);
   assert.ok(quizQuestions.every((question) => question.answers.length === 3));
 });

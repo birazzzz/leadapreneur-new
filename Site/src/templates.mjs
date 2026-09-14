@@ -1,4 +1,5 @@
 import { site } from '../data/content.mjs';
+import { assetVersion } from '../lib/asset-version.mjs';
 
 export const arrow = `<svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>`;
 export const navChevron = `<svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>`;
@@ -112,7 +113,7 @@ function header() {
           <a href="/events/">Events</a>
           <a href="/insights/">Insights</a>
           <a href="/about/">About</a>
-          <a class="header-cta solution-trigger" href="/contact/">Future-proof your people ${arrow}</a>
+          <a class="header-cta solution-trigger" href="/contact/">Future-proof ${arrow}</a>
         </nav>
       </div>
     </header>`;
@@ -198,7 +199,7 @@ function footer() {
       </div>
       <div class="footer-grid shell">
         <div class="footer-brand">
-          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><img src="/images/logo-horizontal.png" alt="" width="394" height="68"></a>
+          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><span class="brand__white-logo" aria-hidden="true"></span></a>
           <p>Future-proofing people, culture and organisations through real AI innovation.</p>
           <div class="social-links" aria-label="Social media">
             <a href="${site.social.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a>
@@ -228,6 +229,7 @@ function footer() {
         </div>
         <div class="footer-contact">
           <h2>${site.legalName}</h2>
+          <p class="footer-registration">${site.registrationNumber}</p>
           <address>${site.address.join('<br>')}</address>
           <a href="${site.whatsapp}" target="_blank" rel="noreferrer">Chat on WhatsApp ↗</a>
         </div>
@@ -249,6 +251,7 @@ export function organizationSchema() {
     '@id': `${site.url}/#organization`,
     name: site.name,
     legalName: site.legalName,
+    identifier: site.registrationNumber,
     url: site.url,
     logo: `${site.url}/images/logo-horizontal.png`,
     slogan: 'Dare to be great',
@@ -288,6 +291,8 @@ export function layout({
   path,
   title,
   description,
+  image = '/images/quiz-banner.jpeg',
+  ogType = 'website',
   body,
   pageClass = '',
   scripts = [],
@@ -295,6 +300,7 @@ export function layout({
   noindex = false,
 }) {
   const canonical = `${site.url}${path === '/' ? '/' : `${path.replace(/\/$/, '')}/`}`;
+  const socialImage = image.startsWith('http') ? image : `${site.url}${image}`;
   const jsonLd = structuredData
     .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`)
     .join('\n');
@@ -310,28 +316,29 @@ export function layout({
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="robots" content="${noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'}">
   <link rel="canonical" href="${canonical}">
-  <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
-  <meta property="og:type" content="website">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <meta property="og:type" content="${ogType}">
   <meta property="og:site_name" content="Leadapreneur">
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${site.url}/images/quiz-banner.jpeg">
+  <meta property="og:image" content="${socialImage}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
-  <meta name="twitter:image" content="${site.url}/images/quiz-banner.jpeg">
-  <link rel="stylesheet" href="/assets/styles.css?v=20260904-8">
-  ${jsonLd}
+  <meta name="twitter:image" content="${socialImage}">
+  <link rel="stylesheet" href="/assets/styles.css?v=${assetVersion.styles}">
+${jsonLd}
 </head>
 <body class="${pageClass}">
   <a class="skip-link" href="#main">Skip to content</a>
-  ${header()}
+${header()}
   <main id="main">${body}</main>
-  ${footer()}
-  ${solutionModal()}
-  <script type="module" src="/assets/site.js?v=20260904-8"></script>
-  ${scriptTags}
+${footer()}
+${solutionModal()}
+  <script type="module" src="/assets/site.js?v=${assetVersion.site}"></script>
+${scriptTags}
   <script>
     if (/(^|\\.)leadapreneur\\.com$/.test(location.hostname)) {
       window.dataLayer = window.dataLayer || [];

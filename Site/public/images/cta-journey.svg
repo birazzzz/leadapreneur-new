@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="952" viewBox="0 0 1672 952" fill="none">
+  <title>AI journey through a low-poly mountain landscape</title>
+  <desc>Pure vector illustration of a glowing portal, lighthouse, winding route, mountain summit, and AI flag in cyan and deep teal.</desc>
+  <defs>
+    <linearGradient id="water" x1="836" y1="622" x2="836" y2="874" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#087993"/>
+      <stop offset="0.45" stop-color="#0AB6C7"/>
+      <stop offset="1" stop-color="#20DDE4"/>
+    </linearGradient>
+    <linearGradient id="foreground" x1="260" y1="731" x2="1270" y2="883" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1FE4E8"/>
+      <stop offset="0.5" stop-color="#0B9DB7"/>
+      <stop offset="1" stop-color="#04758E"/>
+    </linearGradient>
+    <linearGradient id="portalShell" x1="264" y1="472" x2="264" y2="723" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4FFFF"/>
+      <stop offset="0.18" stop-color="#65F8F5"/>
+      <stop offset="0.56" stop-color="#00AFC7"/>
+      <stop offset="1" stop-color="#A6FFFF"/>
+    </linearGradient>
+    <linearGradient id="portalInner" x1="264" y1="545" x2="264" y2="705" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#05AFC4"/>
+      <stop offset="0.65" stop-color="#35EDF0"/>
+      <stop offset="1" stop-color="#F8FFFF"/>
+    </linearGradient>
+    <linearGradient id="tower" x1="859" y1="530" x2="947" y2="542" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DFFFFF"/>
+      <stop offset="0.42" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#56D8E5"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="542" y1="371" x2="879" y2="440" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#03AFBC" stop-opacity="0.76"/>
+      <stop offset="0.75" stop-color="#ACFFFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#F2FFFF" stop-opacity="0.98"/>
+    </linearGradient>
+    <linearGradient id="peakLight" x1="1477" y1="309" x2="1438" y2="472" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F1FFFF"/>
+      <stop offset="1" stop-color="#19D9E2"/>
+    </linearGradient>
+    <linearGradient id="flag" x1="1480" y1="215" x2="1594" y2="282" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38F0ED"/>
+      <stop offset="1" stop-color="#0CCEDA"/>
+    </linearGradient>
+    <radialGradient id="lampGlow">
+      <stop stop-color="#EFFFFF"/>
+      <stop offset="0.32" stop-color="#78FFFF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#00E3ED" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb" cx="36%" cy="26%" r="72%">
+      <stop stop-color="#EFFFFF"/>
+      <stop offset="0.3" stop-color="#34EAF0"/>
+      <stop offset="0.72" stop-color="#07849B"/>
+      <stop offset="1" stop-color="#023044"/>
+    </radialGradient>
+    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#001A2B" flood-opacity="0.75"/>
+    </filter>
+    <clipPath id="flagClip"><path d="M1481 208C1517 207 1551 236 1596 222L1586 290C1547 301 1518 272 1481 278Z"/></clipPath>
+    <g id="routeNode">
+      <circle r="26" fill="#40F7F4" opacity="0.42" filter="url(#glow)"/>
+      <circle r="19" fill="#001C2D" stroke="#54FFFF" stroke-width="5"/>
+      <circle r="11" fill="#A9FFFF"/>
+    </g>
+  </defs>
+
+  <!-- Distant mountain horizon -->
+  <g id="distant-mountains">
+    <path d="M0 631L126 556L179 584L264 541L355 617L495 560L584 615L687 550L775 614L862 565L946 625L1154 510L1226 557L1289 501L1360 516L1436 452L1514 510L1595 387L1672 490V690H0Z" fill="#057A94"/>
+    <path d="M0 631L126 556L68 640Z" fill="#0B98B2"/>
+    <path d="M68 640L126 556L146 636Z" fill="#075372"/>
+    <path d="M126 556L179 584L146 636Z" fill="#02394F"/>
+    <path d="M179 584L264 541L226 640Z" fill="#0CB5C5"/>
+    <path d="M264 541L355 617L303 638Z" fill="#04506C"/>
+    <path d="M391 633L495 560L551 632Z" fill="#0799AD"/>
+    <path d="M495 560L584 615L551 632Z" fill="#0EC6CF"/>
+    <path d="M584 615L687 550L715 635Z" fill="#05627D"/>
+    <path d="M687 550L775 614L715 635Z" fill="#0AA5B9"/>
+    <path d="M947 625L1154 510L1153 571L1048 639Z" fill="#0A9FB4"/>
+    <path d="M1154 510L1226 557L1153 571Z" fill="#075671"/>
+    <path d="M1048 639L1153 571L1221 634Z" fill="#03435D"/>
+    <path d="M1226 557L1289 501L1360 516L1310 612Z" fill="#08A5B7"/>
+    <path d="M1289 501L1360 516L1347 456Z" fill="#0BCAD2"/>
+    <path d="M1436 452L1514 510L1468 621Z" fill="#05536E"/>
+    <path d="M1514 510L1595 387L1672 490V647Z" fill="#06718B"/>
+    <path d="M1595 387L1631 519L1672 490Z" fill="#0B9BB0"/>
+    <path d="M1595 387L1660 566L1631 519Z" fill="#0EC3CB"/>
+  </g>
+
+  <!-- Water -->
+  <path id="water" d="M0 635H1672V858L1542 846L1416 841L1271 812L1065 815L925 864L775 848L626 841L477 813L315 818L153 803L0 829Z" fill="url(#water)"/>
+  <g id="water-reflections" fill="#83FFFF" opacity="0.78">
+    <path d="M369 649C431 646 510 647 593 652C525 656 451 655 369 649Z"/>
+    <path d="M390 664C463 660 534 663 574 668C513 670 453 670 390 664Z"/>
+    <path d="M487 684C548 679 618 680 687 684C629 689 559 690 487 684Z"/>
+    <path d="M549 707C619 704 695 705 765 710C689 713 614 713 549 707Z"/>
+    <path d="M1039 698C1157 696 1291 697 1438 701C1314 705 1184 706 1039 698Z"/>
+    <path d="M1080 724C1164 720 1249 721 1326 726C1239 731 1156 731 1080 724Z"/>
+    <path d="M994 741C1068 737 1144 739 1222 744C1148 749 1072 748 994 741Z"/>
+    <path d="M1113 759C1191 755 1267 757 1334 762C1256 766 1182 766 1113 759Z"/>
+    <path d="M899 782C1008 778 1108 778 1187 783C1087 788 994 789 899 782Z"/>
+    <path d="M1280 729C1344 724 1406 726 1453 730C1396 735 1341 735 1280 729Z"/>
+    <path d="M690 739C746 735 812 736 864 741C804 745 748 746 690 739Z"/>
+    <path d="M719 761C777 757 849 759 907 764C839 768 778 768 719 761Z"/>
+    <path d="M37 751C105 747 164 749 213 753C154 757 93 757 37 751Z"/>
+  </g>
+
+  <!-- Right summit mountain, faceted -->
+  <g id="summit-mountain">
+    <path d="M1009 699L1128 617L1216 535L1286 449L1348 447L1411 377L1477 302L1536 413L1594 387L1672 487V860L1511 842L1355 814L1190 815L1065 815Z" fill="#077B94"/>
+    <path d="M1128 617L1216 535L1286 449L1348 447L1298 561Z" fill="#0AB6C7"/>
+    <path d="M1128 617L1298 561L1217 641Z" fill="#0886A0"/>
+    <path d="M1217 641L1298 561L1348 447L1415 425L1355 698Z" fill="#0CC2CE"/>
+    <path d="M1348 447L1411 377L1477 302L1415 425Z" fill="#14D5DC"/>
+    <path d="M1415 425L1477 302L1472 482Z" fill="#47EEF0"/>
+    <path d="M1472 482L1477 302L1536 413L1566 606Z" fill="#0A94A9"/>
+    <path d="M1472 482L1566 606L1475 671L1415 425Z" fill="#03516C"/>
+    <path d="M1415 425L1355 698L1475 671Z" fill="#08AFC0"/>
+    <path d="M1355 698L1217 641L1190 815L1475 671Z" fill="#066985"/>
+    <path d="M1190 815L1475 671L1511 842Z" fill="#07536E"/>
+    <path d="M1475 671L1566 606L1672 637L1511 842Z" fill="#023C56"/>
+    <path d="M1566 606L1536 413L1594 387L1631 518Z" fill="#078BA2"/>
+    <path d="M1536 413L1631 518L1566 606Z" fill="#055A75"/>
+    <path d="M1631 518L1672 487V637Z" fill="#03445D"/>
+    <path d="M1475 671L1672 637V711L1574 720Z" fill="#075D79"/>
+    <path d="M1511 842L1574 720L1672 711V860Z" fill="#022E47"/>
+    <path d="M1009 699L1128 617L1217 641L1065 815Z" fill="#07536F"/>
+    <path d="M1128 617L1217 641L1298 561Z" fill="#0DC8D2"/>
+  </g>
+
+  <!-- Central island behind the route -->
+  <g id="central-island">
+    <path d="M647 722L742 641L775 657L808 581L835 597L880 561L930 612L978 585L1009 643L1035 629L1130 721Z" fill="#02374F"/>
+    <path d="M647 722L742 641L776 704Z" fill="#086982"/>
+    <path d="M742 641L775 657L790 620L808 581L831 650L776 704Z" fill="#03425C"/>
+    <path d="M808 581L835 597L880 561L851 651Z" fill="#0A8DA3"/>
+    <path d="M880 561L930 612L851 651Z" fill="#01354D"/>
+    <path d="M851 651L930 612L963 673L899 700Z" fill="#075B73"/>
+    <path d="M930 612L978 585L1009 643L963 673Z" fill="#024057"/>
+    <path d="M963 673L1009 643L1035 629L1079 684L1018 701Z" fill="#0A7890"/>
+    <path d="M899 700L963 673L1018 701L1130 721H825Z" fill="#022C43"/>
+  </g>
+
+  <!-- Left rocky shore -->
+  <g id="left-shore">
+    <path d="M0 756L85 660L119 733L149 653L202 693L245 641L303 687L342 674L379 714L413 697L468 739L0 761Z" fill="#023A53"/>
+    <path d="M0 756L85 660L71 708Z" fill="#064D67"/>
+    <path d="M71 708L85 660L119 733Z" fill="#075F78"/>
+    <path d="M119 733L149 653L176 714Z" fill="#087D92"/>
+    <path d="M149 653L202 693L176 714Z" fill="#02364F"/>
+    <path d="M202 693L245 641L267 711Z" fill="#076880"/>
+    <path d="M245 641L303 687L267 711Z" fill="#03475F"/>
+    <path d="M303 687L342 674L379 714L329 736Z" fill="#07576F"/>
+    <path d="M379 714L413 697L468 739L329 736Z" fill="#012F47"/>
+  </g>
+
+  <!-- Lighthouse and lamp -->
+  <g id="lighthouse" filter="url(#shadow)">
+    <path d="M871 454L929 454L949 617L851 617Z" fill="url(#tower)"/>
+    <path d="M871 454H900L890 617H851Z" fill="#D5FFFF" opacity="0.72"/>
+    <path d="M900 454H929L949 617L914 608Z" fill="#72D8E3" opacity="0.5"/>
+    <path d="M910 481L919 482L920 501L911 500Z" fill="#00384F"/>
+    <path d="M914 525L922 526L924 544L915 543Z" fill="#00384F"/>
+    <path d="M852 444H948V463H852Z" fill="#08748C"/>
+    <path d="M858 438H942V452H858Z" fill="#10BFC9"/>
+    <path d="M864 405H936V439H864Z" fill="#05506A"/>
+    <path d="M872 410H928V437H872Z" fill="#0D91A4"/>
+    <path d="M880 410V438M920 410V438" stroke="#002E47" stroke-width="7"/>
+    <circle cx="900" cy="424" r="11" fill="#E9FFFF" filter="url(#softGlow)"/>
+    <path d="M858 405H942L929 391H871Z" fill="#01384F"/>
+    <path d="M866 392C872 378 885 369 900 367C915 369 928 378 934 392Z" fill="#0789A0"/>
+    <path d="M885 391C887 380 892 372 900 367C908 372 913 380 915 391Z" fill="#0DBBC5"/>
+    <path d="M895 368C895 361 898 357 900 357C903 357 906 361 906 368Z" fill="#056079"/>
+    <path d="M852 456H948" stroke="#50F7F1" stroke-width="3"/>
+    <path d="M861 444V460M876 444V460M892 444V460M908 444V460M924 444V460M939 444V460" stroke="#002F48" stroke-width="5"/>
+    <path d="M852 617L880 561L913 607L932 578L949 617Z" fill="#023047"/>
+  </g>
+
+  <!-- Lighthouse beam -->
+  <g id="lighthouse-beam">
+    <path d="M878 413L543 346L578 517L878 435Z" fill="url(#beam)" opacity="0.88"/>
+    <path d="M878 416L551 350L878 428Z" fill="#B7FFFF" opacity="0.4"/>
+  </g>
+
+  <!-- Portal architectural frame -->
+  <g id="portal" filter="url(#shadow)">
+    <path d="M187 705V579L215 572V705Z" fill="#9AFFFF"/>
+    <path d="M155 592L187 579V610L155 620Z" fill="#D7FFFF"/>
+    <path d="M155 640L187 625V653L153 665Z" fill="#8BFFFF"/>
+    <path d="M341 705V582L369 575V705Z" fill="#88F9F6"/>
+    <path d="M341 590L369 579V610L341 620Z" fill="#E1FFFF"/>
+    <path d="M341 641L369 629V656L341 666Z" fill="#B9FFFF"/>
+    <path d="M188 704V578C188 528 220 490 264 469C308 490 340 528 340 578V704Z" fill="url(#portalShell)"/>
+    <path d="M206 704V583C206 542 229 511 264 491C299 511 322 542 322 583V704Z" fill="#007F99"/>
+    <path d="M223 704V587C223 557 240 532 264 518C288 532 305 557 305 587V704Z" fill="#C1FFFF"/>
+    <path d="M239 704V590C239 570 249 557 264 550C279 557 289 570 289 590V704Z" fill="url(#portalInner)"/>
+    <path d="M197 587C200 537 223 500 264 477C305 500 328 537 331 587" stroke="#55F4F2" stroke-width="7" opacity="0.8"/>
+    <path d="M249 491L264 470L279 491L264 510Z" fill="#F3FFFF" opacity="0.9"/>
+    <path d="M205 704H323" stroke="#F1FFFF" stroke-width="5"/>
+    <path d="M176 704H351V712H176Z" fill="#D8FFFF"/>
+    <path d="M162 712H365V720H162Z" fill="#A7FFFF"/>
+    <path d="M148 720H380V729H148Z" fill="#E8FFFF"/>
+    <path d="M135 729H393V738H135Z" fill="#77F9F4"/>
+  </g>
+
+  <!-- Foreground polygonal shore -->
+  <g id="foreground-shore">
+    <path d="M0 756L129 738L262 724L400 762L552 768L655 809L776 825L825 807L895 866L1065 815L1187 827L1282 747L1393 806L1510 842L1672 860L1672 952H0Z" fill="url(#foreground)"/>
+    <path d="M0 756L129 738L262 724L132 820Z" fill="#11B9C8"/>
+    <path d="M132 820L262 724L400 762L319 811Z" fill="#18D8DE"/>
+    <path d="M319 811L400 762L552 768L452 840Z" fill="#0791AA"/>
+    <path d="M452 840L552 768L597 800L515 852Z" fill="#02607C"/>
+    <path d="M552 768L655 809L621 867L597 800Z" fill="#022E49"/>
+    <path d="M621 867L655 809L690 891Z" fill="#013B56"/>
+    <path d="M655 809L776 825L825 807L829 891L690 891Z" fill="#00445E"/>
+    <path d="M776 825L825 807L895 866L829 891Z" fill="#028198"/>
+    <path d="M895 866L1065 815L1187 827L1031 911Z" fill="#12B7C3"/>
+    <path d="M1065 815L1187 827L1282 747L1262 863Z" fill="#0695AA"/>
+    <path d="M1282 747L1393 806L1436 846L1262 863Z" fill="#036E88"/>
+    <path d="M1282 747L1393 806L1436 846Z" fill="#03435D"/>
+    <path d="M1436 846L1510 842L1672 860L1539 894Z" fill="#047D95"/>
+    <path d="M0 756L132 820L0 829Z" fill="#067F99"/>
+  </g>
+
+  <!-- Summit beacon light -->
+  <g id="summit-beam">
+    <path d="M1477 311L1415 425L1430 477L1471 348L1510 421L1477 311Z" fill="url(#peakLight)" opacity="0.9"/>
+  </g>
+
+  <!-- Route glow and path -->
+  <g id="route">
+    <path d="M261 722C354 777 477 775 636 733C745 703 823 678 911 666C985 654 988 674 1043 664C1200 638 1348 589 1428 480C1461 435 1471 362 1477 306" stroke="#19F7F4" stroke-width="14" stroke-linecap="round" opacity="0.23" filter="url(#glow)"/>
+    <path d="M261 722C354 777 477 775 636 733C745 703 823 678 911 666C985 654 988 674 1043 664C1200 638 1348 589 1428 480C1461 435 1471 362 1477 306" stroke="#E7FFFF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M261 722C354 777 477 775 636 733C745 703 823 678 911 666C985 654 988 674 1043 664C1200 638 1348 589 1428 480C1461 435 1471 362 1477 306" stroke="#51FFFF" stroke-width="2.4" stroke-linecap="round"/>
+    <use href="#routeNode" transform="translate(261 722)"/>
+    <use href="#routeNode" transform="translate(636 733)"/>
+    <use href="#routeNode" transform="translate(911 666)"/>
+    <use href="#routeNode" transform="translate(1428 480)"/>
+  </g>
+
+  <!-- Summit flag -->
+  <g id="ai-flag" filter="url(#shadow)">
+    <path d="M1474 307V202" stroke="#002D46" stroke-width="12" stroke-linecap="round"/>
+    <path d="M1474 307V202" stroke="#28E8E5" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="1474" cy="202" r="9" fill="url(#orb)" stroke="#32F4F1" stroke-width="2"/>
+    <path d="M1481 208C1517 207 1551 236 1596 222L1586 290C1547 301 1518 272 1481 278Z" fill="url(#flag)" stroke="#6BFFFF" stroke-width="1.5"/>
+    <g clip-path="url(#flagClip)" fill="#00314A">
+      <!-- outlined A and I as vector paths -->
+      <path d="M1510 261L1523 226L1533 228L1545 270L1536 268L1533 258L1519 255L1516 264ZM1522 248L1531 250L1527 237Z" fill-rule="evenodd"/>
+      <path d="M1551 233L1560 235L1556 274L1547 272Z"/>
+    </g>
+  </g>
+  <use href="#routeNode" transform="translate(1477 306)"/>
+</svg>
