@@ -199,7 +199,7 @@ function footer() {
       </div>
       <div class="footer-grid shell">
         <div class="footer-brand">
-          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><span class="brand__white-logo" aria-hidden="true"></span></a>
+          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><img class="brand__white-logo" src="/images/footer-logo.svg?v=${assetVersion.footerLogo}" alt="" width="232" height="47"></a>
           <p>Future-proofing people, culture and organisations through real AI innovation.</p>
           <div class="social-links" aria-label="Social media">
             <a href="${site.social.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a>
@@ -229,6 +229,7 @@ function footer() {
         </div>
         <div class="footer-contact">
           <h2>${site.legalName}</h2>
+          <p class="footer-registration">${site.registrationNumber}</p>
           <address>${site.address.join('<br>')}</address>
           <a href="${site.whatsapp}" target="_blank" rel="noreferrer">Chat on WhatsApp ↗</a>
         </div>
@@ -250,6 +251,7 @@ export function organizationSchema() {
     '@id': `${site.url}/#organization`,
     name: site.name,
     legalName: site.legalName,
+    identifier: site.registrationNumber,
     url: site.url,
     logo: `${site.url}/images/logo-horizontal.png`,
     slogan: 'Dare to be great',
@@ -314,7 +316,7 @@ export function layout({
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="robots" content="${noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'}">
   <link rel="canonical" href="${canonical}">
-  <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <meta property="og:type" content="${ogType}">
   <meta property="og:site_name" content="Leadapreneur">

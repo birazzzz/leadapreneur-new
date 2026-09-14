@@ -1,6 +1,7 @@
 export const site = {
   name: 'Leadapreneur',
   legalName: 'LEADAPRENEUR SDN. BHD.',
+  registrationNumber: '1086234K / 201401010155',
   url: 'https://www.leadapreneur.com',
   description:
     'Leadapreneur transforms managers into AI-powered innovators who build real solutions with verified business value.',
