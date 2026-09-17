@@ -43,8 +43,8 @@ Why not embed Keystatic in the site? Keystatic's editor needs Next.js, Astro or 
 Keystatic creates the GitHub App for you:
 
 1. Locally, create `admin/.env.local` with `NEXT_PUBLIC_KEYSTATIC_STORAGE=github`.
-2. `npm install`, then `npm run admin`, and open `http://localhost:4174/keystatic`.
-3. Follow **Create GitHub App**. Name it e.g. `leadapreneur-cms`, owned by the account or organisation that owns the repository. Keystatic writes `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` and `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` into `admin/.env.local`. Never commit that file.
+2. `npm install`, then `npm run admin`, and open `http://127.0.0.1:4174/keystatic/setup`.
+3. Follow **Create GitHub App**. Name it e.g. `leadapreneur-cms`, owned by the account or organisation that owns the repository. Keystatic writes `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` and `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` into `admin/.env`. Never commit that file.
 4. On GitHub, open the app's settings and add the production **Callback URL**: `https://admin.leadapreneur.com/api/keystatic/github/oauth/callback` (plus the `*.vercel.app` equivalent while in draft).
 5. Install the app on the repository.
 6. Copy the four variables into the admin Vercel project (**Settings → Environment Variables**) and redeploy. If the repository ever moves, also set `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO=owner/name`.
