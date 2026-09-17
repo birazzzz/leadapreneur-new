@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: repoRoot,
   turbopack: { root: repoRoot },
   poweredByHeader: false,
+  // Keystatic's GitHub sign-in sends local development to 127.0.0.1.
+  allowedDevOrigins: ['127.0.0.1'],
   async headers() {
     return [
       {
