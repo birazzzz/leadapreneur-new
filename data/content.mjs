@@ -1,6 +1,7 @@
 export const site = {
   name: 'Leadapreneur',
   legalName: 'LEADAPRENEUR SDN. BHD.',
+  registrationNumber: '1086234K / 201401010155',
   url: 'https://www.leadapreneur.com',
   description:
     'Leadapreneur transforms managers into AI-powered innovators who build real solutions with verified business value.',
@@ -309,36 +310,8 @@ export const stats = [
   ['USD 120M+', 'Business impact generated'],
 ];
 
-export const events = [
-  {
-    slug: 'greatness-games-kl-season-1',
-    title: 'Greatness Games KL · Season 1',
-    summary:
-      'A three-week leadership quest that closed with three days in Kuala Lumpur and an AI-powered innovation proposal ready to pitch.',
-    type: 'Greatness Games',
-    format: 'in-person',
-    startAt: '2026-06-22T09:00:00+08:00',
-    endAt: '2026-07-03T17:00:00+08:00',
-    timezone: 'Asia/Kuala_Lumpur',
-    city: 'Kuala Lumpur',
-    country: 'Malaysia',
-    venue: 'Common Ground Bukit Bintang',
-    status: 'registration-closed',
-    featured: true,
-    capacity: 25,
-    price: 'RM 2,000 per person',
-    registrationUrl: null,
-    agenda: [
-      ['22 June', 'Kickoff webinar', 'A live one-hour session that sets the leadership standard and opens COSMOS access.'],
-      ['22–30 June', 'Innovate or Die', 'A self-paced course with 17 lessons, quizzes and a working workbook.'],
-      ['1 July', 'Discover problem', 'Find the problem in your work worth solving.'],
-      ['2 July', 'Design solution', 'Build a strong idea using AI.'],
-      ['3 July', 'Pitch proposal', 'Present an innovation proposal ready for management approval.'],
-    ],
-  },
-];
-
-export { educationalVideos, insights, inspiringPodcasts } from './insights.mjs';
+// Events and blog posts are edited in the CMS (content/) and loaded by lib/cms.mjs.
+export { educationalVideos, inspiringPodcasts } from './insights.mjs';
 
 export const team = [
   ['Hanaa Maysoon', 'COO', '/images/team-hanaa.png'],

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { events } from '../data/content.mjs';
+import { events } from '../lib/cms.mjs';
 import { getEventState, partitionEvents } from '../lib/events.mjs';
 
 const event = events[0];

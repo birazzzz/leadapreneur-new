@@ -199,7 +199,7 @@ function footer() {
       </div>
       <div class="footer-grid shell">
         <div class="footer-brand">
-          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><span class="brand__white-logo" aria-hidden="true"></span></a>
+          <a class="brand brand--footer" href="/" aria-label="Leadapreneur home"><img class="brand__white-logo" src="/images/footer-logo.svg?v=${assetVersion.footerLogo}" alt="" width="232" height="47"></a>
           <p>Future-proofing people, culture and organisations through real AI innovation.</p>
           <div class="social-links" aria-label="Social media">
             <a href="${site.social.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a>
@@ -229,6 +229,7 @@ function footer() {
         </div>
         <div class="footer-contact">
           <h2>${site.legalName}</h2>
+          <p class="footer-registration">${site.registrationNumber}</p>
           <address>${site.address.join('<br>')}</address>
           <a href="${site.whatsapp}" target="_blank" rel="noreferrer">Chat on WhatsApp ↗</a>
         </div>
@@ -250,6 +251,7 @@ export function organizationSchema() {
     '@id': `${site.url}/#organization`,
     name: site.name,
     legalName: site.legalName,
+    identifier: site.registrationNumber,
     url: site.url,
     logo: `${site.url}/images/logo-horizontal.png`,
     slogan: 'Dare to be great',
@@ -296,9 +298,19 @@ export function layout({
   scripts = [],
   structuredData = [],
   noindex = false,
+  canonicalUrl = null,
+  publishedTime = null,
+  modifiedTime = null,
 }) {
-  const canonical = `${site.url}${path === '/' ? '/' : `${path.replace(/\/$/, '')}/`}`;
-  const socialImage = image.startsWith('http') ? image : `${site.url}${image}`;
+  const canonical = canonicalUrl || encodeURI(`${site.url}${path === '/' ? '/' : `${path.replace(/\/$/, '')}/`}`);
+  const socialImage = image.startsWith('http') ? image : `${site.url}${encodeURI(image)}`;
+  const articleMeta = [
+    publishedTime && `<meta property="article:published_time" content="${publishedTime}">`,
+    modifiedTime && `<meta property="article:modified_time" content="${modifiedTime}">`,
+  ]
+    .filter(Boolean)
+    .map((tag) => `  ${tag}\n`)
+    .join('');
   const jsonLd = structuredData
     .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`)
     .join('\n');
@@ -314,7 +326,7 @@ export function layout({
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="robots" content="${noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'}">
   <link rel="canonical" href="${canonical}">
-  <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <meta property="og:type" content="${ogType}">
   <meta property="og:site_name" content="Leadapreneur">
@@ -322,21 +334,21 @@ export function layout({
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${socialImage}">
-  <meta name="twitter:card" content="summary_large_image">
+${articleMeta}  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${socialImage}">
   <link rel="stylesheet" href="/assets/styles.css?v=${assetVersion.styles}">
-  ${jsonLd}
+${jsonLd}
 </head>
 <body class="${pageClass}">
   <a class="skip-link" href="#main">Skip to content</a>
-  ${header()}
+${header()}
   <main id="main">${body}</main>
-  ${footer()}
-  ${solutionModal()}
+${footer()}
+${solutionModal()}
   <script type="module" src="/assets/site.js?v=${assetVersion.site}"></script>
-  ${scriptTags}
+${scriptTags}
   <script>
     if (/(^|\\.)leadapreneur\\.com$/.test(location.hostname)) {
       window.dataLayer = window.dataLayer || [];
