@@ -1,4 +1,5 @@
 import { collection, config, fields } from '@keystatic/core';
+import { createElement } from 'react';
 
 /**
  * Keystatic schema for the Leadapreneur CMS.
@@ -63,7 +64,17 @@ function seoFields({ imageDirectory, imagePublicPath, imageFallback }: { imageDi
 export default config({
   storage,
   ui: {
-    brand: { name: 'Leadapreneur' },
+    brand: {
+      name: 'Leadapreneur',
+      // The company mark, served by the admin app. Written without JSX so the site build can load this file.
+      mark: ({ colorScheme }) =>
+        createElement('img', {
+          src: colorScheme === 'dark' ? '/brand/mark-dark.svg' : '/brand/mark-light.svg',
+          alt: '',
+          width: 26,
+          height: 26,
+        }),
+    },
     navigation: {
       Content: ['blogs', 'events'],
       People: ['authors'],

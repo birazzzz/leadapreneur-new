@@ -65,13 +65,29 @@ In the public-site Vercel project: **Settings → Git → Deploy Hooks**, create
 
 ### 5. Editor access
 
-Each editor needs a GitHub account with **write** access to the repository. Access is removed by removing them from the repository. Editors never need Git, code or Vercel.
+There are two ways in. Both open the editor on `CMS_DEFAULT_BRANCH` (currently `feature/keystatic-cms`; set it to `master` after the merge).
+
+**Team email and password (for most editors).** One shared login for the team.
+
+1. Create a fine-grained GitHub token (GitHub → Settings → Developer settings → Fine-grained tokens). Repository access: only this repository. Permissions: **Contents: Read and write** (Metadata read-only is added automatically). Pick an expiry and put a reminder in the calendar to renew it.
+2. Generate the password hash: `npm run hash-password --workspace admin -- "the password"`.
+3. In the admin Vercel project, add `CMS_ADMIN_EMAIL`, `CMS_ADMIN_PASSWORD_HASH` and `CMS_GITHUB_TOKEN`, then redeploy.
+
+How it works: the password is checked on the server against the hash (the password itself is never stored). A signed, httpOnly session lasts 12 hours. While it lasts, the server hands the browser the GitHub token for an hour at a time, because Keystatic calls GitHub directly from the browser. Consequences worth knowing:
+
+- Every save by an email user is committed as the GitHub account that owns the token. Use a dedicated account (e.g. `leadapreneur-cms`) if commits should not carry a person's name.
+- A signed-in editor could read that token from the browser. Keep it limited to this repository and renew it when someone leaves the team, along with the password.
+- If the token expires, sign-in still succeeds but the editor shows a message asking for a new `CMS_GITHUB_TOKEN`.
+
+**GitHub (optional, for developers).** Anyone with write access to the repository can use *Continue with GitHub*. Their saves are committed under their own name.
+
+The dashboard greets everyone as *Leader* with the Leadapreneur avatar, and GitHub repository links are hidden from the editor menus. Neither changes permissions.
 
 ## Editor guide
 
 ### Write a blog post
 
-1. Open `admin.leadapreneur.com` and sign in with GitHub.
+1. Open `admin.leadapreneur.com` and sign in with the team email and password.
 2. **Blogs → Add**.
 3. Fill in the title. The slug (web address) is suggested automatically; check it before publishing and do not change it afterwards.
 4. Leave **Status** on *Draft* while writing. Set the publish date, short description, author and optional category (for example *COO Notes*).

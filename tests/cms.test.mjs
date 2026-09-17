@@ -96,9 +96,31 @@ test('events move between upcoming, current and past from their real dates', () 
   assert.equal(getEventStatusLabel(event, new Date('2030-01-13T00:00:00+08:00')), 'Past event');
 });
 
+// The 17 articles crawled from the Framer site. Posts the team adds later are not held to these checks.
+const migratedSlugs = [
+  'ai-in-the-workplace-leadapreneur-gamified-programs',
+  'bringing-meaning-to-cambodia-one-lifepath-at-a-time',
+  'embracing-change-navigating-the-emotional-journey-of-innovation-in-the-age-of-purpose',
+  'from-resistance-to-renewal-wendy’s-leadership-journey-through-the-toshiba-teka-greatness-games',
+  'how-to-build-great-leaders-why-future-proofing-talent-starts-with-who-your-people-become-not-what-they-learn',
+  'making-change-viable-the-leadapreneur-way-sarah-margaret-peter-victorian',
+  'navigating-the-impact-of-ai-on-jobs-and-leadership-models-a-systemic-approach-to-embracing-change',
+  'the-challenge-of-innovation',
+  'the-cost-of-complacency-in-the-age-of-ai-and-why-future-proofing-your-talent-matters-more-than-ever',
+  'the-difference-between-a-complainer-and-a-leadapreneur-is-about-three-hours-on-a-tuesday-night',
+  'the-great-acceleration-a-strategic-briefing-for-ceos-in-the-age-of-ai',
+  'the-real-story-in-the-2028-intelligence-crisis-report-leadership-ai-impowerment-futureproof',
+  'this-leadapreneur-chooses-to-get-chummy-with-change-ivan-lee-cheng-tat',
+  'this-warrior-finds-his-reward-through-leadapreneur-danny-chia-kai-yan',
+  'what-we-witnessed-at-leadapreneur-open-day-2025-a-real-look-at-future-proofing-your-talent-in-the-age-of-ai',
+  'wu-wei-ing-her-way-through-the-leadapreneurship-journey-sakinah-ghazali',
+  'you-won-t-hear-from-me-for-a-while.-here-s-why',
+];
+
 test('every migrated article is published with a local banner and no Framer-hosted images', () => {
-  assert.equal(blogs.length, 17);
-  for (const blog of blogs) {
+  for (const slug of migratedSlugs) {
+    const blog = blogs.find((item) => item.slug === slug);
+    assert.ok(blog, `${slug} is published`);
     assert.ok(blog.thumbnail && existsSync(join(root, 'public', blog.thumbnail)), blog.slug);
     assert.ok(blog.author, `${blog.slug} has an author`);
     assert.ok(blog.seo.description.length > 50, `${blog.slug} kept its live meta description`);
