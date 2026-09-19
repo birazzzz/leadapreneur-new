@@ -30,13 +30,13 @@ export function homePage() {
           <p class="hero-subhead reveal">Build the people who will build what’s next.</p>
           <p class="hero-lede reveal">Leadapreneur turns managers into AI-powered innovators who build real solutions and create measurable business impact.</p>
           <div class="button-row reveal">
-            ${link('/contact/', 'Future-proof your people', 'button button--teal solution-trigger')}
-            ${link('/role-quiz/', 'Discover more about me', 'button button--ghost')}
+            ${link('/contact/', 'Future Proofing Solutions', 'button button--teal solution-trigger')}
+            ${link('/role-quiz/', 'Take the Quiz', 'button button--ghost')}
           </div>
         </div>
       </div>
       <ol class="hero-chips shell reveal" aria-label="How the journey works">
-        <li class="hero-chip"><span>01</span><b>Discover</b><small>See the opening.</small></li>
+        <li class="hero-chip"><span>01</span><b>Explore</b><small>See the opening.</small></li>
         <li class="hero-chip"><span>02</span><b>Build</b><small>Make it real.</small></li>
         <li class="hero-chip"><span>03</span><b>Lead</b><small>Move the system.</small></li>
       </ol>
