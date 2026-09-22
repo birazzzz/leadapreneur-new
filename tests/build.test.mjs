@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { insights } from '../data/content.mjs';
+import { blogs, events } from '../lib/cms.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -17,7 +17,7 @@ function walk(directory) {
 
 const htmlFiles = walk(dist).filter((file) => extname(file) === '.html');
 const indexableFiles = htmlFiles.filter((file) => !readFileSync(file, 'utf8').includes('noindex,follow'));
-const expectedIndexablePages = 11 + insights.length;
+const expectedIndexablePages = 10 + events.length + blogs.length;
 
 test('every indexable page has one h1, a canonical, description and parseable JSON-LD', () => {
   assert.equal(indexableFiles.length, expectedIndexablePages);

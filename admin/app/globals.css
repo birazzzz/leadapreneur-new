@@ -1,0 +1,89 @@
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/manrope-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/manrope-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  --font-body: "Manrope", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* Keystatic's base font stack starts with var(--font-inter). */
+  --font-inter: "Manrope";
+}
+
+body { margin: 0; }
+
+/*
+ * Keystatic theme: the website's teal replaces Keystatic's indigo accent and
+ * the light scheme picks up the site's warm paper tones. Keystatic sets its
+ * scheme classes on <html> and again on inner providers, so these match both;
+ * the doubled class outranks its own single-class rules.
+ */
+.kui-theme.kui-scheme--light,
+.kui-theme.kui-scheme--auto {
+  --kui-color-scale-indigo1: #fbfefe;
+  --kui-color-scale-indigo2: #f1fafb;
+  --kui-color-scale-indigo3: #dff4f7;
+  --kui-color-scale-indigo4: #c9edf2;
+  --kui-color-scale-indigo5: #b0e3eb;
+  --kui-color-scale-indigo6: #92d5e0;
+  --kui-color-scale-indigo7: #69c2d1;
+  --kui-color-scale-indigo8: #2eaabd;
+  --kui-color-scale-indigo9: #006f80;
+  --kui-color-scale-indigo10: #005f6e;
+  --kui-color-scale-indigo11: #006f80;
+  --kui-color-scale-slate1: #fffdf8;
+  --kui-color-scale-slate2: #f8f4ec;
+}
+
+.kui-theme.kui-scheme--dark {
+  --kui-color-scale-indigo1: #0c1819;
+  --kui-color-scale-indigo2: #0f1f22;
+  --kui-color-scale-indigo3: #0b2e34;
+  --kui-color-scale-indigo4: #073a42;
+  --kui-color-scale-indigo5: #0a4850;
+  --kui-color-scale-indigo6: #11575f;
+  --kui-color-scale-indigo7: #196a74;
+  --kui-color-scale-indigo8: #1f8290;
+  --kui-color-scale-indigo9: #007f93;
+  --kui-color-scale-indigo10: #0b93a8;
+  --kui-color-scale-indigo11: #81edff;
+  --kui-color-scale-slate1: #151d1c;
+  --kui-color-scale-slate2: #1b2524;
+}
+
+@media (prefers-color-scheme: dark) {
+  .kui-theme.kui-scheme--auto {
+    --kui-color-scale-indigo1: #0c1819;
+    --kui-color-scale-indigo2: #0f1f22;
+    --kui-color-scale-indigo3: #0b2e34;
+    --kui-color-scale-indigo4: #073a42;
+    --kui-color-scale-indigo5: #0a4850;
+    --kui-color-scale-indigo6: #11575f;
+    --kui-color-scale-indigo7: #196a74;
+    --kui-color-scale-indigo8: #1f8290;
+    --kui-color-scale-indigo9: #007f93;
+    --kui-color-scale-indigo10: #0b93a8;
+    --kui-color-scale-indigo11: #81edff;
+    --kui-color-scale-slate1: #151d1c;
+    --kui-color-scale-slate2: #1b2524;
+  }
+}
+
+/* The editor opens menus with "View on GitHub"; the team works entirely in the CMS. */
+html.kui-theme a[href^="https://github.com/"][role="menuitem"],
+html.kui-theme [role="menu"] a[href^="https://github.com/"],
+html.kui-theme [role="menuitem"][data-key="view"] {
+  display: none !important;
+}

@@ -1,0 +1,26 @@
+# The public site is static, so "upcoming" events only become "past" when the
+# site is rebuilt. This triggers one Vercel production build every night.
+#
+# Setup: Vercel project → Settings → Git → Deploy Hooks → create a hook for the
+# production branch, then add its URL as the repository secret
+# VERCEL_DEPLOY_HOOK_URL (GitHub → Settings → Secrets and variables → Actions).
+name: Nightly site rebuild
+
+on:
+  schedule:
+    - cron: '5 16 * * *' # 00:05 in Kuala Lumpur
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy hook
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "VERCEL_DEPLOY_HOOK_URL is not set; skipping."
+            exit 0
+          fi
+          curl --fail --silent --show-error -X POST "$HOOK"

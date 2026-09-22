@@ -1,4 +1,5 @@
-import { educationalVideos, insights, inspiringPodcasts, site } from '../../data/content.mjs';
+import { educationalVideos, inspiringPodcasts, site } from '../../data/content.mjs';
+import { blogs as insights } from '../../lib/cms.mjs';
 import { allInsights, educationalVideoGrid, finalCta, inspiringPodcastGrid } from '../components.mjs';
 import { breadcrumb, escapeHtml, pageHeroArt } from '../templates.mjs';
 
@@ -29,8 +30,21 @@ export function insightsPage() {
     ${finalCta()}`;
 }
 
+function authorBlock(author) {
+  if (!author || author.isOrganisation) return '';
+  const image = author.image ? `<img src="${author.image}" alt="" width="96" height="96" loading="lazy" decoding="async">` : '';
+  return `<footer class="article-author${image ? '' : ' article-author--no-image'}">${image}<div><p class="article-author__label">Written by</p><p class="article-author__name">${escapeHtml(author.name)}</p><p class="article-author__role">${escapeHtml(author.jobTitle)}</p>${author.bio ? `<p class="article-author__bio">${escapeHtml(author.bio)}</p>` : ''}</div></footer>`;
+}
+
 export function articlePage(insight) {
   const date = displayDate(insight.date);
+  const authorName = insight.author?.name ?? site.name;
+  const updated = insight.updatedDate && insight.updatedDate !== insight.date
+    ? `<span>Updated <time datetime="${insight.updatedDate}">${displayDate(insight.updatedDate)}</time></span>`
+    : '';
+  const cover = insight.thumbnail
+    ? `<figure class="article-cover shell"><img src="${insight.thumbnail}" alt="${escapeHtml(insight.bannerAlt)}" width="1600" height="900"></figure>`
+    : '';
   return `
     <article class="article-page">
       <header class="article-header">
@@ -39,28 +53,45 @@ export function articlePage(insight) {
           <p class="kicker">${escapeHtml(insight.category)}</p>
           <h1>${escapeHtml(insight.title)}</h1>
           <p class="article-dek">${escapeHtml(insight.excerpt)}</p>
-          <div class="article-byline"><span>By ${escapeHtml(insight.author)}</span><time datetime="${insight.date}">${date}</time><span>${insight.readingTime} min read</span></div>
+          <div class="article-byline"><span>By ${escapeHtml(authorName)}</span><time datetime="${insight.date}">${date}</time>${updated}<span>${insight.readingTime} min read</span></div>
         </div>
-        <figure class="article-cover shell"><img src="${insight.thumbnail}" alt="" width="1600" height="900"></figure>
+        ${cover}
       </header>
       <div class="article-body shell-narrow">
         <div class="article-content">${insight.contentHtml}</div>
+        ${authorBlock(insight.author)}
         <aside><p class="kicker kicker--light">Put the idea to work</p><h2>Future-proofing becomes real when someone builds.</h2><a class="button button--cyan" href="/ai-x-talent-accelerator/">Explore the Accelerator</a></aside>
       </div>
     </article>`;
 }
 
 export function articleSchema(insight) {
+  const url = `${site.url}/blog/${encodeURI(insight.slug)}/`;
+  const author = !insight.author || insight.author.isOrganisation
+    ? { '@type': 'Organization', name: insight.author?.name ?? site.name, url: site.url }
+    : {
+        '@type': 'Person',
+        name: insight.author.name,
+        jobTitle: insight.author.jobTitle,
+        ...(insight.author.image ? { image: `${site.url}${encodeURI(insight.author.image)}` } : {}),
+        worksFor: { '@type': 'Organization', name: site.name, url: site.url },
+      };
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: insight.title,
-    description: insight.excerpt,
-    image: `${site.url}${insight.thumbnail}`,
+    description: insight.seo.description,
+    ...(insight.seo.image ? { image: [`${site.url}${encodeURI(insight.seo.image)}`] } : {}),
     datePublished: insight.date,
-    dateModified: insight.date,
-    author: { '@type': insight.author === 'Leadapreneur' ? 'Organization' : 'Person', name: insight.author },
-    publisher: { '@type': 'Organization', name: site.name, url: site.url },
-    mainEntityOfPage: `${site.url}/blog/${encodeURI(insight.slug)}/`,
+    dateModified: insight.updatedDate || insight.date,
+    ...(insight.category !== 'Leadership article' ? { articleSection: insight.category } : {}),
+    author,
+    publisher: {
+      '@type': 'Organization',
+      name: site.name,
+      url: site.url,
+      logo: { '@type': 'ImageObject', url: `${site.url}/images/logo-horizontal.png` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': insight.seo.canonicalUrl || url },
   };
 }

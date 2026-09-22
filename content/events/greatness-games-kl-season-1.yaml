@@ -1,0 +1,78 @@
+title: Greatness Games KL · Season 1
+series: Greatness Games
+season: Season 1
+eventCode: GGKL
+seasonCode: S01
+dates:
+  start: '2026-06-22T09:00'
+  end: '2026-07-03T17:00'
+  timezone: Asia/Kuala_Lumpur
+format: in-person
+location:
+  city: Kuala Lumpur
+  venue: Common Ground Bukit Bintang
+  country: Malaysia
+shortDescription: >-
+  A three-week leadership quest that closed with three days in Kuala Lumpur and
+  an AI-powered innovation proposal ready to pitch.
+statusOverride: auto
+hero:
+  headline: |-
+    Learn to lead
+    in the age of AI.
+facts:
+  - label: Kickoff
+    value: 22 June 2026
+  - label: Workshop
+    value: 1–3 July 2026
+  - label: Venue
+    value: Common Ground Bukit Bintang
+  - label: Seats
+    value: '25'
+quest:
+  eyebrow: The quest
+  heading: Walk in with a problem. Walk out with a proposal.
+  description: >-
+    Across three weeks, participants moved from leadership context to problem
+    discovery, solution design and a management-ready AI innovation proposal.
+registration:
+  state: Registration closed
+  heading: This season has finished.
+  description: Future dates will be published on the events page when confirmed.
+  ctaLabel: See all events
+  ctaUrl: /events/
+route:
+  eyebrow: The route
+  heading: Three weeks. Five decisive moments.
+  items:
+    - date: 22 June
+      title: Kickoff webinar
+      description: A live one-hour session that sets the leadership standard and opens COSMOS access.
+    - date: 22–30 June
+      title: Innovate or Die
+      description: A self-paced course with 17 lessons, quizzes and a working workbook.
+    - date: 1 July
+      title: Discover problem
+      description: Find the problem in your work worth solving.
+    - date: 2 July
+      title: Design solution
+      description: Build a strong idea using AI.
+    - date: 3 July
+      title: Pitch proposal
+      description: Present an innovation proposal ready for management approval.
+included:
+  eyebrow: What was included
+  heading: Everything needed to move from idea to approval.
+  items:
+    - Live kickoff with Jan Bartscht
+    - 17-lesson Innovate or Die course
+    - Three facilitated workshop days
+    - COSMOS platform access
+    - Innovation Coins and Hero Marketplace
+    - Certificate and LinkedIn badge
+seo:
+  title: Greatness Games KL · Season 1
+  description: >-
+    A three-week leadership quest that closed with three days in Kuala Lumpur and
+    an AI-powered innovation proposal ready to pitch.
+  noindex: false
