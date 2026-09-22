@@ -48,4 +48,12 @@ Legacy `/blog` and `/greatness-games-kl-season-1` routes redirect to their new d
 - `src/quiz.js`: private client-side quiz state and result sharing.
 - `scripts/build.mjs`: production build, sitemap, robots and redirects.
 
+## Assessment result emails
+
+`api/send-result.js` is a Vercel serverless function that emails participants a branded copy of their Future-Proofing Assessment result via Resend. The vendored app at `/assessment/` posts to it after the result is computed; the API key only ever exists server-side.
+
+- `RESEND_API_KEY` — set in the Vercel project environment (and in `.env.local` for local testing).
+- `ASSESSMENT_EMAIL_FROM` — optional verified sender. Until `leadapreneur.com` is verified as a sending domain in Resend, the default `Leadapreneur <onboarding@resend.dev>` is used, which can only deliver to the Resend account owner's address.
+- Send a real sample for visual testing: `node scripts/test-result-email.mjs you@example.com`.
+
 See `docs/content-audit.md` for source decisions and public-content conflicts.
