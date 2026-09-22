@@ -8,7 +8,7 @@ export const site = {
   email: null,
   whatsapp: 'https://wa.me/60139429127',
   cosmos: 'https://cosmos.leadapreneur.com/login',
-  assessment: 'https://future-proof-lp.lovable.app/',
+  assessment: '/assessment/',
   address: [
     'Level 7, Tower 7, Avenue 7',
     'Menara Pernas, The Horizon',

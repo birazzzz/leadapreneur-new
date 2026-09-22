@@ -28,6 +28,7 @@ The local preview runs at `http://127.0.0.1:4173`.
 - `/blog/[slug]/` for every published post in `content/blogs/`
 - `/about/`
 - `/future-proof-assessment/`
+- `/assessment/` — the built Future-Proofing Assessment app, vendored from its own repository with `npm run sync:assessment`
 - `/contact/`
 
 Legacy `/blog` and `/greatness-games-kl-season-1` routes redirect to their new destinations. Legacy `.html` page paths also receive static redirect files.

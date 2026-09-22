@@ -16,7 +16,10 @@ function walk(directory) {
 }
 
 const htmlFiles = walk(dist).filter((file) => extname(file) === '.html');
-const indexableFiles = htmlFiles.filter((file) => !readFileSync(file, 'utf8').includes('noindex,follow'));
+// The vendored assessment app (dist/assessment/) is a self-contained SPA shell
+// synced from its own repository, not a generated site page.
+const siteHtmlFiles = htmlFiles.filter((file) => !file.startsWith(join(dist, 'assessment')));
+const indexableFiles = siteHtmlFiles.filter((file) => !readFileSync(file, 'utf8').includes('noindex,follow'));
 const expectedIndexablePages = 10 + events.length + blogs.length;
 
 test('every indexable page has one h1, a canonical, description and parseable JSON-LD', () => {

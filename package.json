@@ -9,7 +9,8 @@
     "test": "node --test tests/*.test.mjs",
     "check": "npm run build && npm test",
     "admin": "npm run dev --workspace admin",
-    "import:blogs": "node scripts/import-live-blogs.mjs"
+    "import:blogs": "node scripts/import-live-blogs.mjs",
+    "sync:assessment": "node scripts/sync-assessment.mjs"
   },
   "engines": {
     "node": ">=22.18"
