@@ -300,7 +300,7 @@ export const videos = [
   { id: '_XDAhVOZfTA', title: 'Toshiba Greatness Games Season 2: Sales Warriors' },
   { id: 'HORvj7F_9q4', title: 'Leadapreneur Innovation Accelerator | UOB Tournament Highlights' },
   { id: '1q4UnUgHV6Q', title: 'Warriors of WOW: Unleashing the Power of Innovation Across 5 Seasons' },
-  { id: 'HORvj7F_9q4', list: 'PL8OSlp4m4ku05ZfNXxTf_RQI-OlPJuoeW', title: 'Leadapreneur Innovation Accelerator | UOB Tournament Highlights' },
+  { id: '1S-ApoYqcrk', title: 'Leadapreneur x AXA' },
 ];
 
 export const stats = [
