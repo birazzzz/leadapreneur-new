@@ -1,0 +1,22 @@
+{
+  "name": "leadapreneur-admin",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 4174",
+    "build": "next build",
+    "start": "next start --port 4174",
+    "hash-password": "node scripts/hash-password.mjs"
+  },
+  "dependencies": {
+    "@keystatic/core": "^0.6.9",
+    "@keystatic/next": "^5.0.5",
+    "next": "^16.3.5",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.3",
+    "typescript": "7.0.2"
+  }
+}

@@ -2,8 +2,8 @@ import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } fr
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { events, insights, site } from '../data/content.mjs';
-import { assetVersion } from '../lib/asset-version.mjs';
+import { site } from '../data/content.mjs';
+import { blogs, events } from '../lib/cms.mjs';
 import { aboutPage } from '../src/pages/about.mjs';
 import { acceleratorPage } from '../src/pages/accelerator.mjs';
 import { assessmentPage } from '../src/pages/assessment.mjs';
@@ -13,7 +13,6 @@ import { eventDetailPage, eventSchema, eventsPage } from '../src/pages/events.mj
 import { homePage } from '../src/pages/home.mjs';
 import { articlePage, articleSchema, insightsPage } from '../src/pages/insights.mjs';
 import { projectsPage } from '../src/pages/projects.mjs';
-import { roleQuizPage } from '../src/pages/role-quiz.mjs';
 import { breadcrumbSchema, layout, organizationSchema } from '../src/templates.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -46,15 +45,6 @@ const pages = [
     ],
   },
   {
-    path: '/role-quiz/',
-    title: 'AI Role Quiz | Find Your Leadapreneur Role',
-    description: 'Discover whether you are an AI Explorer, AI Builder or AI Leader in three private questions.',
-    body: roleQuizPage(),
-    pageClass: 'role-quiz-page',
-    scripts: [`/assets/quiz.js?v=${assetVersion.quiz}`],
-    structuredData: [crumbs('Role Quiz', '/role-quiz/')],
-  },
-  {
     path: '/ai-x-talent-accelerator/',
     title: 'AI × Talent Accelerator | Build Real AI Projects',
     description: 'Upgrade managers into leadapreneurs who propose, build and deploy real AI innovations with measurable value.',
@@ -70,21 +60,24 @@ const pages = [
     pageClass: 'events-page',
     structuredData: [crumbs('Events', '/events/')],
   },
-  {
-    path: `/events/${events[0].slug}/`,
-    title: `${events[0].title} | Leadapreneur Events`,
-    description: events[0].summary,
-    body: eventDetailPage(events[0]),
+  ...events.map((event) => ({
+    path: event.path,
+    title: `${event.seo.title} | Leadapreneur Events`,
+    description: event.seo.description,
+    ...(event.seo.image ? { image: event.seo.image } : {}),
+    canonicalUrl: event.seo.canonicalUrl,
+    noindex: event.seo.noindex,
+    body: eventDetailPage(event, buildDate),
     pageClass: 'event-detail-page',
     structuredData: [
       breadcrumbSchema([
         { name: 'Home', path: '/' },
         { name: 'Events', path: '/events/' },
-        { name: events[0].title, path: `/events/${events[0].slug}/` },
+        { name: event.title, path: event.path },
       ]),
-      eventSchema(events[0]),
+      eventSchema(event),
     ],
-  },
+  })),
   {
     path: '/projects/',
     title: 'Impact Projects | Real AI Solutions Built by Leadapreneurs',
@@ -133,13 +126,17 @@ const pages = [
     pageClass: 'contact-page-body',
     structuredData: [crumbs('Contact', '/contact/')],
   },
-  ...insights.map((insight) => ({
+  ...blogs.map((insight) => ({
     path: `/blog/${insight.slug}/`,
-    title: `${insight.title} | Leadapreneur`,
-    description: insight.excerpt,
-    image: insight.thumbnail,
+    title: `${insight.seo.title} | Leadapreneur`,
+    description: insight.seo.description,
+    ...(insight.seo.image ? { image: insight.seo.image } : {}),
+    canonicalUrl: insight.seo.canonicalUrl,
+    noindex: insight.seo.noindex,
     ogType: 'article',
-    lastmod: insight.date,
+    publishedTime: insight.date,
+    modifiedTime: insight.updatedDate || insight.date,
+    lastmod: insight.updatedDate || insight.date,
     body: articlePage(insight),
     pageClass: 'article-page-body',
     structuredData: [
@@ -180,8 +177,9 @@ cpSync(join(root, 'data', 'insights.mjs'), join(dist, 'data', 'insights.mjs'));
 for (const page of pages) write(outputPath(page.path), layout(page));
 
 const redirects = [
+  ['/role-quiz/', '/assessment/'],
   ['/blog/', '/insights/'],
-  ['/greatness-games-kl-season-1/', `/events/${events[0].slug}/`],
+  ['/greatness-games-kl-season-1/', '/events/greatness-games-kl-season-1/'],
   [
     '/blog/from-resistance-to-renewal-wendys-leadership-journey-through-the-toshiba-teka-greatness-games/',
     '/blog/from-resistance-to-renewal-wendy’s-leadership-journey-through-the-toshiba-teka-greatness-games/',
@@ -203,7 +201,8 @@ for (const [file, to] of Object.entries(legacyFiles)) {
   write(join(dist, file), redirectHtml(`/${file}`, to));
 }
 
-const indexed = pages.filter((page) => !page.noindex);
+// Pages that ask not to be indexed, or that point their canonical elsewhere, stay out of the sitemap.
+const indexed = pages.filter((page) => !page.noindex && !page.canonicalUrl);
 const lastmod = buildDate.toISOString().slice(0, 10);
 write(
   join(dist, 'sitemap.xml'),

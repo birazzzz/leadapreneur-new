@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { insights } from '../data/content.mjs';
+import { blogs, events } from '../lib/cms.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -16,8 +16,11 @@ function walk(directory) {
 }
 
 const htmlFiles = walk(dist).filter((file) => extname(file) === '.html');
-const indexableFiles = htmlFiles.filter((file) => !readFileSync(file, 'utf8').includes('noindex,follow'));
-const expectedIndexablePages = 11 + insights.length;
+// The vendored assessment app (dist/assessment/) is a self-contained SPA shell
+// synced from its own repository, not a generated site page.
+const siteHtmlFiles = htmlFiles.filter((file) => !file.startsWith(join(dist, 'assessment')));
+const indexableFiles = siteHtmlFiles.filter((file) => !readFileSync(file, 'utf8').includes('noindex,follow'));
+const expectedIndexablePages = 9 + events.length + blogs.length;
 
 test('every indexable page has one h1, a canonical, description and parseable JSON-LD', () => {
   assert.equal(indexableFiles.length, expectedIndexablePages);
@@ -62,13 +65,6 @@ test('homepage keeps the required story order', () => {
   assert.deepEqual([...positions].sort((a, b) => a - b), positions);
 });
 
-test('role quiz contains no personal-data gate', () => {
-  const html = readFileSync(join(dist, 'role-quiz', 'index.html'), 'utf8');
-  assert.doesNotMatch(html, /type="(?:email|file|tel)"|first name|last name|phone number|company field/i);
-  assert.match(html, /No personal details/);
-  assert.match(html, /data-quiz-app/);
-});
-
 test('internal page links and local assets resolve in the production output', () => {
   for (const file of indexableFiles) {
     const html = readFileSync(file, 'utf8');
@@ -88,7 +84,7 @@ test('internal page links and local assets resolve in the production output', ()
 test('sitemap lists indexable routes and excludes redirects', () => {
   const sitemap = readFileSync(join(dist, 'sitemap.xml'), 'utf8');
   assert.equal((sitemap.match(/<url>/g) || []).length, expectedIndexablePages);
-  assert.match(sitemap, /\/role-quiz\//);
+  assert.doesNotMatch(sitemap, /\/role-quiz\//);
   assert.match(sitemap, /\/events\/greatness-games-kl-season-1\//);
   assert.doesNotMatch(sitemap, /<loc>[^<]+\/blog\/<\/loc>/);
 });

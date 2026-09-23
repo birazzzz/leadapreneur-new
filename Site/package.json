@@ -5,12 +5,26 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "import:insights": "node scripts/import-insights.mjs",
     "serve": "node scripts/serve.mjs",
     "test": "node --test tests/*.test.mjs",
-    "check": "npm run build && npm test"
+    "check": "npm run build && npm test",
+    "admin": "npm run dev --workspace admin",
+    "import:blogs": "node scripts/import-live-blogs.mjs",
+    "sync:assessment": "node scripts/sync-assessment.mjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.18"
+  },
+  "workspaces": [
+    "admin"
+  ],
+  "dependencies": {
+    "@keystatic/core": "^0.6.9",
+    "@markdoc/markdoc": "^0.4.0"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.3.2",
+    "sharp": "^0.35.4",
+    "turndown": "^7.2.4"
   }
 }

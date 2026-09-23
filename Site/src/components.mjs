@@ -1,4 +1,6 @@
-import { companies, educationalVideos, insights, inspiringPodcasts, roles, site } from '../data/content.mjs';
+import { companies, educationalVideos, inspiringPodcasts, roles, site } from '../data/content.mjs';
+import { blogs as insights } from '../lib/cms.mjs';
+import { getEventState, getEventStatusLabel } from '../lib/events.mjs';
 import { arrow, escapeHtml, link } from './templates.mjs';
 
 // `withArt: false` drops the per-card artwork, for surfaces that carry one
@@ -22,7 +24,7 @@ export function roleCards({ limit = roles.length, interactive = true, withArt = 
           <div class="role-card__more" id="role-more-${role.id}" hidden>
             <p><b>You may be this role if…</b></p>
             <p>${role.description}</p>
-            <a href="/role-quiz/">Discover your role ${arrow}</a>
+            <a href="/assessment/">Discover your role ${arrow}</a>
           </div>` : ''}
         </div>
       </article>`,
@@ -128,17 +130,24 @@ export function inspiringPodcastGrid() {
   return `<div class="media-grid">${inspiringPodcasts.map((item, index) => mediaCard(item, index, 'Leadership conversation')).join('')}</div>`;
 }
 
-export function eventTicket(event, state = 'past') {
+export function eventTicket(event, now = new Date()) {
+  const [year, month, day] = event.cardDate.split('-');
+  const monthLabel = new Intl.DateTimeFormat('en', { month: 'short', timeZone: 'UTC' })
+    .format(new Date(Date.UTC(Number(year), Number(month) - 1, 1)))
+    .toUpperCase();
+  const past = getEventState(event, now) === 'past';
+  const ctaLabel = event.cardCtaLabel || (past ? 'View event recap' : 'View event');
+  const place = [event.city, event.venue].filter(Boolean).map(escapeHtml).join(' · ');
   return `<article class="event-ticket reveal">
-    <div class="event-ticket__date"><span>22</span><b>JUN</b><small>2026</small></div>
+    <div class="event-ticket__date"><span>${day}</span><b>${monthLabel}</b><small>${year}</small></div>
     <div class="event-ticket__body">
-      <div class="event-ticket__meta"><span>${event.type}</span><span>${state === 'past' ? 'Past event' : event.status}</span></div>
-      <h3>${event.title}</h3>
-      <p>${event.summary}</p>
-      <p class="event-ticket__place">${event.city} · ${event.venue}</p>
-      <a class="text-link" href="/events/${event.slug}/">View event recap ${arrow}</a>
+      <div class="event-ticket__meta"><span>${escapeHtml(event.type)}</span><span>${getEventStatusLabel(event, now)}</span></div>
+      <h3>${escapeHtml(event.title)}</h3>
+      <p>${escapeHtml(event.summary)}</p>
+      ${place ? `<p class="event-ticket__place">${place}</p>` : ''}
+      <a class="text-link" href="${event.path}">${escapeHtml(ctaLabel)} ${arrow}</a>
     </div>
-    <div class="event-ticket__stub" aria-hidden="true"><span>GGKL</span><i></i><span>S01</span></div>
+    <div class="event-ticket__stub" aria-hidden="true"><span>${escapeHtml(event.eventCode)}</span><i></i><span>${escapeHtml(event.seasonCode)}</span></div>
   </article>`;
 }
 

@@ -93,7 +93,7 @@ function header() {
           <span class="sr-only">Open menu</span><i></i><i></i>
         </button>
         <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation" data-nav>
-          <a class="quiz-nav" href="/role-quiz/"><span aria-hidden="true">✦</span> Find your role</a>
+          <a class="quiz-nav" href="/assessment/"><span aria-hidden="true">✦</span> Find your role</a>
           <details class="nav-group">
             <summary>What we do ${navChevron}</summary>
             <div class="nav-panel">
@@ -210,7 +210,7 @@ function footer() {
         <div>
           <h2>Explore</h2>
           <ul>
-            <li><a href="/role-quiz/">Role Quiz</a></li>
+            <li><a href="/assessment/">Assessment</a></li>
             <li><a href="/ai-x-talent-accelerator/">AI × Talent Accelerator</a></li>
             <li><a href="/projects/">Projects</a></li>
             <li><a href="/case-studies/">Case studies</a></li>
@@ -298,9 +298,19 @@ export function layout({
   scripts = [],
   structuredData = [],
   noindex = false,
+  canonicalUrl = null,
+  publishedTime = null,
+  modifiedTime = null,
 }) {
-  const canonical = `${site.url}${path === '/' ? '/' : `${path.replace(/\/$/, '')}/`}`;
-  const socialImage = image.startsWith('http') ? image : `${site.url}${image}`;
+  const canonical = canonicalUrl || encodeURI(`${site.url}${path === '/' ? '/' : `${path.replace(/\/$/, '')}/`}`);
+  const socialImage = image.startsWith('http') ? image : `${site.url}${encodeURI(image)}`;
+  const articleMeta = [
+    publishedTime && `<meta property="article:published_time" content="${publishedTime}">`,
+    modifiedTime && `<meta property="article:modified_time" content="${modifiedTime}">`,
+  ]
+    .filter(Boolean)
+    .map((tag) => `  ${tag}\n`)
+    .join('');
   const jsonLd = structuredData
     .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`)
     .join('\n');
@@ -324,7 +334,7 @@ export function layout({
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${socialImage}">
-  <meta name="twitter:card" content="summary_large_image">
+${articleMeta}  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${socialImage}">

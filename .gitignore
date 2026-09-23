@@ -1,0 +1,19 @@
+# Nested clones — never commit these to the main Leadapreneur repo
+LP-future-proofing-assessment/
+
+# Tooling caches
+.cache/
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+*.swp

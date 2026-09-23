@@ -30,13 +30,13 @@ export function homePage() {
           <p class="hero-subhead reveal">Build the people who will build what’s next.</p>
           <p class="hero-lede reveal">Leadapreneur turns managers into AI-powered innovators who build real solutions and create measurable business impact.</p>
           <div class="button-row reveal">
-            ${link('/contact/', 'Future-proof your people', 'button button--teal solution-trigger')}
-            ${link('/role-quiz/', 'Discover more about me', 'button button--ghost')}
+            ${link('/contact/', 'Future Proofing Solutions', 'button button--teal solution-trigger')}
+            ${link('/assessment/', 'Take the Quiz', 'button button--ghost')}
           </div>
         </div>
       </div>
       <ol class="hero-chips shell reveal" aria-label="How the journey works">
-        <li class="hero-chip"><span>01</span><b>Discover</b><small>See the opening.</small></li>
+        <li class="hero-chip"><span>01</span><b>Explore</b><small>See the opening.</small></li>
         <li class="hero-chip"><span>02</span><b>Build</b><small>Make it real.</small></li>
         <li class="hero-chip"><span>03</span><b>Lead</b><small>Move the system.</small></li>
       </ol>
@@ -54,7 +54,7 @@ export function homePage() {
         <div class="role-intro">
           ${sectionHeading('Who could you become?', '<span id="roles-title">There’s more to you than your job title.</span>', 'What could those strengths mean for your future?')}
           <div class="role-intro__action">
-            ${link('/role-quiz/', 'Show me', 'button button--outline')}
+            ${link('/assessment/', 'Show me', 'button button--outline')}
             <p><span aria-hidden="true">✓</span> A few questions. No right or wrong answers.</p>
           </div>
         </div>
@@ -206,7 +206,7 @@ export function homePage() {
           <h3 id="next-steps-title" class="next-steps__title">Three ways in.</h3>
           <ol class="next-steps__grid">
             ${[
-              ['For you', 'Find your role.', 'Three honest questions. One clear archetype. No personal details.', '/role-quiz/', 'Take the role quiz'],
+              ['For you', 'Find your role.', 'Three honest questions. One clear archetype. No personal details.', '/assessment/', 'Take the assessment'],
               ['For your organisation', 'Measure future readiness.', 'See where capability is strong and where the organisation needs to move next.', '/future-proof-assessment/', 'Explore the assessment'],
               ['Next season', 'Join us in the room.', 'The next public event is being prepared. Explore the latest season while it takes shape.', '/events/', 'See events and past seasons'],
             ]
