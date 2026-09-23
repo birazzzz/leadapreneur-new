@@ -24,7 +24,7 @@ export function roleCards({ limit = roles.length, interactive = true, withArt = 
           <div class="role-card__more" id="role-more-${role.id}" hidden>
             <p><b>You may be this role if…</b></p>
             <p>${role.description}</p>
-            <a href="/role-quiz/">Discover your role ${arrow}</a>
+            <a href="/assessment/">Discover your role ${arrow}</a>
           </div>` : ''}
         </div>
       </article>`,

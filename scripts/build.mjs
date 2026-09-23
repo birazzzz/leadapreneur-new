@@ -3,7 +3,6 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { site } from '../data/content.mjs';
-import { assetVersion } from '../lib/asset-version.mjs';
 import { blogs, events } from '../lib/cms.mjs';
 import { aboutPage } from '../src/pages/about.mjs';
 import { acceleratorPage } from '../src/pages/accelerator.mjs';
@@ -14,7 +13,6 @@ import { eventDetailPage, eventSchema, eventsPage } from '../src/pages/events.mj
 import { homePage } from '../src/pages/home.mjs';
 import { articlePage, articleSchema, insightsPage } from '../src/pages/insights.mjs';
 import { projectsPage } from '../src/pages/projects.mjs';
-import { roleQuizPage } from '../src/pages/role-quiz.mjs';
 import { breadcrumbSchema, layout, organizationSchema } from '../src/templates.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -45,15 +43,6 @@ const pages = [
         description: site.description,
       },
     ],
-  },
-  {
-    path: '/role-quiz/',
-    title: 'AI Role Quiz | Find Your Leadapreneur Role',
-    description: 'Discover whether you are an AI Explorer, AI Builder or AI Leader in three private questions.',
-    body: roleQuizPage(),
-    pageClass: 'role-quiz-page',
-    scripts: [`/assets/quiz.js?v=${assetVersion.quiz}`],
-    structuredData: [crumbs('Role Quiz', '/role-quiz/')],
   },
   {
     path: '/ai-x-talent-accelerator/',
@@ -188,6 +177,7 @@ cpSync(join(root, 'data', 'insights.mjs'), join(dist, 'data', 'insights.mjs'));
 for (const page of pages) write(outputPath(page.path), layout(page));
 
 const redirects = [
+  ['/role-quiz/', '/assessment/'],
   ['/blog/', '/insights/'],
   ['/greatness-games-kl-season-1/', '/events/greatness-games-kl-season-1/'],
   [

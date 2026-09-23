@@ -93,7 +93,7 @@ function header() {
           <span class="sr-only">Open menu</span><i></i><i></i>
         </button>
         <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation" data-nav>
-          <a class="quiz-nav" href="/role-quiz/"><span aria-hidden="true">✦</span> Find your role</a>
+          <a class="quiz-nav" href="/assessment/"><span aria-hidden="true">✦</span> Find your role</a>
           <details class="nav-group">
             <summary>What we do ${navChevron}</summary>
             <div class="nav-panel">
@@ -210,7 +210,7 @@ function footer() {
         <div>
           <h2>Explore</h2>
           <ul>
-            <li><a href="/role-quiz/">Role Quiz</a></li>
+            <li><a href="/assessment/">Assessment</a></li>
             <li><a href="/ai-x-talent-accelerator/">AI × Talent Accelerator</a></li>
             <li><a href="/projects/">Projects</a></li>
             <li><a href="/case-studies/">Case studies</a></li>

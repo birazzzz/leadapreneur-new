@@ -1,6 +1,6 @@
 # Leadapreneur website redesign
 
-A dependency-light, production-oriented static site generated with Node.js, with blogs, events and authors edited in a Git-based CMS (Keystatic). The build produces clean multi-page HTML, centralized content, a private browser-only role quiz, structured data, sitemap, robots rules and deployment redirects.
+A dependency-light, production-oriented static site generated with Node.js, with blogs, events and authors edited in a Git-based CMS (Keystatic). The build produces clean multi-page HTML, centralized content, structured data, sitemap, robots rules and deployment redirects.
 
 ## Commands
 
@@ -18,7 +18,7 @@ The local preview runs at `http://127.0.0.1:4173`.
 ## Route map
 
 - `/`
-- `/role-quiz/`
+- `/assessment/`
 - `/ai-x-talent-accelerator/`
 - `/events/`
 - `/events/[slug]/` for every event in `content/events/`
@@ -31,7 +31,7 @@ The local preview runs at `http://127.0.0.1:4173`.
 - `/assessment/` — the built Future-Proofing Assessment app, vendored from its own repository with `npm run sync:assessment`
 - `/contact/`
 
-Legacy `/blog` and `/greatness-games-kl-season-1` routes redirect to their new destinations. Legacy `.html` page paths also receive static redirect files.
+Legacy `/role-quiz`, `/blog` and `/greatness-games-kl-season-1` routes redirect to their new destinations. Legacy `.html` page paths also receive static redirect files.
 
 ## Architecture
 
@@ -42,10 +42,8 @@ Legacy `/blog` and `/greatness-games-kl-season-1` routes redirect to their new d
 - `src/pages/`: server-rendered page templates.
 - `src/components.mjs`: reusable cards, tickets, logo strip and CTA compositions.
 - `src/templates.mjs`: global layout, navigation, footer, metadata and structured-data helpers.
-- `lib/quiz-engine.mjs`: deterministic quiz validation, scoring and tie breaking.
 - `lib/events.mjs`, `lib/time.mjs`: timezone-safe event status and sorting.
 - `src/site.js`: narrow progressive enhancement for navigation, cards, carousels, filtering and motion.
-- `src/quiz.js`: private client-side quiz state and result sharing.
 - `scripts/build.mjs`: production build, sitemap, robots and redirects.
 
 ## Assessment result emails
