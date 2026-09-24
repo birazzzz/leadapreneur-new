@@ -1,4 +1,4 @@
-import { companies, educationalVideos, inspiringPodcasts, roles, site } from '../data/content.mjs';
+import { companies, educationalVideos, inspiringPodcasts, roleAtlas, roleFamilies, roleTiers, roles, site } from '../data/content.mjs';
 import { blogs as insights } from '../lib/cms.mjs';
 import { getEventState, getEventStatusLabel } from '../lib/events.mjs';
 import { arrow, escapeHtml, link } from './templates.mjs';
@@ -30,6 +30,54 @@ export function roleCards({ limit = roles.length, interactive = true, withArt = 
       </article>`,
     )
     .join('');
+}
+
+// Nine roles in one compact matrix: a spotlight for the chosen role beside a
+// 3x3 picker (Explore/Build/Lead across, tier down). Every spotlight is in
+// the markup, so the page still reads in full without script.
+export function roleAtlasBlock() {
+  const first = roleAtlas[0];
+  const spots = roleAtlas
+    .map((role, index) => {
+      const family = roleFamilies[role.family];
+      return `<article class="role-spot${index === 0 ? ' is-active' : ''}" id="role-spot-${role.id}" style="--role:${family.accent}" data-role-spot="${role.id}"${index === 0 ? '' : ' hidden'}>
+        <div class="role-spot__figure" aria-hidden="true"><img src="${role.image}" alt="" width="450" height="760" loading="lazy" decoding="async"></div>
+        <div class="role-spot__head">
+          <p class="role-spot__meta"><span>${family.label}</span>${roleTiers[role.tier].long}</p>
+          <h3>AI ${role.name}</h3>
+          <p class="role-spot__tagline">${role.tagline}</p>
+        </div>
+        <div class="role-spot__body">
+          <p>${role.description}</p>
+          <div class="trait-list" aria-label="Signature traits">${role.traits.map((trait) => `<span>${trait}</span>`).join('')}</div>
+          <a class="text-link" href="/assessment/">Is this you? Find out ${arrow}</a>
+        </div>
+      </article>`;
+    })
+    .join('');
+
+  const header = `<span></span>${Object.values(roleFamilies)
+    .map((family) => `<b class="role-picker__family" style="--role:${family.accent}">${family.label}</b>`)
+    .join('')}`;
+  const rows = roleTiers
+    .map((tier, tierIndex) => {
+      const tiles = roleAtlas
+        .filter((role) => role.tier === tierIndex)
+        .map(
+          (role) => `<button type="button" class="role-tile${role.id === first.id ? ' is-active' : ''}" style="--role:${roleFamilies[role.family].accent}" aria-pressed="${role.id === first.id}" aria-controls="role-spot-${role.id}" data-role-tile="${role.id}">
+            <img src="${role.image}" alt="" width="450" height="760" loading="lazy" decoding="async">
+            <span class="role-tile__name">${role.name}</span>
+          </button>`,
+        )
+        .join('');
+      return `<span class="role-picker__tier">${tier.short}</span>${tiles}`;
+    })
+    .join('');
+
+  return `<div class="role-atlas reveal" data-role-atlas>
+    <div class="role-atlas__stage" aria-live="polite">${spots}</div>
+    <div class="role-picker" role="group" aria-label="Choose one of nine roles">${header}${rows}</div>
+  </div>`;
 }
 
 export function logoStrip() {

@@ -945,6 +945,271 @@ em {
   display: none;
 }
 
+/* Role atlas: one spotlight beside a 3x3 picker. The picker is the map
+   (Explore/Build/Lead across, tier down); the spotlight is the story. */
+.role-atlas {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(1rem, 2.4vw, 2rem);
+}
+
+.role-atlas__stage {
+  display: grid;
+  scroll-margin-top: 100px;
+}
+
+.role-spot {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-content: start;
+  min-height: 100%;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 78% 36%, color-mix(in srgb, var(--role) 22%, transparent), transparent 58%),
+    linear-gradient(155deg, color-mix(in srgb, var(--role) 7%, var(--white)) 0%, var(--white) 70%);
+  box-shadow: var(--shadow-sm);
+}
+
+.role-spot[hidden] {
+  display: none;
+}
+
+/* A faint ring behind the figure, in the family colour. */
+.role-spot::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: clamp(-60px, -3vw, -20px);
+  top: 12%;
+  width: min(62%, 380px);
+  aspect-ratio: 1;
+  border: 1.5px solid color-mix(in srgb, var(--role) 32%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 28px color-mix(in srgb, var(--role) 5%, transparent);
+}
+
+.role-spot__figure {
+  position: absolute;
+  z-index: -1;
+  right: clamp(0.5rem, 3vw, 2.5rem);
+  bottom: 0;
+  height: 94%;
+  width: 44%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.role-spot__figure img {
+  width: auto;
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 0;
+  filter: drop-shadow(0 26px 30px rgba(16, 37, 33, 0.18));
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+}
+
+.role-spot__head,
+.role-spot__body {
+  max-width: 54%;
+}
+
+.role-spot__head {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.role-spot__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.role-spot__meta span {
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  color: var(--white);
+  background: var(--role);
+  letter-spacing: 0.12em;
+}
+
+.role-spot h3 {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.role-spot__tagline {
+  color: var(--role);
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.role-spot__body {
+  align-self: end;
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.role-spot__body .trait-list span {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.role-spot__body .text-link {
+  color: var(--role);
+}
+
+.role-spot.is-active .role-spot__figure {
+  animation: role-figure-in 620ms var(--ease) both;
+}
+
+.role-spot.is-active .role-spot__head,
+.role-spot.is-active .role-spot__body {
+  animation: role-copy-in 480ms var(--ease) both;
+}
+
+.role-spot.is-active .role-spot__body {
+  animation-delay: 60ms;
+}
+
+@keyframes role-figure-in {
+  from { opacity: 0; transform: translateX(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes role-copy-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.role-picker {
+  display: grid;
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto repeat(3, minmax(0, 1fr));
+  gap: clamp(0.45rem, 1vw, 0.75rem);
+}
+
+.role-picker__family {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding-bottom: 0.2rem;
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.role-picker__family::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--role);
+}
+
+.role-picker__tier {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.role-tile {
+  position: relative;
+  overflow: hidden;
+  min-height: 132px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--role) 16%, transparent), transparent 70%),
+    color-mix(in srgb, var(--role) 5%, var(--white));
+  cursor: pointer;
+  transition: transform 260ms var(--ease), box-shadow 260ms ease, border-color 200ms ease;
+}
+
+.role-tile img {
+  position: absolute;
+  left: 50%;
+  top: 8%;
+  width: 92%;
+  height: auto;
+  transform: translateX(-50%);
+  transform-origin: 50% 0;
+  transition: transform 420ms var(--ease), filter 260ms ease;
+  filter: saturate(0.82);
+}
+
+.role-tile__name {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1.6rem 0.4rem 0.55rem;
+  background: linear-gradient(to top, rgba(255, 253, 248, 0.98) 45%, rgba(255, 253, 248, 0));
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-align: center;
+  transition: color 200ms ease;
+}
+
+.role-tile:hover,
+.role-tile:focus-visible {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--role) 45%, transparent);
+  box-shadow: var(--shadow-sm);
+}
+
+.role-tile:hover img,
+.role-tile:focus-visible img {
+  transform: translateX(-50%) scale(1.06);
+  filter: none;
+}
+
+.role-tile:focus-visible {
+  outline: 2px solid var(--role);
+  outline-offset: 2px;
+}
+
+.role-tile.is-active {
+  border-color: var(--role);
+  box-shadow: 0 0 0 2px var(--role), var(--shadow-sm);
+}
+
+.role-tile.is-active img {
+  filter: none;
+}
+
+.role-tile.is-active .role-tile__name {
+  color: var(--role);
+}
+
 /* Trust */
 .trust-section {
   padding-block: 2.3rem 3rem;
@@ -3708,6 +3973,9 @@ body.modal-open {
   .event-recap aside { position: static; }
   .team-grid { grid-template-columns: repeat(3, 1fr); }
   .assessment-steps ol { grid-template-columns: 1fr 1fr; }
+  .role-atlas { grid-template-columns: 1fr; }
+  .role-spot { min-height: 440px; }
+  .role-tile { min-height: 150px; }
 }
 
 @media (max-width: 700px) {
@@ -3737,6 +4005,22 @@ body.modal-open {
   .role-deck .role-card { scroll-snap-align: center; transform: none; }
   .role-deck .role-card:hover { transform: none; }
   .role-guide-grid { grid-template-columns: 1fr; }
+  /* Phone spotlight: name and tagline beside the figure's upper body, the
+     story full width underneath where it has room to breathe. */
+  .role-spot { min-height: 0; padding: 1.25rem; border-radius: 20px; }
+  .role-spot::before { right: -40px; top: 10px; width: 230px; }
+  .role-spot__figure { right: 0; top: 0; bottom: auto; width: 46%; height: 300px; }
+  .role-spot__figure img { -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 80%); mask-image: linear-gradient(to bottom, #000 45%, transparent 80%); }
+  .role-spot__head { max-width: 56%; min-height: 220px; align-content: start; }
+  .role-spot__body { max-width: none; margin-top: 0.5rem; font-size: 0.9rem; }
+  .role-spot h3 { font-size: clamp(1.9rem, 9vw, 2.5rem); }
+  .role-spot__tagline { font-size: 0.98rem; }
+  .role-spot__meta { font-size: 0.64rem; }
+  .role-picker { gap: 0.45rem; }
+  .role-picker__family { font-size: 0.64rem; letter-spacing: 0.1em; }
+  .role-picker__tier { font-size: 0.58rem; }
+  .role-tile { min-height: 0; aspect-ratio: 1 / 1.05; border-radius: 14px; }
+  .role-tile__name { padding: 1.2rem 0.2rem 0.45rem; font-size: 0.72rem; }
   .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; }
   .carousel-controls button { width: 48px; height: 48px; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); cursor: pointer; }
   .carousel-controls p { min-width: 55px; text-align: center; font-size: 0.8rem; }

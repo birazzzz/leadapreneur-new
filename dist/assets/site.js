@@ -149,6 +149,57 @@ if (carousel && controls) {
   );
 }
 
+const roleAtlas = $('[data-role-atlas]');
+if (roleAtlas) {
+  const tiles = $$('[data-role-tile]', roleAtlas);
+  const spots = $$('[data-role-spot]', roleAtlas);
+  const stage = $('.role-atlas__stage', roleAtlas);
+  let current = tiles.find((tile) => tile.classList.contains('is-active'))?.dataset.roleTile;
+  const select = (id) => {
+    if (id === current) return;
+    current = id;
+    tiles.forEach((tile) => {
+      const on = tile.dataset.roleTile === id;
+      tile.classList.toggle('is-active', on);
+      tile.setAttribute('aria-pressed', String(on));
+    });
+    spots.forEach((spot) => {
+      const on = spot.dataset.roleSpot === id;
+      spot.hidden = !on;
+      spot.classList.toggle('is-active', on);
+    });
+  };
+  tiles.forEach((tile, index) => {
+    tile.addEventListener('click', () => {
+      select(tile.dataset.roleTile);
+      // On a phone the spotlight sits above the picker; bring it back into
+      // view if the tap happened with it scrolled away.
+      if (stage && stage.getBoundingClientRect().top < 80) {
+        stage.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      }
+    });
+    tile.addEventListener('keydown', (event) => {
+      const step = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 3, ArrowUp: -3 }[event.key];
+      if (!step) return;
+      const next = tiles[index + step];
+      if (!next) return;
+      event.preventDefault();
+      next.focus();
+      select(next.dataset.roleTile);
+    });
+  });
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let intent;
+    tiles.forEach((tile) => {
+      tile.addEventListener('pointerenter', () => {
+        clearTimeout(intent);
+        intent = setTimeout(() => select(tile.dataset.roleTile), 90);
+      });
+      tile.addEventListener('pointerleave', () => clearTimeout(intent));
+    });
+  }
+}
+
 if (!reducedMotion && matchMedia('(hover: hover) and (pointer: fine)').matches) {
   const composition = $('[data-hero-depth]');
   if (composition) {

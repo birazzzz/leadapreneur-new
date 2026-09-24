@@ -10,7 +10,7 @@ import {
   finalCta,
   logoStrip,
   projectCard,
-  roleCards,
+  roleAtlasBlock,
 } from '../components.mjs';
 import { escapeHtml, link, sectionHeading } from '../templates.mjs';
 
@@ -58,20 +58,7 @@ export function homePage() {
             <p><span aria-hidden="true">✓</span> A few questions. No right or wrong answers.</p>
           </div>
         </div>
-        <figure class="role-stage" aria-hidden="true">
-          <picture>
-            <source srcset="/images/roles-banner.webp" type="image/webp">
-            <img src="/images/roles-banner.jpg" alt="" width="1536" height="1024" loading="lazy" decoding="async">
-          </picture>
-        </figure>
-        <div class="role-deck" data-role-carousel>
-          ${roleCards({ withArt: false })}
-        </div>
-        <div class="carousel-controls" data-carousel-controls>
-          <button type="button" data-carousel-prev aria-label="Previous role">←</button>
-          <p aria-live="polite"><span data-carousel-position>1</span> / 3</p>
-          <button type="button" data-carousel-next aria-label="Next role">→</button>
-        </div>
+        ${roleAtlasBlock()}
       </div>
     </section>
 

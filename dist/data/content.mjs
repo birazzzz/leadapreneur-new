@@ -76,6 +76,115 @@ export const roles = [
   },
 ];
 
+// The nine roles from the Future-Proofing Assessment, laid out as its own
+// matrix: Explore/Build/Lead across, tier of responsibility down. Tier is
+// scope, not seniority. Each role carries one fixed avatar (five female,
+// four male), matching the assessment's result grid.
+export const roleFamilies = {
+  explore: { label: 'Explore', accent: '#2446c7' },
+  build: { label: 'Build', accent: '#1d7048' },
+  lead: { label: 'Lead', accent: '#c62f36' },
+};
+
+export const roleTiers = [
+  { short: 'Own it', long: 'In your own work' },
+  { short: 'Guide it', long: 'Alongside another owner' },
+  { short: 'Scale it', long: 'Across many projects' },
+];
+
+export const roleAtlas = [
+  {
+    id: 'explorer',
+    name: 'Explorer',
+    family: 'explore',
+    tier: 0,
+    tagline: 'You find what’s genuinely worth pursuing.',
+    description:
+      'You look beneath the first version of a problem, question the assumptions and come back with a possibility worth backing.',
+    traits: ['Curious', 'Questioning', 'Resourceful'],
+  },
+  {
+    id: 'builder',
+    name: 'Builder',
+    family: 'build',
+    tier: 0,
+    tagline: 'You turn a promising direction into something real.',
+    description:
+      'You make a chosen idea work: concrete, testable and a little more useful with every version you ship.',
+    traits: ['Pragmatic', 'Hands-on', 'Persistent'],
+  },
+  {
+    id: 'leader',
+    name: 'Leader',
+    family: 'lead',
+    tier: 0,
+    tagline: 'You carry good ideas into everyday use.',
+    description:
+      'You bring what has been built into real use, so it creates practical value for the people it was meant to serve.',
+    traits: ['Decisive', 'Grounded', 'Persuasive'],
+  },
+  {
+    id: 'navigator',
+    name: 'Navigator',
+    family: 'explore',
+    tier: 1,
+    tagline: 'You help others see a clearer way in.',
+    description:
+      'You help another owner sharpen what is worth pursuing, without quietly taking their ownership away.',
+    traits: ['Perceptive', 'Supportive', 'Clear-sighted'],
+  },
+  {
+    id: 'pathfinder',
+    name: 'Pathfinder',
+    family: 'build',
+    tier: 1,
+    tagline: 'You find the route when a problem feels stuck.',
+    description:
+      'You help others turn uncertainty into a practical route they can build, test and learn from themselves.',
+    traits: ['Inventive', 'Patient', 'Practical'],
+  },
+  {
+    id: 'tactician',
+    name: 'Tactician',
+    family: 'lead',
+    tier: 1,
+    tagline: 'You turn good intentions into follow-through.',
+    description:
+      'You help another owner move from plan to adoption, follow-through and results people can actually see.',
+    traits: ['Focused', 'Organised', 'Steady'],
+  },
+  {
+    id: 'captain',
+    name: 'Captain',
+    family: 'explore',
+    tier: 2,
+    tagline: 'You set one course when many efforts need it.',
+    description:
+      'You create direction and alignment across projects, so separate pieces of work move toward a shared purpose.',
+    traits: ['Visionary', 'Aligning', 'Composed'],
+  },
+  {
+    id: 'pioneer',
+    name: 'Pioneer',
+    family: 'build',
+    tier: 2,
+    tagline: 'You build what lets everything else connect.',
+    description:
+      'You create the shared capabilities, connections and enabling systems that let separate efforts work as one.',
+    traits: ['Systemic', 'Inventive', 'Bold'],
+  },
+  {
+    id: 'strategos',
+    name: 'Strategos',
+    family: 'lead',
+    tier: 2,
+    tagline: 'You turn coordinated effort into lasting impact.',
+    description:
+      'You join adoption, performance and strategy so change scales, and you refresh the direction as conditions shift.',
+    traits: ['Strategic', 'Adaptive', 'Far-sighted'],
+  },
+].map((role, index) => ({ ...role, number: String(index + 1).padStart(2, '0'), image: `/images/roles/${role.id}.webp` }));
+
 export const quizQuestions = [
   {
     id: 'q1',
