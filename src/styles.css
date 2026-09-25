@@ -1047,7 +1047,10 @@ em {
   letter-spacing: 0.12em;
 }
 
+/* The figure is a transparent cut-out, so the name may run over it rather
+   than break onto a second line. */
 .role-spot h3 {
+  white-space: nowrap;
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   letter-spacing: -0.04em;
   line-height: 1;

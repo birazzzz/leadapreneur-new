@@ -59,8 +59,11 @@ export function roleAtlasBlock() {
   const header = `<span></span>${Object.values(roleFamilies)
     .map((family) => `<b class="role-picker__family" style="--role:${family.accent}">${family.label}</b>`)
     .join('')}`;
-  const rows = roleTiers
-    .map((tier, tierIndex) => {
+  // Widest scope on top, so the picker reads as a climb from Explorer up.
+  const rows = [...roleTiers.keys()]
+    .reverse()
+    .map((tierIndex) => {
+      const tier = roleTiers[tierIndex];
       const tiles = roleAtlas
         .filter((role) => role.tier === tierIndex)
         .map(
