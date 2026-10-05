@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Leadapreneur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Temporary stand-in for COSMOS while its servers are being migrated.
+     The form never sends or stores anything: submitting only shows a
+     maintenance notice. -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: Poppins, sans-serif;
+    color: rgba(0, 0, 0, 0.87);
+    background: #05060f url("/assets/battlefield_bg-still.webp") center / cover no-repeat fixed;
+  }
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url("/assets/battlefield_bg.webp") center / cover no-repeat;
+  }
+  .page {
+    min-height: 100%;
+    display: grid;
+    place-items: center;
+    padding: 32px 16px;
+  }
+  .card {
+    width: min(70vw, 1586px);
+    min-height: 480px;
+    display: grid;
+    grid-template-columns: 1fr minmax(360px, 0.72fr);
+    overflow: hidden;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+  }
+  .cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 32px 56px 40px;
+    border-right: 1px solid #e6e6e6;
+    text-align: center;
+  }
+  .cover .logo { width: 120px; height: 120px; object-fit: contain; }
+  .cover .art { width: 100%; max-width: 870px; height: auto; }
+  .cover p { margin: 8px 0 0; font-size: 16px; line-height: 1.5; color: #222; }
+  .login {
+    display: flex;
+    flex-direction: column;
+    padding: 45px 48px 40px;
+  }
+  .login h2 { margin: 0; font-size: 24px; font-weight: 400; line-height: 1.2; }
+  .login h4 { margin: 10px 0 0; font-size: 14px; font-weight: 400; }
+  form { display: flex; flex-direction: column; flex: 1; margin-top: 128px; }
+  label { display: block; margin-bottom: 6px; font-size: 12px; color: rgba(0,0,0,.6); }
+  .field { position: relative; margin-bottom: 18px; }
+  input[type=email], input[type=password], input[type=text] {
+    width: 100%;
+    height: 40px;
+    padding: 0 44px 0 12px;
+    border: 1px solid rgba(0,0,0,.23);
+    border-radius: 4px;
+    font: 14px Poppins, sans-serif;
+    color: rgba(0,0,0,.87);
+    background: #fff;
+    outline: none;
+  }
+  input:focus { border-color: #000; box-shadow: 0 0 0 1px #000; }
+  .eye {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: rgba(0,0,0,.54);
+    cursor: pointer;
+  }
+  .eye svg { width: 22px; height: 22px; fill: currentColor; }
+  .row { display: flex; align-items: center; justify-content: space-between; margin-top: -4px; font-size: 12px; }
+  .row label { display: flex; align-items: center; gap: 8px; margin: 0; color: rgba(0,0,0,.87); cursor: pointer; }
+  .row input { width: 16px; height: 16px; margin: 0; accent-color: #000; }
+  .row a { color: #000; text-decoration: none; }
+  .row a:hover { text-decoration: underline; }
+  .spacer { flex: 1; min-height: 48px; }
+  .submit {
+    width: 100%;
+    min-height: 60px;
+    padding: 16px;
+    border: 0;
+    border-radius: 4px;
+    background: #000;
+    color: #fff;
+    font: 16px Poppins, sans-serif;
+    cursor: pointer;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    transition: background 150ms ease;
+  }
+  .submit:hover { background: #222; }
+  .submit[disabled] { background: #444; cursor: progress; }
+  .notice {
+    margin: 14px 0 0;
+    padding: 12px 14px;
+    border-radius: 4px;
+    background: #fff4e5;
+    color: #663c00;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .notice[hidden] { display: none; }
+  .eula { margin: 14px 0 0; font-size: 12px; }
+  .eula b { font-weight: 600; text-decoration: underline; }
+  @media (max-width: 960px) {
+    .card { width: min(100%, 520px); grid-template-columns: 1fr; }
+    .cover { border-right: 0; border-bottom: 1px solid #e6e6e6; padding: 24px 24px 20px; }
+    .cover .art, .cover p { display: none; }
+    .cover .logo { width: 88px; height: 88px; }
+    .login { padding: 28px 24px 28px; }
+    form { margin-top: 36px; }
+    .spacer { min-height: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<main class="page">
+  <div class="card">
+    <section class="cover">
+      <img class="logo" src="/assets/logo-240.png" alt="Leadapreneur" width="120" height="120">
+      <img class="art" src="/assets/login_cover.webp" alt="" width="750" height="313">
+      <p>Believe in yourself.<br>Be brave. Be bold. Be brilliant.<br>Build your better world.</p>
+    </section>
+    <section class="login">
+      <h2>Welcome back!</h2>
+      <h4>Login to continue</h4>
+      <form id="login" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" autocomplete="off" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" autocomplete="off" required>
+          <button class="eye" type="button" aria-label="Show password" id="toggle">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </button>
+        </div>
+        <div class="row">
+          <label><input type="checkbox"> Remember me</label>
+          <a href="#" id="forgot">Forgot Password?</a>
+        </div>
+        <div class="spacer"></div>
+        <button class="submit" type="submit">Login To COSMOS</button>
+        <p class="notice" id="notice" role="status" hidden>COSMOS is undergoing scheduled maintenance and sign-in is temporarily unavailable. Please try again a little later.</p>
+        <p class="eula">By using Cosmos you agree to the <b>EULA Agreement</b></p>
+      </form>
+    </section>
+  </div>
+</main>
+<script>
+  // Nothing typed here leaves the page: there is no request, no storage.
+  const form = document.getElementById('login');
+  const notice = document.getElementById('notice');
+  const submit = form.querySelector('.submit');
+  const show = () => {
+    submit.disabled = true;
+    setTimeout(() => {
+      submit.disabled = false;
+      notice.hidden = false;
+      document.getElementById('password').value = '';
+    }, 900);
+  };
+  form.addEventListener('submit', (event) => { event.preventDefault(); show(); });
+  document.getElementById('forgot').addEventListener('click', (event) => { event.preventDefault(); notice.hidden = false; });
+  document.getElementById('toggle').addEventListener('click', () => {
+    const field = document.getElementById('password');
+    field.type = field.type === 'password' ? 'text' : 'password';
+  });
+</script>
+</body>
+</html>
