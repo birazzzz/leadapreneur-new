@@ -19,6 +19,7 @@ export function homePage() {
     <section class="hero home-hero" aria-labelledby="home-title" data-hero-depth>
       <div class="hero-backdrop" aria-hidden="true">
         <picture>
+          <source media="(max-width: 560px)" srcset="/images/hero-banner-portrait.webp" type="image/webp" width="770" height="1126">
           <source srcset="/images/hero-banner.webp" type="image/webp">
           <img src="/images/hero-banner.jpg" alt="" width="2000" height="1126" fetchpriority="high">
         </picture>

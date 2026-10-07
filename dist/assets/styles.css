@@ -26,6 +26,8 @@
   --ink: #102521;
   --muted: #5e6965;
   --teal: #009fb8;
+  /* --teal fails text contrast on the light backgrounds; small text uses this. */
+  --teal-text: #007387;
   --teal-deep: #006f80;
   --teal-dark: #004852;
   /* The site's dark ground: footer, games panel, event hero. */
@@ -144,7 +146,7 @@ h3 {
 }
 
 em {
-  color: var(--teal);
+  color: var(--teal-text);
   font-style: normal;
 }
 
@@ -201,7 +203,7 @@ em {
 }
 
 .kicker {
-  color: var(--teal);
+  color: var(--teal-text);
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.17em;
@@ -267,7 +269,7 @@ em {
 
 .button--teal {
   color: var(--white);
-  background: var(--teal);
+  background: #007d91;
   box-shadow: 0 14px 30px -20px var(--teal-dark);
 }
 
@@ -349,7 +351,7 @@ em {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--teal);
+  color: var(--teal-text);
   font-weight: 750;
   text-decoration: none;
 }
@@ -1444,7 +1446,7 @@ em {
 
 .journey-step > p:first-of-type,
 .project-card__programme {
-  color: var(--teal);
+  color: var(--teal-text);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.13em;
@@ -1578,7 +1580,7 @@ em {
 }
 
 .project-card__industry {
-  color: var(--teal);
+  color: var(--teal-text);
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.11em;
@@ -2117,7 +2119,7 @@ em {
 .event-ticket__meta {
   display: flex;
   gap: 1rem;
-  color: var(--teal);
+  color: var(--teal-text);
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -2194,7 +2196,7 @@ em {
 
 .stories-proof h2 {
   max-width: 15ch;
-  color: var(--teal);
+  color: var(--teal-text);
   font-size: clamp(1.9rem, 3.4vw, 3.2rem);
 }
 
@@ -2367,7 +2369,7 @@ em {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  color: var(--teal);
+  color: var(--teal-text);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -2468,7 +2470,7 @@ em {
 
 /* Footer */
 .site-footer {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.78);
   background: var(--teal-night);
 }
 
@@ -2552,7 +2554,7 @@ em {
 
 .footer-registration {
   margin: -0.55rem 0 1rem;
-  color: rgba(255, 255, 255, 0.58);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.75rem;
   letter-spacing: 0.04em;
 }
@@ -4168,7 +4170,8 @@ body.modal-open {
   }
 
   .hero-backdrop img {
-    object-position: 69% 50%;
+    /* A portrait crop of the scene (hero-banner-portrait.webp), centred on the summit. */
+    object-position: 50% 50%;
     transform: none;
   }
 }
@@ -4221,4 +4224,28 @@ body.modal-open {
   .project-card,
   .role-card,
   .event-ticket { border: 1px solid CanvasText; }
+}
+
+/* 404 */
+.not-found {
+  min-height: 70vh;
+  display: grid;
+  align-items: center;
+  padding-top: 140px;
+  background: var(--paper);
+}
+
+.not-found .shell {
+  display: grid;
+  gap: 1.2rem;
+  max-width: 760px;
+}
+
+.not-found h1 {
+  font-size: var(--h2);
+}
+
+.not-found .button-row {
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
 }

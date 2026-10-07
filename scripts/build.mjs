@@ -211,6 +211,64 @@ write(
     .join('\n')}\n</urlset>\n`,
 );
 write(join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`);
+
+// Without a 404.html, Cloudflare Pages treats the site as a single-page app
+// and answers every unknown URL with the home page and a 200 status.
+write(
+  join(dist, '404.html'),
+  layout({
+    path: '/404/',
+    title: 'Page not found | Leadapreneur',
+    description: 'This page has moved or no longer exists.',
+    noindex: true,
+    body: `<section class="section not-found" aria-labelledby="not-found-title">
+      <div class="shell">
+        <p class="kicker">404</p>
+        <h1 id="not-found-title">This page has moved or no longer exists.</h1>
+        <p>The site has a new home. Try one of these instead.</p>
+        <div class="button-row">
+          <a class="button button--teal" href="/">Home</a>
+          <a class="button button--outline" href="/ai-x-talent-accelerator/">AI × Talent Accelerator</a>
+          <a class="button button--outline" href="/assessment/">Take the assessment</a>
+          <a class="button button--outline" href="/insights/">Insights</a>
+        </div>
+      </div>
+    </section>`,
+  }),
+);
+
+// llms.txt (llmstxt.org): a plain summary for AI assistants and answer engines.
+const published = indexed.filter((page) => page.path.startsWith('/blog/'));
+write(
+  join(dist, 'llms.txt'),
+  `# Leadapreneur
+
+> ${site.description} Leadapreneur (${site.legalName}, Kuala Lumpur) runs the AI × Talent Accelerator: a six-month programme in which each manager individually proposes, builds and deploys an AI-enabled, KPI-aligned project, with its business value validated by their managers in the COSMOS platform.
+
+Key facts:
+- Founded by Jan Henrik Bartscht (Founder & CEO); 20 years of future-proofing talent: 80,000+ professionals transformed, 250+ organisations, 5,000+ solutions built and USD 120M+ in business impact, across Malaysia, Singapore, Cambodia, the Philippines and beyond.
+- Clients include DBS, CIMB, OCBC, UOB, Citibank, Public Bank, Hong Leong Bank, AXA, Axiata, Toshiba and Top Glove.
+- Method: Stratecution, which proposes with AI × Design Thinking, prototypes with AI × Lean Startup and deploys with AI × Agile Execution.
+- Value is tracked across five kinds: grow revenue, cut costs, improve efficiency, reduce risk, increase satisfaction.
+- Example: across five seasons (2019–2024), DBS deployed 180 projects worth SGD 79 million in innovation value.
+- The Greatness Games turn AI adoption into a sport-style challenge where people step forward to build; COSMOS is the platform that tracks every project and its value.
+- The free Future-Proofing Assessment shows which of nine AI roles fits a person best (Explore, Build or Lead, in their own work, alongside another owner, or across many projects).
+
+## Main pages
+- [Home](${site.url}/): what Leadapreneur does and the nine AI roles
+- [AI × Talent Accelerator](${site.url}/ai-x-talent-accelerator/): the programme, Stratecution, COSMOS and the Greatness Games
+- [Projects](${site.url}/projects/): real participant projects with their measured value
+- [Case studies](${site.url}/case-studies/): client results
+- [Future-Proofing Assessment (individual)](${site.url}/assessment/): find your AI role
+- [Organisation assessment](${site.url}/future-proof-assessment/): how future-ready an organisation is
+- [About](${site.url}/about/): founder and team
+- [Events](${site.url}/events/): Greatness Games and public events
+- [Contact](${site.url}/contact/)
+
+## Insights
+${published.map((page) => `- [${page.title.replace(/ \| Leadapreneur$/, '')}](${encodeURI(site.url + page.path)})`).join('\n')}
+`,
+);
 write(
   join(dist, '_redirects'),
   `${redirects.map(([from, to]) => `${from} ${to} 301`).join('\n')}\n`,

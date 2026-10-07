@@ -72,7 +72,7 @@ export function roleAtlasBlock() {
         .filter((role) => role.tier === tierIndex)
         .map(
           (role) => `<button type="button" class="role-tile${role.id === first.id ? ' is-active' : ''}" style="--role:${roleFamilies[role.family].accent}" aria-pressed="${role.id === first.id}" aria-controls="role-spot-${role.id}" data-role-tile="${role.id}">
-            <img src="${versioned(role.image)}" alt="" width="450" height="760" loading="lazy" decoding="async">
+            <img src="${versioned(role.image.replace('/roles/', '/roles/thumbs/'))}" alt="" width="300" height="336" loading="lazy" decoding="async">
             <span class="role-tile__name">${role.name}</span>
           </button>`,
         )
