@@ -1,0 +1,14 @@
+// Cloudflare Worker that serves the Keystatic editor at cms.leadapreneur.com.
+// Built with OpenNext: `npm run cf:build --workspace admin`.
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "leadapreneur-cms",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": { "enabled": true }
+}

@@ -1,9 +1,9 @@
 # Leadapreneur CMS
 
-Blogs, events and authors are edited in [Keystatic](https://keystatic.com) at `admin.leadapreneur.com`. Every save is a commit to this repository; Vercel rebuilds the static site from those files. There is no database.
+Blogs, events and authors are edited in [Keystatic](https://keystatic.com) at `cms.leadapreneur.com`. Every save is a commit to this repository; Cloudflare Pages rebuilds the static site from those files. There is no database.
 
 ```
-Editor → admin.leadapreneur.com (Keystatic, admin/) → commit to GitHub → Vercel builds dist/ → www.leadapreneur.com
+Editor → cms.leadapreneur.com (Keystatic, admin/) → commit to GitHub → Cloudflare Pages builds dist/ → www.leadapreneur.com
 ```
 
 ## How it fits together
@@ -13,7 +13,7 @@ Editor → admin.leadapreneur.com (Keystatic, admin/) → commit to GitHub → V
 | Content model | `keystatic.config.ts` | One schema, used by both the editor and the site build. |
 | Content | `content/blogs/*.mdoc`, `content/events/*.yaml`, `content/authors/*.yaml` | Blog bodies are Markdoc. File name = slug = URL. |
 | Uploaded images | `public/uploads/{blogs,events,authors}/<slug>/` | Copied into `dist/` by the build. |
-| Editor app | `admin/` | Small Next.js app that only hosts Keystatic. Separate Vercel project. |
+| Editor app | `admin/` | Small Next.js app that only hosts Keystatic. Separate Cloudflare Worker (built with OpenNext). |
 | Build-time reader | `lib/cms.mjs` | Reads `content/` from disk, drops drafts, renders Markdoc to HTML, resolves authors. |
 | Templates | `src/pages/insights.mjs`, `src/pages/events.mjs`, `src/components.mjs` | The existing design, now fed by CMS data. |
 
@@ -29,14 +29,14 @@ Why not embed Keystatic in the site? Keystatic's editor needs Next.js, Astro or 
 
 ## One-time setup
 
-### 1. Admin Vercel project
+### 1. Editor Worker on Cloudflare
 
-1. In Vercel, **Add New → Project** and import this same repository again.
-2. **Root Directory:** `admin`. Framework: Next.js (auto-detected). Leave "Include files outside the root directory" on.
-3. Deploy once. It will fail until step 2 adds the environment variables; that is expected.
-4. **Settings → Domains:** add `admin.leadapreneur.com` (during the draft phase, use the `*.vercel.app` domain Vercel assigns).
+1. Cloudflare → **Workers & Pages → Create → Import a repository** → this repository.
+2. **Root directory:** `admin`. **Build command:** `npx opennextjs-cloudflare build`. **Deploy command:** `npx wrangler deploy`. The Worker name comes from `admin/wrangler.jsonc` (`leadapreneur-cms`).
+3. Add the variables from steps 2 and 5 as **build and runtime** variables (Keystatic reads them while building). Mark the secrets as secrets.
+4. **Settings → Domains & Routes:** add the custom domain `cms.leadapreneur.com`. Cloudflare creates the DNS record.
 
-`admin/vercel.json` skips admin rebuilds when only content changed.
+Test the Worker build locally with `npm run cf:preview --workspace admin` (put test values in `admin/.dev.vars`, which is git-ignored).
 
 ### 2. GitHub App (sign-in for editors)
 
@@ -45,33 +45,27 @@ Keystatic creates the GitHub App for you:
 1. Locally, create `admin/.env.local` with `NEXT_PUBLIC_KEYSTATIC_STORAGE=github`.
 2. `npm install`, then `npm run admin`, and open `http://127.0.0.1:4174/keystatic/setup`.
 3. Follow **Create GitHub App**. Name it e.g. `leadapreneur-cms`, owned by the account or organisation that owns the repository. Keystatic writes `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` and `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` into `admin/.env`. Never commit that file.
-4. On GitHub, open the app's settings and add the production **Callback URL**: `https://admin.leadapreneur.com/api/keystatic/github/oauth/callback` (plus the `*.vercel.app` equivalent while in draft).
+4. On GitHub, open the app's settings and add the production **Callback URL**: `https://cms.leadapreneur.com/api/keystatic/github/oauth/callback` (plus the `*.workers.dev` equivalent while testing).
 5. Install the app on the repository.
-6. Copy the four variables into the admin Vercel project (**Settings → Environment Variables**) and redeploy. If the repository ever moves, also set `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO=owner/name`.
+6. Copy the four variables into the editor Worker (**Settings → Variables and secrets**, and the build variables) and redeploy. If the repository ever moves, also set `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO=owner/name`.
 
 ### 3. DNS
 
-This cannot be done from the repository. At the DNS provider for `leadapreneur.com`, add:
-
-```
-admin   CNAME   cname.vercel-dns.com.
-```
-
-Vercel shows the exact target when the domain is added in step 1.4. `www` and the apex stay on the public-site project.
+Nothing to add by hand: the custom domain in step 1.4 creates the `cms` record in Cloudflare. `www` and the apex stay on the public-site Pages project. (`admin.leadapreneur.com` is reserved for COSMOS.)
 
 ### 4. Nightly rebuild
 
-In the public-site Vercel project: **Settings → Git → Deploy Hooks**, create a hook for the production branch, and save its URL as the GitHub Actions secret `VERCEL_DEPLOY_HOOK_URL`.
+In the public-site Cloudflare Pages project: **Settings → Builds → Deploy hooks**, create a hook for the production branch, and save its URL as the GitHub Actions secret `VERCEL_DEPLOY_HOOK_URL`.
 
 ### 5. Editor access
 
-There are two ways in. Both open the editor on `CMS_DEFAULT_BRANCH` (currently `feature/keystatic-cms`; set it to `master` after the merge).
+There are two ways in. Both open the editor on `CMS_DEFAULT_BRANCH` (defaults to `master`).
 
 **Team email and password (for most editors).** One shared login for the team.
 
 1. Create a fine-grained GitHub token (GitHub → Settings → Developer settings → Fine-grained tokens). Repository access: only this repository. Permissions: **Contents: Read and write** (Metadata read-only is added automatically). Pick an expiry and put a reminder in the calendar to renew it.
 2. Generate the password hash: `npm run hash-password --workspace admin -- "the password"`.
-3. In the admin Vercel project, add `CMS_ADMIN_EMAIL`, `CMS_ADMIN_PASSWORD_HASH` and `CMS_GITHUB_TOKEN`, then redeploy.
+3. In the editor Worker, add `CMS_ADMIN_EMAIL`, `CMS_ADMIN_PASSWORD_HASH` and `CMS_GITHUB_TOKEN`, then redeploy.
 
 How it works: the password is checked on the server against the hash (the password itself is never stored). A signed, httpOnly session lasts 12 hours. While it lasts, the server hands the browser the GitHub token for an hour at a time, because Keystatic calls GitHub directly from the browser. Consequences worth knowing:
 
@@ -87,7 +81,7 @@ The dashboard greets everyone as *Leader* with the Leadapreneur avatar, and GitH
 
 ### Write a blog post
 
-1. Open `admin.leadapreneur.com` and sign in with the team email and password.
+1. Open `cms.leadapreneur.com` and sign in with the team email and password.
 2. **Blogs → Add**.
 3. Fill in the title. The slug (web address) is suggested automatically; check it before publishing and do not change it afterwards.
 4. Leave **Status** on *Draft* while writing. Set the publish date, short description, author and optional category (for example *COO Notes*).

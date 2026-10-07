@@ -7,7 +7,7 @@ import { NextResponse, type NextRequest } from 'next/server';
  * know some sign-in exists, because every read and write still needs a valid
  * GitHub token that only those routes hand out.
  */
-const DEFAULT_BRANCH = process.env.CMS_DEFAULT_BRANCH || 'feature/keystatic-cms';
+const DEFAULT_BRANCH = process.env.CMS_DEFAULT_BRANCH || 'master';
 const SIGN_IN_COOKIES = ['lp-cms-session', 'keystatic-gh-access-token', 'keystatic-gh-refresh-token'];
 
 export function proxy(request: NextRequest) {

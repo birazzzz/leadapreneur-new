@@ -36,7 +36,7 @@ Legacy `/role-quiz`, `/blog` and `/greatness-games-kl-season-1` routes redirect 
 ## Architecture
 
 - `keystatic.config.ts`, `content/`, `public/uploads/`: CMS schema, content files and uploaded images. See `docs/cms.md`.
-- `admin/`: Next.js app that hosts the Keystatic editor (deployed separately to `admin.leadapreneur.com`).
+- `admin/`: Next.js app that hosts the Keystatic editor (deployed separately to `cms.leadapreneur.com`).
 - `lib/cms.mjs`: build-time reader that loads published content and renders Markdoc.
 - `data/content.mjs`: central source for roles, quiz questions, companies, projects, case studies, stats, videos and team.
 - `src/pages/`: server-rendered page templates.
