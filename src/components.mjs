@@ -56,7 +56,7 @@ export function roleAtlasBlock() {
     })
     .join('');
 
-  const header = `<span></span>${Object.values(roleFamilies)
+  const familyLabels = `<span></span>${Object.values(roleFamilies)
     .map((family) => `<b class="role-picker__family" style="--role:${family.accent}">${family.label}</b>`)
     .join('')}`;
   // Widest scope on top, so the picker reads as a climb from Explorer up.
@@ -79,7 +79,7 @@ export function roleAtlasBlock() {
 
   return `<div class="role-atlas reveal" data-role-atlas>
     <div class="role-atlas__stage" aria-live="polite">${spots}</div>
-    <div class="role-picker" role="group" aria-label="Choose one of nine roles">${header}${rows}</div>
+    <div class="role-picker" role="group" aria-label="Choose one of nine roles">${rows}${familyLabels}</div>
   </div>`;
 }
 

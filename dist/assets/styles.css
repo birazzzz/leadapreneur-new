@@ -1106,7 +1106,7 @@ em {
 .role-picker {
   display: grid;
   grid-template-columns: auto repeat(3, minmax(0, 1fr));
-  grid-template-rows: auto repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr)) auto;
   gap: clamp(0.45rem, 1vw, 0.75rem);
 }
 
@@ -1115,7 +1115,7 @@ em {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  padding-bottom: 0.2rem;
+  padding-top: 0.2rem;
   color: var(--ink);
   font-size: 0.72rem;
   font-weight: 800;
