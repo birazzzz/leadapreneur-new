@@ -291,7 +291,7 @@ export function layout({
   path,
   title,
   description,
-  image = '/images/quiz-banner.jpeg',
+  image = '/images/og-leadapreneur.jpg',
   ogType = 'website',
   body,
   pageClass = '',

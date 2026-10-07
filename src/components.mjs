@@ -1,7 +1,11 @@
 import { companies, educationalVideos, inspiringPodcasts, roleAtlas, roleFamilies, roleTiers, roles, site } from '../data/content.mjs';
 import { blogs as insights } from '../lib/cms.mjs';
 import { getEventState, getEventStatusLabel } from '../lib/events.mjs';
+import { publicFileVersion } from '../lib/asset-version.mjs';
 import { arrow, escapeHtml, link } from './templates.mjs';
+
+// Role portraits are cached for a year and replaced under the same name.
+const versioned = (path) => `${path}?v=${publicFileVersion(path)}`;
 
 // `withArt: false` drops the per-card artwork, for surfaces that carry one
 // shared illustration behind the deck instead.
@@ -41,7 +45,7 @@ export function roleAtlasBlock() {
     .map((role, index) => {
       const family = roleFamilies[role.family];
       return `<article class="role-spot${index === 0 ? ' is-active' : ''}" id="role-spot-${role.id}" style="--role:${family.accent}" data-role-spot="${role.id}"${index === 0 ? '' : ' hidden'}>
-        <div class="role-spot__figure" aria-hidden="true"><img src="${role.image}" alt="" width="450" height="760" loading="lazy" decoding="async"></div>
+        <div class="role-spot__figure" aria-hidden="true"><img src="${versioned(role.image)}" alt="" width="450" height="760" loading="lazy" decoding="async"></div>
         <div class="role-spot__head">
           <p class="role-spot__meta"><span>${family.label}</span>${roleTiers[role.tier].long}</p>
           <h3>AI ${role.name}</h3>
@@ -68,7 +72,7 @@ export function roleAtlasBlock() {
         .filter((role) => role.tier === tierIndex)
         .map(
           (role) => `<button type="button" class="role-tile${role.id === first.id ? ' is-active' : ''}" style="--role:${roleFamilies[role.family].accent}" aria-pressed="${role.id === first.id}" aria-controls="role-spot-${role.id}" data-role-tile="${role.id}">
-            <img src="${role.image}" alt="" width="450" height="760" loading="lazy" decoding="async">
+            <img src="${versioned(role.image)}" alt="" width="450" height="760" loading="lazy" decoding="async">
             <span class="role-tile__name">${role.name}</span>
           </button>`,
         )
