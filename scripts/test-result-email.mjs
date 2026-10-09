@@ -5,7 +5,7 @@ import { buildResultEmail } from '../lib/result-email.mjs';
 
 // Sends a real sample result email through Resend for visual testing.
 // Usage:
-//   node scripts/test-result-email.mjs someone@example.com
+//   node scripts/test-result-email.mjs someone@example.com [Explorer|Builder|...]
 // Reads RESEND_API_KEY (and optionally ASSESSMENT_EMAIL_FROM) from the
 // environment or from .env.local in this directory's parent.
 
@@ -30,12 +30,8 @@ if (!apiKey) {
 }
 
 const from = process.env.ASSESSMENT_EMAIL_FROM || 'Leadapreneur <onboarding@resend.dev>';
-const sample = buildResultEmail({
-  name: 'Biraj',
-  role: 'Pathfinder',
-  description:
-    'You read situations before you move — mapping who is affected, what could break, and where the real opportunity sits. That makes you the person teams trust to find the route before anyone commits resources.',
-});
+const role = process.argv[3] || 'Pathfinder';
+const sample = buildResultEmail({ name: 'Biraj', role });
 
 const response = await fetch('https://api.resend.com/emails', {
   method: 'POST',

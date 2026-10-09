@@ -33,13 +33,9 @@ export async function onRequestPost({ request, env }) {
 
   const name = typeof body.name === 'string' ? body.name.trim().slice(0, 80) : '';
   const role = typeof body.role === 'string' ? body.role.trim().slice(0, 80) : '';
-  const description = typeof body.description === 'string' ? body.description.trim().slice(0, 600) : '';
 
-  const { subject, html, text } = buildResultEmail({
-    name: name || null,
-    role: role || null,
-    description: description || null,
-  });
+  // Only the role name is taken from the request; all copy comes from lib/result-email.mjs.
+  const { subject, html, text } = buildResultEmail({ name: name || null, role: role || null });
 
   try {
     const resendResponse = await fetch(RESEND_ENDPOINT, {
