@@ -3841,7 +3841,7 @@ body.modal-open {
 .trust-section--about { background: var(--paper); }
 .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .team-card { overflow: hidden; border: 1px solid var(--line); background: var(--paper); }
-.team-card img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--beige-deep); filter: saturate(.86); }
+.team-card img { width: 100%; aspect-ratio: 338 / 550; object-fit: cover; background: var(--beige-deep); filter: saturate(.86); }
 .team-card > div { display: grid; gap: 0.2rem; padding: 1rem; }
 .team-card h3 { font-size: 1.05rem; letter-spacing: -0.02em; }
 .team-card p { color: var(--muted); font-size: 0.76rem; }
