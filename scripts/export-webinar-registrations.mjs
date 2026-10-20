@@ -14,7 +14,7 @@ if (output.startsWith(publicRoot) || output.startsWith(distRoot)) throw new Erro
 const query = 'SELECT registered_at, name, email, consent_version, source FROM webinar_registrations ORDER BY registered_at';
 const {stdout} = await promisify(execFile)(process.execPath,[
   'node_modules/wrangler/bin/wrangler.js','d1','execute','leadapreneur-webinar-registrations','--remote','--command',query,'--json'
-],{maxBuffer:64*1024*1024});
+],{maxBuffer:64*1024*1024,env:{...process.env,CLOUDFLARE_ACCOUNT_ID:'24c48103d0988536fe007d547dc254d2'}});
 const result=JSON.parse(stdout);
 if (!Array.isArray(result) || !result[0]?.success) throw new Error('Registration export failed; no CSV was written.');
 const csv = registrationsToCsv(result[0].results);
