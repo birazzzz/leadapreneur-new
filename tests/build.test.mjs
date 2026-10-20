@@ -19,7 +19,7 @@ const htmlFiles = walk(dist).filter((file) => extname(file) === '.html');
 // The vendored assessment app (dist/assessment/) is a self-contained SPA shell
 // synced from its own repository, not a generated site page.
 const siteHtmlFiles = htmlFiles.filter((file) => !file.startsWith(join(dist, 'assessment')));
-const indexableFiles = siteHtmlFiles.filter((file) => !readFileSync(file, 'utf8').includes('noindex,follow'));
+const indexableFiles = siteHtmlFiles.filter((file) => !/<meta name="robots" content="[^"]*noindex/i.test(readFileSync(file, 'utf8')));
 const expectedIndexablePages = 10 + events.length + blogs.length;
 
 test('every indexable page has one h1, a canonical, description and parseable JSON-LD', () => {
@@ -87,4 +87,5 @@ test('sitemap lists indexable routes and excludes redirects', () => {
   assert.doesNotMatch(sitemap, /\/role-quiz\//);
   assert.match(sitemap, /\/events\/greatness-games-kl-season-1\//);
   assert.doesNotMatch(sitemap, /<loc>[^<]+\/blog\/<\/loc>/);
+  assert.doesNotMatch(sitemap, /\/certificates(?:\/|<)/);
 });

@@ -178,6 +178,15 @@ cpSync(join(root, 'src', 'styles.css'), join(dist, 'assets', 'styles.css'));
 cpSync(join(root, 'src', 'site.js'), join(dist, 'assets', 'site.js'));
 cpSync(join(root, 'src', 'quiz.js'), join(dist, 'assets', 'quiz.js'));
 cpSync(join(root, 'lib', 'quiz-engine.mjs'), join(dist, 'assets', 'quiz-engine.mjs'));
+// The certificate studio is gated by functions/_middleware.js. It is intentionally
+// absent from `pages`, so no sitemap, navigation or llms.txt entry is generated.
+const certificateSource = join(root, 'internal', 'certificates');
+const certificateOutput = join(dist, 'certificates');
+mkdirSync(join(certificateOutput, 'assets'), { recursive: true });
+for (const file of ['index.html', 'styles.css', 'app.js']) {
+  cpSync(join(certificateSource, file), join(certificateOutput, file));
+}
+cpSync(join(certificateSource, 'assets'), join(certificateOutput, 'assets'), { recursive: true });
 mkdirSync(join(dist, 'data'), { recursive: true });
 cpSync(join(root, 'data', 'content.mjs'), join(dist, 'data', 'content.mjs'));
 cpSync(join(root, 'data', 'insights.mjs'), join(dist, 'data', 'insights.mjs'));
