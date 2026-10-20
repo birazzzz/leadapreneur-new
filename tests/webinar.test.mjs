@@ -101,3 +101,11 @@ test('webinar HTML has Register now and contains no QR or Meet joining content',
   assert.match(html,/id="submit-label">Register now/);
   assert.doesNotMatch(html,/qr-code|Google Meet|registration-qr|QR code/);
 });
+
+test('published webinar assets are content-versioned and require cache revalidation',()=>{
+  const html=readFileSync(new URL('../dist/future-proof-friday/index.html',import.meta.url),'utf8');
+  assert.match(html,/src="\/future-proof-friday\/app\.js\?v=[a-f0-9]{10}"/);
+  assert.match(html,/href="\/future-proof-friday\/styles\.css\?v=[a-f0-9]{10}"/);
+  const headers=readFileSync(new URL('../dist/_headers',import.meta.url),'utf8');
+  assert.match(headers,/\/future-proof-friday\/\*\r?\n\s+Cache-Control: public, max-age=0, must-revalidate/);
+});

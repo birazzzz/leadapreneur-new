@@ -35,6 +35,9 @@
       });
       const result = await response.json();
       if (!response.ok || result.ok !== true) throw new Error(result.error || 'We couldn’t save your registration. Please try again.');
+      if (typeof result.calendarUrl !== 'string' || !result.calendarUrl) {
+        throw new Error('Your registration was saved, but the calendar link could not load. Please reload this page.');
+      }
       const calendarUrl = new URL(result.calendarUrl);
       if (calendarUrl.protocol !== 'https:' || calendarUrl.hostname !== 'calendar.google.com' ||
           calendarUrl.pathname !== '/calendar/event') throw new Error('The calendar link is unavailable. Please try again.');

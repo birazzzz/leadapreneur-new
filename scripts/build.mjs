@@ -3,6 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { site } from '../data/content.mjs';
+import { publicFileVersion } from '../lib/asset-version.mjs';
 import { blogs, events } from '../lib/cms.mjs';
 import { aboutPage } from '../src/pages/about.mjs';
 import { acceleratorPage } from '../src/pages/accelerator.mjs';
@@ -121,7 +122,9 @@ const pages = [
   {
     path: '/future-proof-friday/',
     title: 'Future-Proof Fridays | Leadapreneur',
-    standalone: readFileSync(join(root, 'src', 'pages', 'future-proof-friday.html'), 'utf8'),
+    standalone: readFileSync(join(root, 'src', 'pages', 'future-proof-friday.html'), 'utf8')
+      .replace('"/future-proof-friday/app.js"', `"/future-proof-friday/app.js?v=${publicFileVersion('future-proof-friday/app.js')}"`)
+      .replace('"/future-proof-friday/styles.css"', `"/future-proof-friday/styles.css?v=${publicFileVersion('future-proof-friday/styles.css')}"`),
   },
   {
     path: '/contact/',
