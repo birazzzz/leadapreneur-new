@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#f3eee5">
+  <title>Certificate Studio | Leadapreneur</title>
+  <link rel="icon" href="../../public/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#certificate-form">Skip to certificate details</a>
+  <header class="topbar">
+    <img src="./assets/logo-horizontal.png" alt="Leadapreneur" width="200" height="40">
+    <div class="topbar-right"><span class="draft-marker">INTERNAL TOOL</span><span>Certificate Studio</span></div>
+  </header>
+
+  <main class="workspace">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">CREATE · REVIEW · ISSUE</p>
+        <h1 id="page-title">Celebrate the work<br><em>that moves us forward.</em></h1>
+      </div>
+      <p>Build a Leadapreneur certificate, check every detail, then save a print-ready PDF. Nothing entered here is sent to a server.</p>
+    </section>
+
+    <div class="studio-grid">
+      <section class="editor panel" aria-labelledby="editor-heading">
+        <div class="panel-heading"><span class="step">01</span><div><p class="eyebrow">THE DETAILS</p><h2 id="editor-heading">Create certificate</h2></div></div>
+        <form id="certificate-form" novalidate>
+          <div class="field">
+            <label for="certificate-type">Certificate type</label>
+            <select id="certificate-type" name="type">
+              <option value="attendance">Certificate of attendance</option>
+              <option value="completion">Certificate of completion</option>
+              <option value="recognition">Certificate of recognition</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="recipient">Recipient name <span aria-hidden="true">*</span></label>
+            <input id="recipient" name="recipient" type="text" autocomplete="name" maxlength="80" placeholder="e.g. Amina Rahman" required>
+          </div>
+          <div class="field">
+            <label for="programme">Programme or event <span aria-hidden="true">*</span></label>
+            <input id="programme" name="programme" type="text" maxlength="110" placeholder="e.g. AI × Talent Accelerator" required>
+          </div>
+          <div class="field">
+            <label for="achievement">Certificate statement</label>
+            <textarea id="achievement" name="achievement" rows="3" maxlength="260" placeholder="Optional detail about the experience or achievement"></textarea>
+            <span class="field-hint">Keep this to one or two concise sentences.</span>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="issue-date">Issue date <span aria-hidden="true">*</span></label><input id="issue-date" name="date" type="date" required></div>
+            <div class="field"><label for="location">Location</label><input id="location" name="location" type="text" maxlength="65" placeholder="e.g. Kuala Lumpur"></div>
+          </div>
+          <div class="field">
+            <label for="certificate-id">Certificate ID</label>
+            <div class="id-row"><input id="certificate-id" name="id" type="text" maxlength="40" pattern="[A-Za-z0-9-]+" required aria-describedby="id-help"><button class="small-button" id="regenerate-id" type="button" aria-label="Generate a new certificate ID">New ID</button></div>
+            <span class="field-hint" id="id-help">For your records. Online verification will be configured later.</span>
+          </div>
+          <p class="form-error" id="form-error" role="alert" hidden></p>
+          <div class="editor-actions">
+            <button class="primary-button" id="print-certificate" type="submit">Print / save PDF <span aria-hidden="true">↗</span></button>
+            <button class="secondary-button" id="reset-certificate" type="button">Clear details</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="preview-panel" aria-labelledby="preview-heading">
+        <div class="preview-topline"><div><p class="eyebrow">LIVE PREVIEW</p><h2 id="preview-heading">Certificate</h2></div><span class="paper-label">A4 · LANDSCAPE</span></div>
+        <div class="preview-stage">
+          <article class="certificate" id="certificate" aria-label="Certificate preview">
+            <div class="certificate-rail" aria-hidden="true"><span class="rail-line"></span><span class="rail-diamond"></span><span class="rail-text">EXPLORE / BUILD / LEAD</span></div>
+            <div class="certificate-inner">
+              <div class="certificate-top">
+                <img src="./assets/logo-horizontal.png" alt="Leadapreneur" width="235" height="47">
+                <span>DARE TO BE GREAT<span class="certificate-top-dot">.</span></span>
+              </div>
+              <div class="certificate-main">
+                <p class="certificate-kicker">LEADAPRENEUR PRESENTS</p>
+                <h3 id="preview-type">Certificate<br><i>of Attendance</i></h3>
+                <p class="presented-to">PROUDLY PRESENTED TO</p>
+                <p class="recipient-name placeholder" id="preview-recipient">Recipient name</p>
+                <p class="certificate-intro" id="preview-intro">In recognition of participation in</p>
+                <p class="programme-name placeholder" id="preview-programme">Programme or event</p>
+                <p class="achievement-line" id="preview-achievement">A step forward in building the future, together.</p>
+              </div>
+              <div class="certificate-bottom">
+                <div class="certificate-meta"><span>ISSUED ON</span><strong id="preview-date">—</strong><small id="preview-location">Leadapreneur</small></div>
+                <div class="certificate-seal" aria-hidden="true"><span>LP</span><small>FUTURE<br>READY</small></div>
+                <div class="certificate-meta certificate-meta-right"><span>ISSUED BY</span><strong>Leadapreneur</strong><small id="preview-id">ID: —</small></div>
+              </div>
+            </div>
+            <div class="certificate-orbit orbit-one" aria-hidden="true"></div><div class="certificate-orbit orbit-two" aria-hidden="true"></div>
+          </article>
+        </div>
+        <div class="preview-footer"><span><b>Review before issuing.</b> The PDF is created in your browser’s print dialog.</span><span class="privacy-mark">● &nbsp;LOCAL DRAFT</span></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
