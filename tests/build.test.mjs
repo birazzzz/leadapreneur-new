@@ -20,7 +20,7 @@ const htmlFiles = walk(dist).filter((file) => extname(file) === '.html');
 // synced from its own repository, not a generated site page.
 const siteHtmlFiles = htmlFiles.filter((file) => !file.startsWith(join(dist, 'assessment')));
 const indexableFiles = siteHtmlFiles.filter((file) => !readFileSync(file, 'utf8').includes('noindex,follow'));
-const expectedIndexablePages = 9 + events.length + blogs.length;
+const expectedIndexablePages = 10 + events.length + blogs.length;
 
 test('every indexable page has one h1, a canonical, description and parseable JSON-LD', () => {
   assert.equal(indexableFiles.length, expectedIndexablePages);

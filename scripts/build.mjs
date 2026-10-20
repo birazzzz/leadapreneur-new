@@ -119,6 +119,11 @@ const pages = [
     structuredData: [crumbs('Future-Proof Assessment', '/future-proof-assessment/')],
   },
   {
+    path: '/future-proof-friday/',
+    title: 'Future-Proof Fridays | Leadapreneur',
+    standalone: readFileSync(join(root, 'src', 'pages', 'future-proof-friday.html'), 'utf8'),
+  },
+  {
     path: '/contact/',
     title: 'Future-Proof Your People | Contact Leadapreneur',
     description: 'Start a conversation about AI adoption, talent acceleration, Greatness Games or Stratecution.',
@@ -174,7 +179,7 @@ mkdirSync(join(dist, 'data'), { recursive: true });
 cpSync(join(root, 'data', 'content.mjs'), join(dist, 'data', 'content.mjs'));
 cpSync(join(root, 'data', 'insights.mjs'), join(dist, 'data', 'insights.mjs'));
 
-for (const page of pages) write(outputPath(page.path), layout(page));
+for (const page of pages) write(outputPath(page.path), page.standalone || layout(page));
 
 const redirects = [
   ['/role-quiz/', '/assessment/'],

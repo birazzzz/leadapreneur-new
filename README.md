@@ -30,6 +30,7 @@ The local preview runs at `http://127.0.0.1:4173`.
 - `/future-proof-assessment/`
 - `/assessment/` — the built Future-Proofing Assessment app, vendored from its own repository with `npm run sync:assessment`
 - `/contact/`
+- `/future-proof-friday/` — weekly webinar registration; joining QR appears after a saved name/email submission.
 
 Legacy `/role-quiz`, `/blog` and `/greatness-games-kl-season-1` routes redirect to their new destinations. Legacy `.html` page paths also receive static redirect files.
 
@@ -55,3 +56,20 @@ Legacy `/role-quiz`, `/blog` and `/greatness-games-kl-season-1` routes redirect 
 - Send a real sample for visual testing: `node scripts/test-result-email.mjs you@example.com`.
 
 See `docs/content-audit.md` for source decisions and public-content conflicts.
+
+## Future-Proof Fridays registrations
+
+`POST /api/register-webinar` validates name, email and the registration notice, then saves one immutable CSV record per submission in the project's **private** Vercel Blob store. Joining details are returned only after that save succeeds. No registration information is sent to Resend, stored in browser storage, or published in the Git repository. The QR asset is the supplied SVG, with crisp rendering enabled; it links to Google Meet.
+
+To download all registrations into one local spreadsheet-compatible CSV:
+
+```powershell
+vercel env pull .env.local
+npm run export:webinar
+# Optional output path:
+npm run export:webinar -- --out exports/friday-registrations.csv
+```
+
+The export is written to `exports/` (ignored by Git), with timestamp, name, email, consent version, and source. The store token remains server-side. CSV cells are escaped and spreadsheet formulas are neutralized. No publicly accessible CSV or unauthenticated export endpoint is exposed. Duplicate submissions remain separate timestamped rows.
+
+The input form gates the joining details in the normal visitor flow; the QR asset itself is not an authenticated access-control system. Refreshing the page starts a fresh form.
