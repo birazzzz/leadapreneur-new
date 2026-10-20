@@ -42,6 +42,9 @@
       if (calendarUrl.protocol !== 'https:' || calendarUrl.hostname !== 'calendar.google.com' ||
           calendarUrl.pathname !== '/calendar/render') throw new Error('The calendar link is unavailable. Please try again.');
       byId('add-to-calendar').href = calendarUrl.href;
+      const icsUrl=new URL(result.icsUrl,location.origin);
+      if (icsUrl.origin!==location.origin || icsUrl.pathname!=='/api/webinar-calendar') throw new Error('The calendar download is unavailable. Please reload this page.');
+      byId('download-calendar').href=icsUrl.href;
       form.reset();
       form.hidden = true;
       byId('registration-success').hidden = false;

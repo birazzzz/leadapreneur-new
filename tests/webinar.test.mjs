@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import { createWebinarHandler } from '../functions/api/register-webinar.js';
-import { buildWebinarCalendarUrl } from '../lib/webinar-calendar.mjs';
+import { buildWebinarCalendarUrl, buildWebinarIcs } from '../lib/webinar-calendar.mjs';
+import { onRequestGet as downloadWebinarCalendar } from '../functions/api/webinar-calendar.js';
 import { csvCell, registrationCsv, registrationsToCsv, saveWebinarRegistration } from '../lib/webinar-registrations.mjs';
 
 function request(body={name:'Example Person',email:'EXAMPLE@example.com',consent:true},origin='https://www.leadapreneur.com') {
@@ -32,6 +33,7 @@ test('Cloudflare returns the recurring calendar entry only after saving registra
   assert.equal(event.searchParams.get('recur'),'RRULE:FREQ=WEEKLY;BYDAY=FR');
   assert.equal(event.searchParams.get('location'),'https://meet.google.com/zek-romn-csi');
   assert.equal(event.searchParams.has('tmeid'),false);
+  assert.equal(body.icsUrl,'/api/webinar-calendar');
   assert.equal(body.qrImage,undefined);
   assert.equal(result.headers.get('cache-control'),'no-store');
 });
@@ -99,11 +101,12 @@ test('browser keeps calendar hidden until a successful registration and permits 
 });
 
 test('successful registration exposes the exact Google Calendar event link',async()=>{
-  const state=clientState({ok:true,json:async()=>({ok:true,calendarUrl:CALENDAR_URL})});
+  const state=clientState({ok:true,json:async()=>({ok:true,calendarUrl:CALENDAR_URL,icsUrl:'/api/webinar-calendar'})});
   await state.submit();
   assert.equal(state.get('registration-form').hidden,true);
   assert.equal(state.get('registration-success').hidden,false);
   assert.equal(state.get('add-to-calendar').href,CALENDAR_URL);
+  assert.equal(state.get('download-calendar').href,'https://www.leadapreneur.com/api/webinar-calendar');
   assert.equal(state.get('registration-success').focused,true);
 });
 
@@ -112,6 +115,9 @@ test('webinar HTML has Register now, explains weekly recurrence and contains no 
   assert.match(html,/id="submit-label">Register now/);
   assert.doesNotMatch(html,/qr-code|registration-qr|QR code/);
   assert.match(html,/Save once to add the weekly Friday series/);
+  assert.match(html,/Apple \/ Outlook \/ Other/);
+  assert.match(html,/Using Notion Calendar/);
+  assert.doesNotMatch(html,/Nepal/);
 });
 
 test('calendar series starts at the next Friday session with a one-hour duration',()=>{
@@ -119,6 +125,22 @@ test('calendar series starts at the next Friday session with a one-hour duration
   assert.equal(dates('2026-10-23T02:59:59Z'),'20261023T030000Z/20261023T040000Z');
   assert.equal(dates('2026-10-23T03:00:01Z'),'20261030T030000Z/20261030T040000Z');
   assert.equal(dates('2026-12-31T23:30:00Z'),'20270101T030000Z/20270101T040000Z');
+});
+
+test('ICS download is a weekly, one-hour Friday series with Malaysia details and the confirmed Meet URL',async()=>{
+  const ics=buildWebinarIcs(TEST_NOW);
+  const unfolded=ics.replace(/\r\n /g,'');
+  assert.match(unfolded,/DTSTART:20261023T030000Z\r\nDTEND:20261023T040000Z/);
+  assert.match(unfolded,/RRULE:FREQ=WEEKLY;BYDAY=FR/);
+  assert.match(unfolded,/SUMMARY:Future-Proof Friday Weekly Briefing/);
+  assert.match(unfolded,/Malaysia Time \(MYT/);
+  assert.match(unfolded,/Great Acceleration into the Singularity/);
+  assert.match(unfolded,/URL:https:\/\/meet.google.com\/zek-romn-csi/);
+  assert.doesNotMatch(unfolded,/ATTENDEE:|ORGANIZER:|Nepal|tmeid/);
+  for(const line of ics.split('\r\n')) assert.ok(Buffer.byteLength(line,'utf8')<=75);
+  const result=downloadWebinarCalendar();
+  assert.match(result.headers.get('content-type'),/^text\/calendar/);
+  assert.match(result.headers.get('content-disposition'),/attachment; filename="future-proof-fridays.ics"/);
 });
 
 test('published webinar assets are content-versioned and require cache revalidation',()=>{

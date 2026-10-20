@@ -33,7 +33,7 @@ export function createWebinarHandler({save = saveWebinarRegistration, now = () =
     attempts.set(rateKey,attempt);
     try {
       await save(env,{name,email,registeredAt:now().toISOString()});
-      return json(201,{ok:true,calendarUrl:buildWebinarCalendarUrl(now())});
+      return json(201,{ok:true,calendarUrl:buildWebinarCalendarUrl(now()),icsUrl:'/api/webinar-calendar'});
     } catch {
       return json(503,{error:'We couldn’t save your registration. Please try again shortly.'});
     }
