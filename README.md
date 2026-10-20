@@ -30,7 +30,7 @@ The local preview runs at `http://127.0.0.1:4173`.
 - `/future-proof-assessment/`
 - `/assessment/` — the built Future-Proofing Assessment app, vendored from its own repository with `npm run sync:assessment`
 - `/contact/`
-- `/future-proof-friday/` — weekly webinar registration; joining QR appears after a saved name/email submission.
+- `/future-proof-friday/` — weekly webinar registration; Google Calendar link appears after a saved name/email submission.
 
 Legacy `/role-quiz`, `/blog` and `/greatness-games-kl-season-1` routes redirect to their new destinations. Legacy `.html` page paths also receive static redirect files.
 
@@ -59,17 +59,19 @@ See `docs/content-audit.md` for source decisions and public-content conflicts.
 
 ## Future-Proof Fridays registrations
 
-`POST /api/register-webinar` validates name, email and the registration notice, then saves one immutable CSV record per submission in the project's **private** Vercel Blob store. Joining details are returned only after that save succeeds. No registration information is sent to Resend, stored in browser storage, or published in the Git repository. The QR asset is the supplied SVG, with crisp rendering enabled; it links to Google Meet.
+`POST /api/register-webinar` is a Cloudflare Pages Function. It validates name, email and the registration notice, then saves a row in the private `WEBINAR_DB` Cloudflare D1 binding. The supplied Google Calendar event link is returned only after that save succeeds. No registration information is sent to Resend or Vercel, stored in browser storage, or published in the Git repository.
+
+The page and registration backend both run on Cloudflare. `migrations/webinar-registration.sql` defines the registration table. The page does not display a QR code or automatically add an event to a visitor's calendar; the visitor selects **Add to Google Calendar** after registering, then saves the event in Google Calendar.
 
 To download all registrations into one local spreadsheet-compatible CSV:
 
 ```powershell
-vercel env pull .env.local
+npx wrangler login
 npm run export:webinar
 # Optional output path:
 npm run export:webinar -- --out exports/friday-registrations.csv
 ```
 
-The export is written to `exports/` (ignored by Git), with timestamp, name, email, consent version, and source. The store token remains server-side. CSV cells are escaped and spreadsheet formulas are neutralized. No publicly accessible CSV or unauthenticated export endpoint is exposed. Duplicate submissions remain separate timestamped rows.
+The export is written to `exports/` (ignored by Git), with timestamp, name, email, consent version, and source. The export uses the authenticated Cloudflare CLI. CSV cells are escaped and spreadsheet formulas are neutralized. No publicly accessible CSV or unauthenticated export endpoint is exposed. Duplicate submissions remain separate timestamped rows.
 
-The input form gates the joining details in the normal visitor flow; the QR asset itself is not an authenticated access-control system. Refreshing the page starts a fresh form.
+Refreshing the page starts a fresh form. CSV exports contain personal information and should stay outside public site directories.

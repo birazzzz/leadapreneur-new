@@ -11,7 +11,7 @@
     "admin": "npm run dev --workspace admin",
     "import:blogs": "node scripts/import-live-blogs.mjs",
     "sync:assessment": "node scripts/sync-assessment.mjs",
-    "export:webinar": "node --env-file-if-exists=.env.local scripts/export-webinar-registrations.mjs"
+    "export:webinar": "node scripts/export-webinar-registrations.mjs"
   },
   "engines": {
     "node": ">=22.18"
@@ -21,12 +21,12 @@
   ],
   "dependencies": {
     "@keystatic/core": "^0.6.9",
-    "@markdoc/markdoc": "^0.4.0",
-    "@vercel/blob": "^2.8.2"
+    "@markdoc/markdoc": "^0.4.0"
   },
   "devDependencies": {
     "js-yaml": "^4.3.2",
     "sharp": "^0.35.4",
-    "turndown": "^7.2.4"
+    "turndown": "^7.2.4",
+    "wrangler": "^4.151.2"
   }
 }

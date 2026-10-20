@@ -35,14 +35,10 @@
       });
       const result = await response.json();
       if (!response.ok || result.ok !== true) throw new Error(result.error || 'We couldn’t save your registration. Please try again.');
-      // Joining details are supplied by the server only after durable storage succeeds.
-      const qrUrl = new URL(result.qrImage, location.origin);
-      const joinUrl = new URL(result.joinUrl);
-      if (qrUrl.origin !== location.origin || !qrUrl.pathname.startsWith('/future-proof-friday/assets/') ||
-          joinUrl.protocol !== 'https:' || joinUrl.hostname !== 'meet.google.com') throw new Error('The joining details are unavailable. Please try again.');
-      byId('qr-code').addEventListener('error', () => {byId('qr-error').hidden = false;}, {once:true});
-      byId('qr-code').src = qrUrl.href;
-      byId('join-webinar').href = joinUrl.href;
+      const calendarUrl = new URL(result.calendarUrl);
+      if (calendarUrl.protocol !== 'https:' || calendarUrl.hostname !== 'calendar.google.com' ||
+          calendarUrl.pathname !== '/calendar/event') throw new Error('The calendar link is unavailable. Please try again.');
+      byId('add-to-calendar').href = calendarUrl.href;
       form.reset();
       form.hidden = true;
       byId('registration-success').hidden = false;
@@ -56,7 +52,7 @@
       submitting = false;
       button.disabled = false;
       form.removeAttribute('aria-busy');
-      byId('submit-label').textContent = 'Register & get the joining link';
+      byId('submit-label').textContent = 'Register now';
     }
   });
 })();
