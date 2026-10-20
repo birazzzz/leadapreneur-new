@@ -16,7 +16,11 @@ const invoke = (path, auth, env = { CERTIFICATES_PASSWORD_SHA256: hash }) =>
   onRequest({ request: request(path, auth), env, next: async () => new Response('private certificate content') });
 
 test('the certificate page and assets require staff authentication', async () => {
-  for (const path of ['/certificates', '/certificates/', '/certificates/app.js', '/certificates/assets/logo-horizontal.png']) {
+  for (const path of [
+    '/certificates', '/certificates/', '/certificates/app.js',
+    '/certificates/assets/logo-horizontal.png', '/%63ertificates/',
+    '/%2563ertificates/', '//certificates/'
+  ]) {
     const missing = await invoke(path);
     assert.equal(missing.status, 401, path);
     assert.match(missing.headers.get('www-authenticate'), /^Basic /);

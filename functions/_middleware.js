@@ -1,4 +1,18 @@
-const certificatePath = /^\/certificates(?:\/|$)/;
+const certificatePath = /(?:^|\/)certificates(?:\/|$)/i;
+function isCertificatePath(url) {
+  let path = new URL(url).pathname;
+  // Pages resolves encoded and repeated slashes before serving static files.
+  // Apply the gate to every equivalent path, including double-encoded URLs.
+  for (let pass = 0; pass < 5; pass++) {
+    if (certificatePath.test(path.replaceAll('\\', '/'))) return true;
+    try {
+      const decoded = decodeURIComponent(path);
+      if (decoded === path) break;
+      path = decoded;
+    } catch { break; }
+  }
+  return false;
+}
 const privateHeaders = {
   'Cache-Control': 'private, no-store',
   'Vary': 'Authorization',
@@ -28,7 +42,7 @@ async function validPassword(header, hash) {
 }
 
 export async function onRequest({ request, env, next }) {
-  if (!certificatePath.test(new URL(request.url).pathname)) return next();
+  if (!isCertificatePath(request.url)) return next();
   const hash = env.CERTIFICATES_PASSWORD_SHA256;
   if (typeof hash !== 'string' || !/^[0-9a-f]{64}$/.test(hash)) {
     return reply(503, 'Certificate studio is temporarily unavailable.');
