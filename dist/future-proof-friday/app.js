@@ -40,7 +40,7 @@
       }
       const calendarUrl = new URL(result.calendarUrl);
       if (calendarUrl.protocol !== 'https:' || calendarUrl.hostname !== 'calendar.google.com' ||
-          calendarUrl.pathname !== '/calendar/event') throw new Error('The calendar link is unavailable. Please try again.');
+          calendarUrl.pathname !== '/calendar/render') throw new Error('The calendar link is unavailable. Please try again.');
       byId('add-to-calendar').href = calendarUrl.href;
       form.reset();
       form.hidden = true;

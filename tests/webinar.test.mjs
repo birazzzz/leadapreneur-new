@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
-import { createWebinarHandler, CALENDAR_URL } from '../functions/api/register-webinar.js';
+import { createWebinarHandler } from '../functions/api/register-webinar.js';
+import { buildWebinarCalendarUrl } from '../lib/webinar-calendar.mjs';
 import { csvCell, registrationCsv, registrationsToCsv, saveWebinarRegistration } from '../lib/webinar-registrations.mjs';
 
 function request(body={name:'Example Person',email:'EXAMPLE@example.com',consent:true},origin='https://www.leadapreneur.com') {
@@ -11,16 +12,26 @@ function request(body={name:'Example Person',email:'EXAMPLE@example.com',consent
   });
 }
 
-test('Cloudflare returns the exact supplied calendar event only after saving registration',async()=>{
+const TEST_NOW = new Date('2026-10-20T00:00:00Z');
+const CALENDAR_URL = buildWebinarCalendarUrl(TEST_NOW);
+
+test('Cloudflare returns the recurring calendar entry only after saving registration',async()=>{
   const records=[];
-  const handler=createWebinarHandler({save:async(env,record)=>records.push(record)});
+  const handler=createWebinarHandler({save:async(env,record)=>records.push(record),now:()=>TEST_NOW});
   const result=await handler({request:request(),env:{}});
   assert.equal(result.status,201);
   assert.equal(records.length,1);
   assert.equal(records[0].email,'example@example.com');
   const body=await result.json();
   assert.equal(body.calendarUrl,CALENDAR_URL);
-  assert.equal(new URL(body.calendarUrl).searchParams.get('tmsrc'),'biraj@leadapreneur.com');
+  const event=new URL(body.calendarUrl);
+  assert.equal(event.pathname,'/calendar/render');
+  assert.equal(event.searchParams.get('text'),'Future-Proof Friday Weekly Briefing');
+  assert.equal(event.searchParams.get('dates'),'20261023T030000Z/20261023T040000Z');
+  assert.equal(event.searchParams.get('ctz'),'Asia/Kuala_Lumpur');
+  assert.equal(event.searchParams.get('recur'),'RRULE:FREQ=WEEKLY;BYDAY=FR');
+  assert.equal(event.searchParams.get('location'),'https://meet.google.com/zek-romn-csi');
+  assert.equal(event.searchParams.has('tmeid'),false);
   assert.equal(body.qrImage,undefined);
   assert.equal(result.headers.get('cache-control'),'no-store');
 });
@@ -96,10 +107,18 @@ test('successful registration exposes the exact Google Calendar event link',asyn
   assert.equal(state.get('registration-success').focused,true);
 });
 
-test('webinar HTML has Register now and contains no QR or Meet joining content',()=>{
+test('webinar HTML has Register now, explains weekly recurrence and contains no QR',()=>{
   const html=readFileSync(new URL('../src/pages/future-proof-friday.html',import.meta.url),'utf8');
   assert.match(html,/id="submit-label">Register now/);
-  assert.doesNotMatch(html,/qr-code|Google Meet|registration-qr|QR code/);
+  assert.doesNotMatch(html,/qr-code|registration-qr|QR code/);
+  assert.match(html,/Save once to add the weekly Friday series/);
+});
+
+test('calendar series starts at the next Friday session with a one-hour duration',()=>{
+  const dates=now=>new URL(buildWebinarCalendarUrl(new Date(now))).searchParams.get('dates');
+  assert.equal(dates('2026-10-23T02:59:59Z'),'20261023T030000Z/20261023T040000Z');
+  assert.equal(dates('2026-10-23T03:00:01Z'),'20261030T030000Z/20261030T040000Z');
+  assert.equal(dates('2026-12-31T23:30:00Z'),'20270101T030000Z/20270101T040000Z');
 });
 
 test('published webinar assets are content-versioned and require cache revalidation',()=>{

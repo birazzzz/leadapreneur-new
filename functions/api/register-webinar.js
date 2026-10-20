@@ -1,6 +1,6 @@
 import { saveWebinarRegistration } from '../../lib/webinar-registrations.mjs';
+import { buildWebinarCalendarUrl } from '../../lib/webinar-calendar.mjs';
 
-export const CALENDAR_URL = 'https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NmhpNjhvaG9jaGhqY2I5a2M0cW1jYjlrNm9ybTJiYjE2Z3E2NmJiNDZwZ2pjcGhrYzVoM2VjajY3MF8yMDI2MTAyM1QwMzAwMDBaIGJpcmFqQGxlYWRhcHJlbmV1ci5jb20&tmsrc=biraj%40leadapreneur.com&scp=ALL';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const json = (status, body, headers = {}) => new Response(JSON.stringify(body), {
   status, headers:{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...headers}
@@ -33,7 +33,7 @@ export function createWebinarHandler({save = saveWebinarRegistration, now = () =
     attempts.set(rateKey,attempt);
     try {
       await save(env,{name,email,registeredAt:now().toISOString()});
-      return json(201,{ok:true,calendarUrl:CALENDAR_URL});
+      return json(201,{ok:true,calendarUrl:buildWebinarCalendarUrl(now())});
     } catch {
       return json(503,{error:'We couldn’t save your registration. Please try again shortly.'});
     }

@@ -61,7 +61,7 @@ See `docs/content-audit.md` for source decisions and public-content conflicts.
 
 `POST /api/register-webinar` is a Cloudflare Pages Function. It validates name, email and the registration notice, then saves a row in the private `WEBINAR_DB` Cloudflare D1 binding. The supplied Google Calendar event link is returned only after that save succeeds. No registration information is sent to Resend or Vercel, stored in browser storage, or published in the Git repository.
 
-The page and registration backend both run on Cloudflare. `migrations/webinar-registration.sql` defines the registration table. The page does not display a QR code or automatically add an event to a visitor's calendar; the visitor selects **Add to Google Calendar** after registering, then saves the event in Google Calendar.
+The page and registration backend both run on Cloudflare. `migrations/webinar-registration.sql` defines the registration table. After registering, the visitor selects **Add to Google Calendar**, then saves the weekly series. `lib/webinar-calendar.mjs` builds a self-contained Google Calendar template for **Future-Proof Friday Weekly Briefing**, every Friday 11:00 AM–12:00 PM Kuala Lumpur time, starting from the next session, with `https://meet.google.com/zek-romn-csi` as its location and a weekly Friday recurrence rule. The link does not rely on access to an existing private calendar event.
 
 To download all registrations into one local spreadsheet-compatible CSV:
 
