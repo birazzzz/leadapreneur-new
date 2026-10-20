@@ -107,5 +107,7 @@ test('published webinar assets are content-versioned and require cache revalidat
   assert.match(html,/src="\/future-proof-friday\/app\.js\?v=[a-f0-9]{10}"/);
   assert.match(html,/href="\/future-proof-friday\/styles\.css\?v=[a-f0-9]{10}"/);
   const headers=readFileSync(new URL('../dist/_headers',import.meta.url),'utf8');
-  assert.match(headers,/\/future-proof-friday\/\*\r?\n\s+Cache-Control: public, max-age=0, must-revalidate/);
+  for(const path of ['/future-proof-friday/','/future-proof-friday/app.js','/future-proof-friday/styles.css']) {
+    assert.ok(headers.replaceAll('\r\n','\n').includes(path+'\n  Cache-Control: no-cache, no-store, must-revalidate'));
+  }
 });

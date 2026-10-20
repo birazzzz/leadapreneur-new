@@ -5,5 +5,9 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-/future-proof-friday/*
-  Cache-Control: public, max-age=0, must-revalidate
+/future-proof-friday/
+  Cache-Control: no-cache, no-store, must-revalidate
+/future-proof-friday/app.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/future-proof-friday/styles.css
+  Cache-Control: no-cache, no-store, must-revalidate
