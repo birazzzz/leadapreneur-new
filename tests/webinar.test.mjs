@@ -187,3 +187,14 @@ test('the same email always gets the same invitation UID, so re-registering upda
   assert.equal(uid('a@example.com'),uid('a@example.com'));
   assert.notEqual(uid('a@example.com'),uid('b@example.com'));
 });
+
+test('invitation email offers "Add event to calendar" (the Google Calendar link) before the Meet button',async()=>{
+  const { buildWebinarInviteEmail } = await import('../lib/webinar-invite.mjs');
+  const { html, text } = buildWebinarInviteEmail({name:'Example Person',email:'example@example.com',now:TEST_NOW});
+  const calendarHref = CALENDAR_URL.replaceAll('&','&amp;');
+  const addAt = html.indexOf(`href="${calendarHref}"`);
+  assert.ok(addAt > -1, 'calendar link present');
+  assert.ok(addAt < html.indexOf('Join with Google Meet'), 'calendar button comes first');
+  assert.match(html, /Add event to calendar<\/a>/);
+  assert.ok(text.includes(`Add event to calendar: ${CALENDAR_URL}`));
+});
