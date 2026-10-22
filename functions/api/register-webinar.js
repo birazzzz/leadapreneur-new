@@ -1,14 +1,15 @@
 import { saveWebinarRegistration } from '../../lib/webinar-registrations.mjs';
 import { buildWebinarCalendarUrl } from '../../lib/webinar-calendar.mjs';
+import { sendWebinarInvite } from '../../lib/webinar-invite.mjs';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const json = (status, body, headers = {}) => new Response(JSON.stringify(body), {
   status, headers:{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...headers}
 });
 
-export function createWebinarHandler({save = saveWebinarRegistration, now = () => new Date()} = {}) {
+export function createWebinarHandler({save = saveWebinarRegistration, invite = sendWebinarInvite, now = () => new Date()} = {}) {
   const attempts = new Map();
-  return async function ({request, env}) {
+  return async function ({request, env, waitUntil}) {
     if (request.headers.get('origin') !== new URL(request.url).origin) return json(403,{error:'Please register using the webinar page.'});
     if (!request.headers.get('content-type')?.startsWith('application/json')) return json(415,{error:'A JSON request is required.'});
     let body;
@@ -33,10 +34,14 @@ export function createWebinarHandler({save = saveWebinarRegistration, now = () =
     attempts.set(rateKey,attempt);
     try {
       await save(env,{name,email,registeredAt:now().toISOString()});
-      return json(201,{ok:true,calendarUrl:buildWebinarCalendarUrl(now()),icsUrl:'/api/webinar-calendar'});
     } catch {
       return json(503,{error:'We couldn’t save your registration. Please try again shortly.'});
     }
+    // Calendar invitation (Yes / Maybe / No) by email. It runs after the response,
+    // so a slow or failed email never blocks or undoes the registration.
+    const sending = Promise.resolve(invite(env,{name,email},{now:now()})).catch(() => false);
+    if (typeof waitUntil === 'function') waitUntil(sending); else await sending;
+    return json(201,{ok:true,calendarUrl:buildWebinarCalendarUrl(now()),icsUrl:'/api/webinar-calendar'});
   };
 }
 

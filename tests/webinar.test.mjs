@@ -152,3 +152,38 @@ test('published webinar assets are content-versioned and require cache revalidat
     assert.ok(headers.replaceAll('\r\n','\n').includes(path+'\n  Cache-Control: no-cache, no-store, must-revalidate'));
   }
 });
+
+test('registration sends a calendar invitation with RSVP after saving, and still succeeds if email fails',async()=>{
+  const { sendWebinarInvite } = await import('../lib/webinar-invite.mjs');
+  const sent=[];
+  const fetchImpl=async(url,options)=>{sent.push(JSON.parse(options.body));return new Response('{"id":"x"}',{status:200});};
+  const waited=[];
+  const handler=createWebinarHandler({save:async()=>{},now:()=>TEST_NOW,
+    invite:(env,record,options)=>sendWebinarInvite(env,record,{...options,fetchImpl})});
+  const result=await handler({request:request(),env:{RESEND_API_KEY:'k'},waitUntil:(promise)=>waited.push(promise)});
+  assert.equal(result.status,201);
+  assert.equal(await waited[0],true);
+  assert.equal(sent.length,1);
+  const email=sent[0];
+  assert.deepEqual(email.to,['example@example.com']);
+  assert.equal(email.from,'Leadapreneur <hello@leadapreneur.com>');
+  assert.equal(email.attachments[0].content_type,'text/calendar; method=REQUEST; charset=UTF-8');
+  const ics=Buffer.from(email.attachments[0].content,'base64').toString('utf8').replace(/\r\n /g,'');
+  assert.match(ics,/METHOD:REQUEST/);
+  assert.match(ics,/DTSTART:20261023T030000Z/);
+  assert.match(ics,/RRULE:FREQ=WEEKLY;BYDAY=FR/);
+  assert.match(ics,/ORGANIZER;CN="Leadapreneur":mailto:hello@leadapreneur.com/);
+  assert.match(ics,/ATTENDEE;CN="Example Person";ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:example@example.com/);
+  assert.match(ics,/LOCATION:https:\/\/meet.google.com\/zek-romn-csi/);
+
+  const failing=createWebinarHandler({save:async()=>{},now:()=>TEST_NOW,invite:async()=>{throw new Error('down');}});
+  assert.equal((await failing({request:request(),env:{}})).status,201);
+});
+
+test('the same email always gets the same invitation UID, so re-registering updates one event',async()=>{
+  const { buildWebinarInviteIcs } = await import('../lib/webinar-invite.mjs');
+  const organizer={name:'Leadapreneur',address:'events@leadapreneur.com'};
+  const uid=(email)=>buildWebinarInviteIcs({name:'A',email,organizer,now:TEST_NOW}).match(/UID:(\S+)/)[1];
+  assert.equal(uid('a@example.com'),uid('a@example.com'));
+  assert.notEqual(uid('a@example.com'),uid('b@example.com'));
+});
