@@ -49,6 +49,10 @@ Legacy `/role-quiz`, `/blog` and `/greatness-games-kl-season-1` routes redirect 
 
 ## Assessment result emails
 
+`/assessment/` serves the **Future-Proofing Check**, built from the `question-world-redesign` branch of `Aeikz8/LP-future-proofing-assessment` (`npm run build:future-proofing`, then `ASSESSMENT_DIST=<that repo>/dist-future-proofing-check npm run sync:assessment`). Build it from a checkout with LF line endings (`git -c core.autocrlf=false`): the app imports raw text files and fails on CRLF. Its personalised email and PDF report come from that repository's Node email service on Vercel (`leadapreneur-future-proofing-check.vercel.app`); `functions/api/future-proofing-result-email.js` forwards the app's same-origin requests there (override with `FUTURE_PROOFING_EMAIL_UPSTREAM`).
+
+The older endpoint below served the previous assessment and is no longer called by `/assessment/`.
+
 `api/send-result.js` is a Vercel serverless function that emails participants a branded copy of their Future-Proofing Assessment result via Resend. The vendored app at `/assessment/` posts to it after the result is computed; the API key only ever exists server-side.
 
 - `RESEND_API_KEY` — set in the Vercel project environment (and in `.env.local` for local testing).
